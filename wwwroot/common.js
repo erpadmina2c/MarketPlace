@@ -337,6 +337,9 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.sendRequirementPost = function (request) {
         return this.http.post(this.baseUrl + 'requirementpost', request);
     };
+    RequirementService.prototype.sendPurchaseOrderPost = function (request) {
+        return this.http.post(this.baseUrl + 'addpurchaseorderpost', request);
+    };
     RequirementService.prototype.addOrder = function (request) {
         return this.http.post(this.baseUrl + 'addOrder', request);
     };
@@ -358,6 +361,9 @@ var RequirementService = /** @class */ (function () {
     };
     RequirementService.prototype.getRequirements = function () {
         return this.http.get(this.baseUrl + 'getrequirements/' + Number(localStorage.getItem('UserId')));
+    };
+    RequirementService.prototype.getPurchaseOrders = function () {
+        return this.http.get(this.baseUrl + 'getpurchaseorder');
     };
     RequirementService.prototype.getOrderss = function () {
         return this.http.get(this.baseUrl + 'getorder');
