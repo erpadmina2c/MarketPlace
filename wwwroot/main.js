@@ -935,6 +935,7 @@ var routes = [
     },
     {
         path: '',
+        runGuardsAndResolvers: 'always',
         component: _containers__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutComponent"],
         canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]],
         data: {

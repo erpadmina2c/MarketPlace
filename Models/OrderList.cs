@@ -13,6 +13,7 @@ namespace CheckpointInventoryStock.API.Models
         public string c_name {get; set; }
         public string Username {get; set; }
         public int status {get; set; }
+        public DateTime e_edd {get; set; }
         public DateTime created_at {get; set; }
     }
 }
