@@ -180,7 +180,8 @@ namespace CheckpointInventoryStock.API.Controllers
                 po_price =request.po_price,
                 po_type = request.po_type,
                 s_name = request.s_name,
-                po_status = 0,
+                po_status = 1,
+                po_eta = request.po_eta,
                 comment =request.comment,
                 created_at =DateTime.Now,
                 updated_at =DateTime.Now
@@ -323,6 +324,21 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // POST api/values
         [AllowAnonymous]
+        [HttpGet("getshortfalldetail")]
+        public async Task<IActionResult> GetShortfallDetails()
+        {
+            
+            var values = await _context.Requests.ToListAsync();
+           
+            List<ShortfallDetailList> availableStock = new List<ShortfallDetailList>();
+
+            var result = _context.ShortfallDetailLists.FromSql<ShortfallDetailList>("EXEC spgetshortfalldetails").ToList();
+
+             return Ok(result);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
         [HttpGet("getshortfall")]
         public async Task<IActionResult> GetShortfall()
         {
@@ -387,7 +403,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                 // Subject 
                 
-                message.Subject = "New Order" + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor;
+                message.Subject = "New Order " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor;
                 // Body 
                 message.Body =  new TextPart("html"){
                     Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>New Order Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Order No #"+result1.o_num+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New order has been posted on Marketplace. kindly login and check.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Order Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>OrderNo:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_num + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CustomerName:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.c_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_qty + "</td><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>EDD</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.e_edd + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK New Order</div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
@@ -869,8 +885,11 @@ namespace CheckpointInventoryStock.API.Controllers
                     appby = appby.username,
                     rejby = rejby.username,
                     poby = poby.username,
+                    purchaseqty = deals.p_qty,
                     purchaseby = purchase.username,
+                    receiveqty = deals.r_qty,
                     receiveby = receive.username,
+                    dispatchqty = deals.d_qty,
                     dispatchby = dispatch.username,
                     ponum = deals.p_num,
                     EmpId = deals.EmpId,
@@ -1570,16 +1589,19 @@ namespace CheckpointInventoryStock.API.Controllers
                         _context.SaveChanges();
                     
                 } else if (request.Status == 5) {
+                        entity.p_qty = entity.p_qty+request.Qty;
                         entity.p_by = request.EmpId;
                         entity.Status = request.Status;
                         entity.Flag = request.Flag;
                         _context.SaveChanges();
                 } else if (request.Status == 8) {
+                        entity.r_qty = entity.r_qty+request.Qty;
                         entity.r_by = request.EmpId;
                         entity.Status = request.Status;
                         entity.Flag = request.Flag;
                         _context.SaveChanges();
                 } else if (request.Status == 9) {
+                        entity.d_qty = entity.r_qty;
                         entity.d_by = request.EmpId;
                         entity.Status = request.Status;
                         entity.Flag = request.Flag;
@@ -1587,15 +1609,51 @@ namespace CheckpointInventoryStock.API.Controllers
                 }
             }
             var requestlogToCreate = new DealLog
-            {
-                ref_id =entity.Id,
-                qty =entity.Qty,
-                price =entity.Price,
-                created_by =request.EmpId,
-                status =request.Status,
-                created_at = DateTime.Now
+                {
+                    ref_id =entity.Id,
+                    qty =entity.Qty,
+                    price =entity.Price,
+                    created_by =request.EmpId,
+                    status =request.Status,
+                    created_at = DateTime.Now
 
-            };
+                };
+
+            if (request.Status == 5) {
+                requestlogToCreate = new DealLog
+                {
+                    ref_id =entity.Id,
+                    qty =request.Qty,
+                    price =entity.Price,
+                    created_by =request.EmpId,
+                    status =request.Status,
+                    created_at = DateTime.Now
+
+                };
+            } else if (request.Status == 8) {
+                requestlogToCreate = new DealLog
+                {
+                    ref_id =entity.Id,
+                    qty =request.Qty,
+                    price =entity.Price,
+                    created_by =request.EmpId,
+                    status =request.Status,
+                    created_at = DateTime.Now
+
+                };
+            } else if (request.Status == 9) {
+                requestlogToCreate = new DealLog
+                {
+                    ref_id =entity.Id,
+                    qty =entity.r_qty,
+                    price =entity.Price,
+                    created_by =request.EmpId,
+                    status =request.Status,
+                    created_at = DateTime.Now
+
+                };
+            }
+                
             var requestlogToCreated = await _hisrepo.DealLog(requestlogToCreate);
 
             var result =from deals in _context.History
@@ -1752,6 +1810,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 po_type = entity1.req_type,
                 s_name = entity1.Cname,
                 po_status = 0,
+                po_eta = DateTime.Now,
                 ref_id = entity.Id,
                 comment =request.Comment,
                 created_at =DateTime.Now,

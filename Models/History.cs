@@ -19,8 +19,11 @@ namespace CheckpointInventoryStock.API.Models
         public int app_by { get; set; }
         public int rej_by { get; set; }
         public int po_by { get; set; }
+        public int p_qty { get; set; }
         public int p_by { get; set; }
+        public int r_qty { get; set; }
         public int r_by { get; set; }
+        public int d_qty { get; set; }
         public int d_by { get; set; }
         public int Status { get; set; }
         public int Flag { get; set; }

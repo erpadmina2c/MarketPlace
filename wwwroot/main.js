@@ -1003,6 +1003,10 @@ var routes = [
                 loadChildren: function () { return Promise.all(/*! import() | views-short-fall-short-fall-module */[__webpack_require__.e("common"), __webpack_require__.e("views-short-fall-short-fall-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall/short-fall.module */ "./src/app/views/short-fall/short-fall.module.ts")).then(function (m) { return m.ShortFallModule; }); }
             },
             {
+                path: 'short-fall-details',
+                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-details-short-fall-details-module */[__webpack_require__.e("common"), __webpack_require__.e("views-short-fall-details-short-fall-details-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall-details/short-fall-details.module */ "./src/app/views/short-fall-details/short-fall-details.module.ts")).then(function (m) { return m.ShortFallDetailsModule; }); }
+            },
+            {
                 path: 'closeddeal',
                 loadChildren: function () { return Promise.all(/*! import() | views-close-deal-close-deal-module */[__webpack_require__.e("default~views-approved-stocks-approved-stocks-module~views-close-deal-close-deal-module~views-make-m~fbc058ce"), __webpack_require__.e("common"), __webpack_require__.e("views-close-deal-close-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/close-deal/close-deal.module */ "./src/app/views/close-deal/close-deal.module.ts")).then(function (m) { return m.CloseDealModule; }); }
             },

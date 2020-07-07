@@ -371,6 +371,9 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.getShortFalls = function () {
         return this.http.get(this.baseUrl + 'getshortfall');
     };
+    RequirementService.prototype.getShortFalldetails = function () {
+        return this.http.get(this.baseUrl + 'getshortfalldetail');
+    };
     RequirementService.prototype.getRejectdeals = function () {
         return this.http.get(this.baseUrl + 'getrejecteddeal');
     };

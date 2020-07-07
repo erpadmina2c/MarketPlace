@@ -18,6 +18,7 @@ namespace CheckpointInventoryStock.API.Models
         public decimal po_price{ get; set; }
         public int po_type{ get; set; }
         public string s_name{ get; set; }
+        public DateTime po_eta{ get; set; }
         public int po_status{ get; set; }
         public string comment{ get; set; }
         
