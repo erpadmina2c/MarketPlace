@@ -6,9 +6,11 @@ namespace CheckpointInventoryStock.API.Models
         public string make_name {get; set;}	
         public string model_name {get; set;}
         public string processor {get; set;}
-        public string filtermonth {get; set;}
-        public int o_qty {get; set;}
-        public int available_qty {get; set;}
-        public int required_qty {get; set;}
+        public string filtermonth1 {get; set;}
+        public string filtermonth2 {get; set;}
+        public string filtermonth3 {get; set;}
+        public string filtermonth4 {get; set;}
+        public string filtermonth5 {get; set;}
+        public string filtermonth6 {get; set;}
     }
 }
