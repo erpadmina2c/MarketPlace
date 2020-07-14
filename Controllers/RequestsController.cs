@@ -833,6 +833,10 @@ namespace CheckpointInventoryStock.API.Controllers
                         on r.req_type equals proj.PM_Id
                         into ProjectMaster
                         from hh in ProjectMaster.DefaultIfEmpty()
+                        join gen in _context.Generations
+                        on r.gen_id equals gen.id
+                        into Gen
+                        from gen in Gen.DefaultIfEmpty()
                         join user in _context.Users
                         on deals.EmpId equals user.Id
                         into User
@@ -874,6 +878,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     Processor = p.Processor,
                     hddname = hdd.Text,
                     ramname = ram.Text,
+                    genname = gen.text,
                     Adapter = deals.Adapter,
                     Qty = deals.Qty,
                     Price = deals.Price,
