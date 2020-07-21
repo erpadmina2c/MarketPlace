@@ -22,6 +22,14 @@ namespace CheckpointInventoryStock.API.Data
             return request;
 
         }
+        public async Task<Pricing> Pricing(Pricing request)
+        {            
+            await _context.Pricings.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
+        }
         public async Task<PurchaseOrder> PurchaseOrder(PurchaseOrder request)
         {            
             await _context.PurchaseOrders.AddAsync(request);

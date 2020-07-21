@@ -337,6 +337,13 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.sendRequirementPost = function (request) {
         return this.http.post(this.baseUrl + 'requirementpost', request);
     };
+    RequirementService.prototype.postPrice = function (request) {
+        return this.http.post(this.baseUrl + 'postprice', request);
+    };
+    RequirementService.prototype.searchAveragePrice = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'searchaverageprice', request);
+    };
     RequirementService.prototype.sendPurchaseOrderPost = function (request) {
         return this.http.post(this.baseUrl + 'addpurchaseorderpost', request);
     };
@@ -361,6 +368,9 @@ var RequirementService = /** @class */ (function () {
     };
     RequirementService.prototype.getRequirements = function () {
         return this.http.get(this.baseUrl + 'getrequirements/' + Number(localStorage.getItem('UserId')));
+    };
+    RequirementService.prototype.getPrice = function () {
+        return this.http.get(this.baseUrl + 'getprice');
     };
     RequirementService.prototype.getPurchaseOrders = function () {
         return this.http.get(this.baseUrl + 'getpurchaseorder');

@@ -474,6 +474,14 @@ namespace CheckpointInventoryStock.API.Controllers
             
             return Ok(values);
         }
+        [AllowAnonymous]
+        [HttpGet("getsupplier")]
+        public async Task<IActionResult> GetSupplier()
+        {
+            var values = await _context.Suppliers.ToListAsync();
+            
+            return Ok(values);
+        }
          // POST api/values
         [AllowAnonymous]
         [HttpPost("addroles")]

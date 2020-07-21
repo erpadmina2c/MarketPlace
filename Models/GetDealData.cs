@@ -5,6 +5,7 @@ namespace CheckpointInventoryStock.API.Models
     public class GetDealData
     {
         public int id {get; set; }
+        public int int_id {get; set; }
         public string req_id {get; set; }
         public string make_name {get; set;}	
         public string model_name {get; set;}
@@ -19,6 +20,9 @@ namespace CheckpointInventoryStock.API.Models
         public decimal price {get; set; }
         public string user_name {get; set; }
         public int chat_count {get; set;}
+        public string comment {get; set;}
+        public string deal_reason {get; set;}
+        public string deal_comment {get; set;}
         public DateTime created_at {get; set; }
     }
 }

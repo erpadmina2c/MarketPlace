@@ -160,6 +160,63 @@ namespace CheckpointInventoryStock.API.Controllers
              return Ok(result);
         }
 
+        // Get api/getprice
+        [AllowAnonymous]
+        [HttpGet("getprice")]
+        public async Task<IActionResult> GetPrice()
+        {
+             var price = await _context.Pricings.ToListAsync();
+
+            List<PricingList> availableStock = new List<PricingList>();
+
+            var result = _context.PricingLists.FromSql<PricingList>("EXEC spgetpricing").ToList();
+            
+
+            return Ok(result);
+        }
+
+        // Get api/getprice
+        [AllowAnonymous]
+        [HttpPost("searchaverageprice")]
+        public async Task<IActionResult> SearchAveragePrice([FromBody]Pricing request)
+        {
+             var price = await _context.Pricings.ToListAsync();
+
+             var make_id= new SqlParameter("make_id", request.make_id);
+             var model_id = new SqlParameter("model_id", request.model_id);
+             var proc_id = new SqlParameter("proc_id", request.proc_id);
+             var hdd_id = new SqlParameter("hdd_id", request.hdd_id);
+            var ram_id = new SqlParameter("ram_id", request.ram_id);
+            var supplier_id = new SqlParameter("supplier_id", request.supplier_id);
+
+            var result = _context.AvgPriceLists.FromSql("EXECUTE dbo.spgetavegpricing @make_id,@model_id,@proc_id,@hdd_id,@ram_id,@supplier_id", make_id, model_id, proc_id, hdd_id, ram_id, supplier_id).FirstOrDefault();            
+
+            return Ok(result);
+        }
+
+        // POST api/values
+        [HttpPost("postprice")]
+        public async Task<IActionResult> PostPrice([FromBody]Pricing request)
+        {
+
+            var priceTocreate = new Pricing
+            {
+                make_id =request.make_id,
+                model_id =request.model_id,
+                proc_id =request.proc_id,
+                hdd_id =request.hdd_id,
+                ram_id =request.ram_id,
+                supplier_id =request.supplier_id,
+                price = request.price,
+                user_id = request.user_id,
+                created_at =DateTime.Now
+
+            };
+            var createdPrice = await _repo.Pricing(priceTocreate);
+
+            return Ok(201);
+        }
+
         [HttpPost("addpurchaseorderpost")]
         public async Task<IActionResult> addPurchaseOrderpost([FromBody]PurchaseOrder request)
         {
@@ -191,54 +248,54 @@ namespace CheckpointInventoryStock.API.Controllers
             
 
 
-            List<POList> availableStock = new List<POList>();
+            // List<POList> availableStock = new List<POList>();
 
-            var result = _context.POLists.FromSql<POList>("EXEC spgetpurchaseorders").ToList();
+            // var result = _context.POLists.FromSql<POList>("EXEC spgetpurchaseorders").ToList();
             
-            var result1 = result.Where(e=> e.id==poToCreated.id).FirstOrDefault();
+            //var result1 = result.Where(e=> e.id==poToCreated.id).FirstOrDefault();
             
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 1 || role.RoleID == 2
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
-            foreach (var item in users)
-            {
+            // var users =from user in _context.Users
+            //             join role in _context.UserRoles 
+            //             on user.Id equals role.UserID
+            //             into Role
+            //             from role in Role.DefaultIfEmpty()
+            //             where role.RoleID == 1 || role.RoleID == 2
+            //    select new
+            //     {
+            //         username = user.username,
+            //         Email = user.Email
+            //     };   
+            // foreach (var item in users)
+            // {
 
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+            //     var message = new MimeMessage();
+            //     // From address
+            //     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("PO Added", item.Email));
+            //     // To address
+            //     message.To.Add(new MailboxAddress("PO Added", item.Email));
 
-                // Subject 
+            //     // Subject 
                 
-                message.Subject = "PO Added " + result1.make_name + " " + result1.model_name + " / " + result1.proc_name + " / " + result1.ram_name + " / " + result1.hdd_name;
-                // Body 
-                message.Body =  new TextPart("html") {
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>PO Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>PO No #"+result1.po_num+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New purchase order has been posted on Marketplace kindly check specification details below</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>PO Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.make_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hdd_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.model_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ram_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.proc_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.gen_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.po_qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.type_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.adp_name+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.user_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.po_price+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'></th><td style='font-size:16px; color:#21355C;text-align: left;'></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK PURCHASE ORDER DETAILS </div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
-                };
+            //     message.Subject = "PO Added " + result1.make_name + " " + result1.model_name + " / " + result1.proc_name + " / " + result1.ram_name + " / " + result1.hdd_name;
+            //     // Body 
+            //     message.Body =  new TextPart("html") {
+            //         Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>PO Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>PO No #"+result1.po_num+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New purchase order has been posted on Marketplace kindly check specification details below</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>PO Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.make_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hdd_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.model_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ram_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.proc_name + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.gen_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.po_qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.type_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.adp_name+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.user_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.po_price+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'></th><td style='font-size:16px; color:#21355C;text-align: left;'></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK PURCHASE ORDER DETAILS </div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
+            //     };
 
-                using (var client = new SmtpClient()){
+            //     using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+            //         //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
     
-                    client.Connect("mail.a2cuae.com", 465, true);
+            //         client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+            //         client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+            //         client.Send(message);
 
-                    client.Disconnect(true);
-                }
-            }  
+            //         client.Disconnect(true);
+            //     }
+            // }  
 
              return Ok(201);
         }
@@ -375,53 +432,53 @@ namespace CheckpointInventoryStock.API.Controllers
             };
             var orderToCreated = await _repo.Order(orderToCreate);
 
-            List<OrderList> availableStock = new List<OrderList>();
+            // List<OrderList> availableStock = new List<OrderList>();
 
-            var result = _context.OrderLists.FromSql<OrderList>("EXEC spgetorders").ToList();
+            // var result = _context.OrderLists.FromSql<OrderList>("EXEC spgetorders").ToList();
             
-            var result1 = result.Where(e=> e.id==orderToCreated.id).FirstOrDefault();
+            // var result1 = result.Where(e=> e.id==orderToCreated.id).FirstOrDefault();
             
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 1  || role.RoleID == 2
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
-            foreach (var item in users)
-            {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+            // var users =from user in _context.Users
+            //             join role in _context.UserRoles 
+            //             on user.Id equals role.UserID
+            //             into Role
+            //             from role in Role.DefaultIfEmpty()
+            //             where role.RoleID == 1  || role.RoleID == 2
+            //    select new
+            //     {
+            //         username = user.username,
+            //         Email = user.Email
+            //     };   
+            // foreach (var item in users)
+            // {
+                // var message = new MimeMessage();
+                // // From address
+                // message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("New Order", item.Email));
+                // // To address
+                // message.To.Add(new MailboxAddress("New Order", item.Email));
 
                 // Subject 
                 
-                message.Subject = "New Order " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor;
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>New Order Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Order No #"+result1.o_num+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New order has been posted on Marketplace. kindly login and check.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Order Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>OrderNo:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_num + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CustomerName:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.c_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_qty + "</td><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>EDD</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.e_edd + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK New Order</div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                // message.Subject = "New Order " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor;
+                // // Body 
+                // message.Body =  new TextPart("html"){
+                //     Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>New Order Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Order No #"+result1.o_num+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New order has been posted on Marketplace. kindly login and check.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Order Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>OrderNo:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_num + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CustomerName:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.c_name + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.o_qty + "</td><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>EDD</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.e_edd + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK New Order</div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                // };
 
-                using (var client = new SmtpClient()){
+                // using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+                //     //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
     
-                    client.Connect("mail.a2cuae.com", 465, true);
+                //     client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                //     client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                //     client.Send(message);
 
-                    client.Disconnect(true);
-                }
-            }  
+                //     client.Disconnect(true);
+                // }
+           // }  
 
              return Ok(201);
         }
@@ -790,9 +847,9 @@ namespace CheckpointInventoryStock.API.Controllers
             var values = await _context.Departments.ToListAsync();
             var user_id = new SqlParameter("user_id", userid);
 
-           List<RequirementList> availableStock = new List<RequirementList>();
+            List<RequirementList> availableStock = new List<RequirementList>();
 
-          var result = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
+            var result = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
             
              return Ok(result);
         }
@@ -802,106 +859,12 @@ namespace CheckpointInventoryStock.API.Controllers
         public async Task<IActionResult> GetOffers()
         {
             
-            var values = await _context.Departments.ToListAsync();
+            var values = await _context.Departments.ToListAsync();            
 
-            var result =from deals in _context.History
-                        join request1 in _context.Requests
-                        on deals.RequestId equals request1.RequestID
-                        into Request1
-                        from r in Request1.DefaultIfEmpty()
-                        join make in _context.PartProducts 
-                        on r.MakeId equals make.Id
-                        into Make
-                        from d in Make.DefaultIfEmpty()
-                        join model in _context.PartProducts 
-                        on r.ModelId equals model.Id
-                        into Model
-                        from i in Model.DefaultIfEmpty()
-                        join processor in _context.ProcessorMasters
-                        on r.ProcessorId equals processor.ProcessorId
-                        into Processor
-                        from p in Processor.DefaultIfEmpty()
-                        join hdd in _context.SpectDetails 
-                        on deals.HDD equals hdd.Id
-                        into HDD
-                        from hdd in HDD.DefaultIfEmpty()
-                        join ram in _context.SpectDetails 
-                        on deals.RAM equals ram.Id
-                        into RAM
-                        from ram in RAM.DefaultIfEmpty()
-                        join proj in _context.ProjectMaster
-                        on r.req_type equals proj.PM_Id
-                        into ProjectMaster
-                        from hh in ProjectMaster.DefaultIfEmpty()
-                        join gen in _context.Generations
-                        on r.gen_id equals gen.id
-                        into Gen
-                        from gen in Gen.DefaultIfEmpty()
-                        join user in _context.Users
-                        on deals.EmpId equals user.Id
-                        into User
-                        from u in User.DefaultIfEmpty()
-                        join appby in _context.Users
-                        on deals.app_by equals appby.Id
-                        into Appby
-                        from appby in Appby.DefaultIfEmpty()
-                        join rejby in _context.Users
-                        on deals.rej_by equals rejby.Id
-                        into Rejby
-                        from rejby in Rejby.DefaultIfEmpty()
-                        join poby in _context.Users
-                        on deals.po_by equals poby.Id
-                        into POby
-                        from poby in POby.DefaultIfEmpty()
-                        join purchase in _context.Users
-                        on deals.p_by equals purchase.Id
-                        into Purchase
-                        from purchase in Purchase.DefaultIfEmpty()
-                        join receive in _context.Users
-                        on deals.r_by equals receive.Id
-                        into Receive
-                        from receive in Receive.DefaultIfEmpty()
-                        join dispatch in _context.Users
-                        on deals.d_by equals dispatch.Id
-                        into Dispatch
-                        from dispatch in Dispatch.DefaultIfEmpty()
-                        orderby deals.ModifyDate descending
-               select new
-                {
-                    Id = deals.Id,
-                    RequestID = r.RequestID,
-                    c_name = r.Cname,
-                    c_type = r.Type,
-                    deal_id = deals.deal_id,
-                    MakeName = d.ProductName,
-                    ModelName = i.ProductName,
-                    Processor = p.Processor,
-                    hddname = hdd.Text,
-                    ramname = ram.Text,
-                    genname = gen.text,
-                    Adapter = deals.Adapter,
-                    Qty = deals.Qty,
-                    Price = deals.Price,
-                    Flag = deals.Flag,
-                    Status = deals.Status,
-                    Comment = deals.Comment,
-                    Reason = deals.Reason,
-                    Username = u.username,
-                    appby = appby.username,
-                    rejby = rejby.username,
-                    poby = poby.username,
-                    purchaseqty = deals.p_qty,
-                    purchaseby = purchase.username,
-                    receiveqty = deals.r_qty,
-                    receiveby = receive.username,
-                    dispatchqty = deals.d_qty,
-                    dispatchby = dispatch.username,
-                    ponum = deals.p_num,
-                    EmpId = deals.EmpId,
-                    ProjectName = hh.ProjectName,
-                    CreatedDate = deals.ModifyDate
-                };
-            
+            List<DealOfferList> availableStock = new List<DealOfferList>();
+
+            var result = _context.DealOfferLists.FromSql<DealOfferList>("EXEC spgetoffers").ToList();
+                
              return Ok(result);
         }
 
