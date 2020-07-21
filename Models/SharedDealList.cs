@@ -17,6 +17,7 @@ namespace CheckpointInventoryStock.API.Models
         public string MakeName { get; set; }
         public string ModelName { get; set; }
         public string Processor { get; set; }
+        public string gen_name { get; set; }
         public string HddName { get; set; }
         public string RAMName { get; set; }
         public int Adapter { get; set; }
