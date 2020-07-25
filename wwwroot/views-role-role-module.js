@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <!-- Button trigger modal -->\n    \n  </div>\n  <div bsModal #infoModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" id=\"myModal\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-info\" role=\"document\">\n    <form  #requestForm=\"ngForm\" (ngSubmit)=\"AddRole()\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Add Role</h4>\n          <button type=\"button\" class=\"close\" (click)=\"infoModal.hide()\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">          \n        <div class=\"card\">\n            <div class=\"card-body\">\n                <div class=\"form-group\">\n                  <div class=\"input-group\">\n                    <label style=\"padding: 7px\">Role Title</label>\n                    <input type=\"text\" id=\"RoleTitle\" name=\"RoleTitle\" [(ngModel)]=\"model.RoleTitle\"  class=\"form-control\" placeholder=\"Role Title\">               \n                  </div>\n                </div> \n            </div>\n          </div>\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary\" (click)=\"infoModal.hide()\">Close</button>        \n          <button type=\"submit\" class=\"btn btn-sm btn-success\">Submit</button>\n        </div>\n      </div><!-- /.modal-content -->\n    </form>\n    </div><!-- /.modal-dialog -->\n  </div><!-- /.modal -->\n  <!--/.row-->\n  <div class=\"row\">\n    <div class=\"col-lg-6  mx-auto\" *ngIf=\"roleid === 9\">\n      <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"fa fa-align-justify\"></i> Manage Role\n          <button *ngIf=\"roleid === 9\" type=\"button\" class=\"btn btn-info mr-1\" style=\"float: right;\" data-toggle=\"modal\" (click)=\"infoModal.show()\">\n            Add Role\n          </button>\n        </div>\n        <div class=\"card-body\">\n          <table class=\"table table-sm\">\n            <thead>\n              <tr>\n                <th>RoleId</th>\n                <th>Role Title</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let role of roles; let i = index\">                \n                  <td>{{role.roleID}}</td>\n                  <td>{{role.roleTitle}}</td>\n                  <td>                           \n                      <span class=\"badge badge-danger\">Edit</span>\n                  </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div><!--/.col--> \n  </div>\n  <div *ngIf=\"roleid !== 9\">\n    <div class=\"app flex-row align-items-center\">\n      <div class=\"container\">\n        <div class=\"row justify-content-center\">\n          <div class=\"col-md-6\">\n            <div class=\"clearfix\">\n              <h1 class=\"float-left display-3 mr-4\">404</h1>\n              <h4 class=\"pt-3\">Oops! You're lost.</h4>\n              <p class=\"text-muted\">The page you are looking for was not found.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <!-- Button trigger modal -->\n    \n  </div>\n  <div bsModal #infoModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" id=\"myModal\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-info\" role=\"document\">\n    <form  #requestForm=\"ngForm\" (ngSubmit)=\"AddRole()\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Add Role</h4>\n          <button type=\"button\" class=\"close\" (click)=\"infoModal.hide()\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">          \n        <div class=\"card\">\n            <div class=\"card-body\">\n                <div class=\"form-group\">\n                  <div class=\"input-group\">\n                    <label style=\"padding: 7px\">Role Title</label>\n                    <input type=\"text\" id=\"RoleTitle\" name=\"RoleTitle\" [(ngModel)]=\"model.RoleTitle\"  class=\"form-control\" placeholder=\"Role Title\">               \n                  </div>\n                </div> \n            </div>\n          </div>\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary\" (click)=\"infoModal.hide()\">Close</button>        \n          <button type=\"submit\" class=\"btn btn-sm btn-success\">Submit</button>\n        </div>\n      </div><!-- /.modal-content -->\n    </form>\n    </div><!-- /.modal-dialog -->\n  </div><!-- /.modal -->\n  <div bsModal #pageModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" id=\"myModal\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-info\" role=\"document\">\n    <form  #requestForm=\"ngForm\" (ngSubmit)=\"AddRole()\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Add Menu</h4>\n          <button type=\"button\" class=\"close\" (click)=\"pageModal.hide()\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">          \n        <div class=\"card\">\n            <div class=\"card-body\">\n                <div class=\"form-group\">\n                  <div class=\"input-group\">\n                    <label style=\"padding: 7px\">Menu</label>\n                    <input type=\"text\" id=\"RoleTitle\" name=\"RoleTitle\" [(ngModel)]=\"model.RoleTitle\"  class=\"form-control\" placeholder=\"Role Title\">               \n                  </div>\n                </div> \n            </div>\n          </div>\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary\" (click)=\"pageModal.hide()\">Close</button>        \n          <button type=\"submit\" class=\"btn btn-sm btn-success\">Submit</button>\n        </div>\n      </div><!-- /.modal-content -->\n    </form>\n    </div><!-- /.modal-dialog -->\n  </div><!-- /.modal -->\n  <!--/.row-->\n  <div class=\"row\">\n    <div class=\"col-lg-6 \" *ngIf=\"roleid === 9\">\n      <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"fa fa-align-justify\"></i> Manage Roles\n          <button *ngIf=\"roleid === 9\" type=\"button\" class=\"btn btn-info mr-1\" style=\"float: right;\" data-toggle=\"modal\" (click)=\"infoModal.show()\">\n            Add Role\n          </button>\n        </div>\n        <div class=\"card-body\">\n          <table class=\"table table-responsive-sm table-hover table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th>RoleId</th>\n                <th>Role Title</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let role of roles; let i = index\">                \n                  <td>{{role.roleID}}</td>\n                  <td>{{role.roleTitle}}</td>\n                  <td>                           \n                      <span class=\"badge badge-danger\">Edit</span>\n                  </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div><!--/.col--> \n    <div class=\"col-lg-6 \" *ngIf=\"roleid === 9\">\n      <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"fa fa-align-justify\"></i> Manage Menus\n          <!-- <button *ngIf=\"roleid === 9\" type=\"button\" class=\"btn btn-info mr-1\" style=\"float: right;\" data-toggle=\"modal\" (click)=\"pageModal.show()\">\n            Add Menu\n          </button> -->\n        </div>\n        <div class=\"card-body\">\n          <table class=\"table table-responsive-sm table-hover table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th>id</th>\n                <th>Page Name</th>\n                <th>Page Url</th>\n                <th>Icon</th>\n                <th>Parent Name</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let page of pages; let i = index\">                \n                  <td>{{page.id}}</td>\n                  <td>{{page.page_name}}</td>\n                  <td>{{page.page_url}}</td>\n                  <td>{{page.icon}}</td>\n                  <td>{{page.parent_name}}</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div><!--/.col--> \n  </div>\n  <div *ngIf=\"roleid !== 9\">\n    <div class=\"app flex-row align-items-center\">\n      <div class=\"container\">\n        <div class=\"row justify-content-center\">\n          <div class=\"col-md-6\">\n            <div class=\"clearfix\">\n              <h1 class=\"float-left display-3 mr-4\">404</h1>\n              <h4 class=\"pt-3\">Oops! You're lost.</h4>\n              <p class=\"text-muted\">The page you are looking for was not found.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>");
 
 /***/ }),
 
@@ -84,20 +84,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_role_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../_services/role.service */ "./src/app/_services/role.service.ts");
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
 /* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
+/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+
 
 
 
 
 
 var RoleComponent = /** @class */ (function () {
-    function RoleComponent(roleService, alertify) {
+    function RoleComponent(roleService, alertify, loadspecsService) {
         this.roleService = roleService;
         this.alertify = alertify;
+        this.loadspecsService = loadspecsService;
         this.model = {};
         this.roleid = Number(localStorage.getItem('RoleID'));
     }
     RoleComponent.prototype.ngOnInit = function () {
         this.loadRoles();
+        this.loadMenu();
     };
     RoleComponent.prototype.loadRoles = function () {
         var _this = this;
@@ -105,6 +109,13 @@ var RoleComponent = /** @class */ (function () {
             _this.roles = roles;
         }, function (error) {
             _this.alertify.error(error);
+        });
+    };
+    RoleComponent.prototype.loadMenu = function () {
+        var _this = this;
+        return this.loadspecsService.getallpages().subscribe(function (pages) {
+            _this.pages = pages;
+            console.log(pages);
         });
     };
     RoleComponent.prototype.AddRole = function () {
@@ -116,7 +127,7 @@ var RoleComponent = /** @class */ (function () {
         this.roleService.AddRole(this.model).subscribe(function (roles) {
             _this.roles = roles;
             _this.model.RoleTitle = '';
-            _this.alertify.success('Role Added Successful');
+            _this.alertify.success('Role Added Successfully');
             _this.infoModal.hide();
         }, function (error) {
             _this.alertify.error(error);
@@ -124,19 +135,25 @@ var RoleComponent = /** @class */ (function () {
     };
     RoleComponent.ctorParameters = function () { return [
         { type: _services_role_service__WEBPACK_IMPORTED_MODULE_2__["RoleService"] },
-        { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"] }
+        { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"] },
+        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"] }
     ]; };
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('infoModal'),
         Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__["ModalDirective"])
     ], RoleComponent.prototype, "infoModal", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('pageModal'),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__["ModalDirective"])
+    ], RoleComponent.prototype, "pageModal", void 0);
     RoleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-role',
             template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./role.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/role/role.component.html")).default,
             styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./role.component.css */ "./src/app/views/role/role.component.css")).default]
         }),
-        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_role_service__WEBPACK_IMPORTED_MODULE_2__["RoleService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"]])
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_role_service__WEBPACK_IMPORTED_MODULE_2__["RoleService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"],
+            _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"]])
     ], RoleComponent);
     return RoleComponent;
 }());

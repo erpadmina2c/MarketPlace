@@ -593,6 +593,9 @@ var LoadspecsService = /** @class */ (function () {
     LoadspecsService.prototype.getallmenus = function () {
         return this.http.get(this.baseUrl + 'getallmenus');
     };
+    LoadspecsService.prototype.getallpages = function () {
+        return this.http.get(this.baseUrl + 'getallpages');
+    };
     LoadspecsService.prototype.getGenerations = function () {
         return this.http.get(this.baseUrl + 'getgenerations');
     };
@@ -636,6 +639,10 @@ var LoadspecsService = /** @class */ (function () {
     LoadspecsService.prototype.AddPurchaseUsers = function (request) {
         console.log(request);
         return this.http.post(this.baseUrl + 'addpurchaseusers', request);
+    };
+    LoadspecsService.prototype.AddSupplier = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'addsupplier', request);
     };
     LoadspecsService.prototype.EditPurchaseUserPost = function (request) {
         console.log(request);
@@ -951,7 +958,7 @@ var routes = [
             },
             {
                 path: 'roles',
-                loadChildren: function () { return Promise.all(/*! import() | views-role-role-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-role-role-module")]).then(__webpack_require__.bind(null, /*! ./views/role/role.module */ "./src/app/views/role/role.module.ts")).then(function (m) { return m.RoleModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-role-role-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-role-role-module")]).then(__webpack_require__.bind(null, /*! ./views/role/role.module */ "./src/app/views/role/role.module.ts")).then(function (m) { return m.RoleModule; }); },
             },
             {
                 path: 'managemenu',
@@ -959,31 +966,35 @@ var routes = [
             },
             {
                 path: 'users',
-                loadChildren: function () { return Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "./src/app/views/users/users.module.ts")).then(function (m) { return m.UsersModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "./src/app/views/users/users.module.ts")).then(function (m) { return m.UsersModule; }); },
             },
             {
                 path: 'managehdd',
-                loadChildren: function () { return Promise.all(/*! import() | views-manage-hdd-manage-hdd-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("views-manage-hdd-manage-hdd-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-hdd/manage-hdd.module */ "./src/app/views/manage-hdd/manage-hdd.module.ts")).then(function (m) { return m.ManageHddModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-hdd-manage-hdd-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("views-manage-hdd-manage-hdd-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-hdd/manage-hdd.module */ "./src/app/views/manage-hdd/manage-hdd.module.ts")).then(function (m) { return m.ManageHddModule; }); },
             },
             {
                 path: 'manageram',
-                loadChildren: function () { return Promise.all(/*! import() | views-manage-ram-manage-ram-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("views-manage-ram-manage-ram-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-ram/manage-ram.module */ "./src/app/views/manage-ram/manage-ram.module.ts")).then(function (m) { return m.ManageRamModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-ram-manage-ram-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("views-manage-ram-manage-ram-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-ram/manage-ram.module */ "./src/app/views/manage-ram/manage-ram.module.ts")).then(function (m) { return m.ManageRamModule; }); },
             },
             {
                 path: 'managemakemodel',
-                loadChildren: function () { return Promise.all(/*! import() | views-make-model-make-model-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("views-make-model-make-model-module")]).then(__webpack_require__.bind(null, /*! ./views/make-model/make-model.module */ "./src/app/views/make-model/make-model.module.ts")).then(function (m) { return m.MakeModelModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-make-model-make-model-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("views-make-model-make-model-module")]).then(__webpack_require__.bind(null, /*! ./views/make-model/make-model.module */ "./src/app/views/make-model/make-model.module.ts")).then(function (m) { return m.MakeModelModule; }); },
+            },
+            {
+                path: 'manage-supplier',
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-supplier-manage-supplier-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("views-manage-supplier-manage-supplier-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-supplier/manage-supplier.module */ "./src/app/views/manage-supplier/manage-supplier.module.ts")).then(function (m) { return m.ManageSupplierModule; }); },
             },
             {
                 path: 'stocks',
-                loadChildren: function () { return Promise.all(/*! import() | views-stocks-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-stocks-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/stocks/stocks.module */ "./src/app/views/stocks/stocks.module.ts")).then(function (m) { return m.StocksModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-stocks-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-stocks-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/stocks/stocks.module */ "./src/app/views/stocks/stocks.module.ts")).then(function (m) { return m.StocksModule; }); }
             },
             {
                 path: 'requirements',
-                loadChildren: function () { return Promise.all(/*! import() | views-requirements-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-requirements-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/requirements/requirements.module */ "./src/app/views/requirements/requirements.module.ts")).then(function (m) { return m.RequirementsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-requirements-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-requirements-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/requirements/requirements.module */ "./src/app/views/requirements/requirements.module.ts")).then(function (m) { return m.RequirementsModule; }); }
             },
             {
                 path: 'approvedstock',
-                loadChildren: function () { return Promise.all(/*! import() | views-approved-stocks-approved-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-approved-stocks-approved-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/approved-stocks/approved-stocks.module */ "./src/app/views/approved-stocks/approved-stocks.module.ts")).then(function (m) { return m.ApprovedStocksModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-approved-stocks-approved-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-approved-stocks-approved-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/approved-stocks/approved-stocks.module */ "./src/app/views/approved-stocks/approved-stocks.module.ts")).then(function (m) { return m.ApprovedStocksModule; }); }
             },
             {
                 path: 'shareddeals',
@@ -991,15 +1002,15 @@ var routes = [
             },
             {
                 path: 'salesteam',
-                loadChildren: function () { return Promise.all(/*! import() | views-purchase-users-purchase-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("views-purchase-users-purchase-users-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-users/purchase-users.module */ "./src/app/views/purchase-users/purchase-users.module.ts")).then(function (m) { return m.PurchaseUsersModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-purchase-users-purchase-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("views-purchase-users-purchase-users-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-users/purchase-users.module */ "./src/app/views/purchase-users/purchase-users.module.ts")).then(function (m) { return m.PurchaseUsersModule; }); }
             },
             {
                 path: 'orders',
-                loadChildren: function () { return Promise.all(/*! import() | views-reserve-order-reserve-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-reserve-order-reserve-order-module")]).then(__webpack_require__.bind(null, /*! ./views/reserve-order/reserve-order.module */ "./src/app/views/reserve-order/reserve-order.module.ts")).then(function (m) { return m.ReserveOrderModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-reserve-order-reserve-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-reserve-order-reserve-order-module")]).then(__webpack_require__.bind(null, /*! ./views/reserve-order/reserve-order.module */ "./src/app/views/reserve-order/reserve-order.module.ts")).then(function (m) { return m.ReserveOrderModule; }); }
             },
             {
                 path: 'purchase-orders',
-                loadChildren: function () { return Promise.all(/*! import() | views-purchase-order-purchase-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-purchase-order-purchase-order-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-order/purchase-order.module */ "./src/app/views/purchase-order/purchase-order.module.ts")).then(function (m) { return m.PurchaseOrderModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-purchase-order-purchase-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-purchase-order-purchase-order-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-order/purchase-order.module */ "./src/app/views/purchase-order/purchase-order.module.ts")).then(function (m) { return m.PurchaseOrderModule; }); }
             },
             {
                 path: 'shortfall',
@@ -1011,23 +1022,23 @@ var routes = [
             },
             {
                 path: 'closeddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-close-deal-close-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-close-deal-close-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/close-deal/close-deal.module */ "./src/app/views/close-deal/close-deal.module.ts")).then(function (m) { return m.CloseDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-close-deal-close-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-close-deal-close-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/close-deal/close-deal.module */ "./src/app/views/close-deal/close-deal.module.ts")).then(function (m) { return m.CloseDealModule; }); }
             },
             {
                 path: 'removeddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-remove-deal-remove-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-remove-deal-remove-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/remove-deal/remove-deal.module */ "./src/app/views/remove-deal/remove-deal.module.ts")).then(function (m) { return m.RemoveDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-remove-deal-remove-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-remove-deal-remove-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/remove-deal/remove-deal.module */ "./src/app/views/remove-deal/remove-deal.module.ts")).then(function (m) { return m.RemoveDealModule; }); }
             },
             {
                 path: 'rejecteddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-reject-deal-reject-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("common"), __webpack_require__.e("views-reject-deal-reject-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/reject-deal/reject-deal.module */ "./src/app/views/reject-deal/reject-deal.module.ts")).then(function (m) { return m.RejectDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-reject-deal-reject-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("common"), __webpack_require__.e("views-reject-deal-reject-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/reject-deal/reject-deal.module */ "./src/app/views/reject-deal/reject-deal.module.ts")).then(function (m) { return m.RejectDealModule; }); }
             },
             {
                 path: 'add-price',
-                loadChildren: function () { return Promise.all(/*! import() | views-add-price-add-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-add-price-add-price-module")]).then(__webpack_require__.bind(null, /*! ./views/add-price/add-price.module */ "./src/app/views/add-price/add-price.module.ts")).then(function (m) { return m.AddPriceModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-add-price-add-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-add-price-add-price-module")]).then(__webpack_require__.bind(null, /*! ./views/add-price/add-price.module */ "./src/app/views/add-price/add-price.module.ts")).then(function (m) { return m.AddPriceModule; }); }
             },
             {
                 path: 'check-price',
-                loadChildren: function () { return Promise.all(/*! import() | views-check-price-check-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-check-price-check-price-module")]).then(__webpack_require__.bind(null, /*! ./views/check-price/check-price.module */ "./src/app/views/check-price/check-price.module.ts")).then(function (m) { return m.CheckPriceModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-check-price-check-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-make-model-make-~ae3da2b7"), __webpack_require__.e("common"), __webpack_require__.e("views-check-price-check-price-module")]).then(__webpack_require__.bind(null, /*! ./views/check-price/check-price.module */ "./src/app/views/check-price/check-price.module.ts")).then(function (m) { return m.CheckPriceModule; }); }
             },
             {
                 path: 'base',
@@ -1051,7 +1062,7 @@ var routes = [
             },
             {
                 path: 'notifications',
-                loadChildren: function () { return Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "./src/app/views/notifications/notifications.module.ts")).then(function (m) { return m.NotificationsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "./src/app/views/notifications/notifications.module.ts")).then(function (m) { return m.NotificationsModule; }); }
             },
             {
                 path: 'theme',
@@ -1118,7 +1129,6 @@ var DefaultLayoutComponent = /** @class */ (function () {
         var _this = this;
         var x = this.loadspecsService.getmenus(this.roleid).subscribe(function (menus) {
             _this.menus = menus;
-            console.log(_this.menus);
             function list_to_tree(list) {
                 var map = {}, roots = [];
                 for (var i = 0; i < list.length; i += 1) {

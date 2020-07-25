@@ -48,6 +48,7 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<AvgPriceList> AvgPriceLists { get; set; }
         public DbSet<DealOfferList> DealOfferLists { get; set; }
+        public DbSet<Page> Pages { get; set; }
         
     }
 }

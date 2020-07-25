@@ -27,5 +27,12 @@ namespace CheckpointInventoryStock.API.Data
             
             return request;
         }
+        public async Task<Supplier> Supplier(Supplier request)
+        {
+            await _context.Suppliers.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+        }
     }
 }

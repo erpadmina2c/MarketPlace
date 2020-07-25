@@ -194,11 +194,11 @@ var StocksComponent = /** @class */ (function () {
         return this.requirementservice.getRequirements().subscribe(function (requirements) {
             if (Number(localStorage.getItem('RoleID')) === 4) {
                 _this.requirements = requirements.filter(function (proj) { return (Number(proj.type) === 1 && Number(proj.flag) === 0
-                    && Number(proj.status) !== 2 && Number(proj.userId) === Number(localStorage.getItem('UserId'))); });
+                    && Number(proj.status) !== 2 && proj.qty !== 0 && Number(proj.userId) === Number(localStorage.getItem('UserId'))); });
             }
             else {
                 _this.requirements = requirements.filter(function (proj) { return (Number(proj.type) === 1 && Number(proj.status) !== 2
-                    && Number(proj.flag) === 0); });
+                    && proj.qty !== 0 && Number(proj.flag) === 0); });
             }
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {

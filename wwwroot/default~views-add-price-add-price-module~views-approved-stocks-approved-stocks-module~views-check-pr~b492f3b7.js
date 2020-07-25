@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7"],{
 
 /***/ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js":
 /*!***********************************************************************!*\
@@ -1423,4 +1423,4 @@ var ModalModule = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~0db6ad29.js.map
+//# sourceMappingURL=default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~b492f3b7.js.map

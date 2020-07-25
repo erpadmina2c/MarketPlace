@@ -12,5 +12,6 @@ namespace CheckpointInventoryStock.API.Models
         public string filtermonth4 {get; set;}
         public string filtermonth5 {get; set;}
         public string filtermonth6 {get; set;}
+        public string filtertotal {get; set;}
     }
 }

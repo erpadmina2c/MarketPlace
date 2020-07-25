@@ -152,6 +152,23 @@ namespace CheckpointInventoryStock.API.Controllers
 
          // POST api/values
         [AllowAnonymous]
+        [HttpPost("addsupplier")]
+        public async Task<IActionResult> AddSupplier([FromBody]Supplier request)
+        {                         
+            var makeToCreate = new Supplier
+            {
+                text =request.text,
+                created_at =DateTime.Now
+
+            };
+            
+            var createdMake = await _puser.Supplier(makeToCreate);
+                
+             return Ok(201);
+        }
+
+         // POST api/values
+        [AllowAnonymous]
         [HttpPut("editpurchaseusers")]
         public async Task<IActionResult> EdiPurchaseusers([FromBody]PurchaseUser request)
         {                         
@@ -212,6 +229,21 @@ namespace CheckpointInventoryStock.API.Controllers
                     is_active = access.is_active,
                     created_at = access.created_at,
                 };
+            
+            
+            return Ok(result);
+        }
+
+        
+        [AllowAnonymous]
+        [HttpGet("getallpages")]
+        public async Task<IActionResult> GetAllPages(int roleid)
+        {
+            var values = await _context.RoleAccess.ToListAsync();
+
+            List<Page> availableStock = new List<Page>();
+
+            var result = _context.Pages.FromSql<Page>("EXEC spgetpages").ToList();
             
             
             return Ok(result);

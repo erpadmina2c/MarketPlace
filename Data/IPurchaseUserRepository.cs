@@ -8,6 +8,7 @@ namespace CheckpointInventoryStock.API.Data
     {
          
          Task<PurchaseUser> PurchaseUser (PurchaseUser request);
+         Task<Supplier> Supplier (Supplier request);
          Task<IEnumerable<PurchaseUser>> GetPurchaseUsers();
     }
 }
