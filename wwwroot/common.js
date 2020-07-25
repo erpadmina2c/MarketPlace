@@ -350,6 +350,10 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.addOrder = function (request) {
         return this.http.post(this.baseUrl + 'addOrder', request);
     };
+    RequirementService.prototype.EditOrderPost = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'editorderpost', request);
+    };
     RequirementService.prototype.sendMessagePost = function (request) {
         return this.http.post(this.baseUrl + 'sendmessagepost', request);
     };

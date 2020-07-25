@@ -482,7 +482,28 @@ namespace CheckpointInventoryStock.API.Controllers
 
              return Ok(201);
         }
-         [HttpPost("sendmessagepost")]
+        
+         // POST api/values
+        [HttpPut("editorderpost")]
+        public async Task<IActionResult> EditOrderPost([FromBody]Order request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.ReserveOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.e_edd = request.e_edd;
+                entity.updated_at = DateTime.Now;
+                entity.updated_by = request.updated_by;
+                _context.SaveChanges();
+            }          
+
+             return Ok(201);
+        }
+
+        [HttpPost("sendmessagepost")]
         public async Task<IActionResult> sendMessagePost([FromBody]ChatBox request)
         {
             
@@ -1410,7 +1431,7 @@ namespace CheckpointInventoryStock.API.Controllers
         public async Task<IActionResult> CloseRequirement([FromBody]Request request)
         {
             
-             var values1 = await _repo.GetRequests();
+            var values1 = await _repo.GetRequests();
             
             var entity = _context.Requests.FirstOrDefault(item => item.RequestID == request.RequestID);
 
