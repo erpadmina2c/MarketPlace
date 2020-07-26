@@ -302,6 +302,29 @@ namespace CheckpointInventoryStock.API.Controllers
 
         
 
+        [HttpPut("editpurchaseorderpost")]
+        public async Task<IActionResult> EditPurchaseOrderpost([FromBody]PurchaseOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.PurchaseOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.po_qty = request.po_qty;
+                entity.po_price =request.po_price;
+                entity.s_name = request.s_name;
+                entity.po_eta = request.po_eta;
+                entity.comment =request.comment;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            }          
+
+             return Ok(201);
+        }
+
         // POST api/values
         [AllowAnonymous]
         [HttpGet("getpurchaseorder")]

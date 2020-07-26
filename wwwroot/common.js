@@ -347,6 +347,9 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.sendPurchaseOrderPost = function (request) {
         return this.http.post(this.baseUrl + 'addpurchaseorderpost', request);
     };
+    RequirementService.prototype.EditPurchaseOrderPost = function (request) {
+        return this.http.put(this.baseUrl + 'editpurchaseorderpost', request);
+    };
     RequirementService.prototype.addOrder = function (request) {
         return this.http.post(this.baseUrl + 'addOrder', request);
     };
