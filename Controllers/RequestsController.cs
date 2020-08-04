@@ -177,8 +177,8 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // Get api/getprice
         [AllowAnonymous]
-        [HttpPost("searchaverageprice")]
-        public async Task<IActionResult> SearchAveragePrice([FromBody]Pricing request)
+        [HttpPut("searchaverageprice")]
+        public async Task<IActionResult> SearchAveragePrice([FromBody]PricingParameter request)
         {
              var price = await _context.Pricings.ToListAsync();
 
@@ -188,8 +188,12 @@ namespace CheckpointInventoryStock.API.Controllers
              var hdd_id = new SqlParameter("hdd_id", request.hdd_id);
             var ram_id = new SqlParameter("ram_id", request.ram_id);
             var supplier_id = new SqlParameter("supplier_id", request.supplier_id);
+            var type_id = new SqlParameter("type_id", request.type);
+            var p_start = new SqlParameter("p_start", request.start);
+            var p_end = new SqlParameter("p_end", request.end);
+            
 
-            var result = _context.AvgPriceLists.FromSql("EXECUTE dbo.spgetavegpricing @make_id,@model_id,@proc_id,@hdd_id,@ram_id,@supplier_id", make_id, model_id, proc_id, hdd_id, ram_id, supplier_id).FirstOrDefault();            
+            var result = _context.AvgPriceLists.FromSql("EXECUTE dbo.spgetavegpricing @make_id,@model_id,@proc_id,@hdd_id,@ram_id,@supplier_id,@type_id,@p_start,@p_end", make_id,model_id,proc_id,hdd_id,ram_id,supplier_id,type_id,p_start,p_end);            
 
             return Ok(result);
         }
@@ -209,6 +213,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 supplier_id =request.supplier_id,
                 price = request.price,
                 user_id = request.user_id,
+                purchase_date = request.purchase_date,
                 created_at =DateTime.Now
 
             };
@@ -404,34 +409,54 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // POST api/values
         [AllowAnonymous]
-        [HttpGet("getshortfalldetail")]
-        public async Task<IActionResult> GetShortfallDetails()
+        [HttpGet("getshortfalldetail/{userid}/{type}")]
+        public async Task<IActionResult> GetShortfallDetails(int userid, int type)
         {
             
             var values = await _context.Requests.ToListAsync();
-           
+            
+            var user_id = new SqlParameter("user_id", userid);
+            var type_id = new SqlParameter("type_id", type);
+
             List<ShortfallDetailList> availableStock = new List<ShortfallDetailList>();
 
-            var result = _context.ShortfallDetailLists.FromSql<ShortfallDetailList>("EXEC spgetshortfalldetails").ToList();
+            var result = _context.ShortfallDetailLists.FromSql<ShortfallDetailList>("EXEC spgetshortfalldetails @user_id, @type_id", user_id, type_id).ToList();
 
              return Ok(result);
         }
 
         // POST api/values
         [AllowAnonymous]
-        [HttpGet("getshortfall")]
-        public async Task<IActionResult> GetShortfall()
+        [HttpGet("getshortfall/{userid}/{type}")]
+        public async Task<IActionResult> GetShortfall(int userid, int type)
         {
-            
             var values = await _context.Requests.ToListAsync();
            
+            var user_id = new SqlParameter("user_id", userid);
+            var type_id = new SqlParameter("type_id", type);
+
             List<ShortfallList> availableStock = new List<ShortfallList>();
 
-            var result = _context.ShortfallLists.FromSql<ShortfallList>("EXEC spgetshortfalls").ToList();
+            var result = _context.ShortfallLists.FromSql<ShortfallList>("EXEC spgetshortfalls @user_id, @type_id", user_id, type_id).ToList();
 
              return Ok(result);
         }
+        // POST api/values
+        [HttpPost("activatemodel")]
+        public async Task<IActionResult> ActivateModel([FromBody]ReportSetting request)
+        {
 
+            var values1 = await _repo.GetRequests();
+            
+            var user_id = new SqlParameter("user_id", request.user_id);
+            var model_id = new SqlParameter("model_id", request.model_id);
+            var s_type = new SqlParameter("s_type", request.s_type);
+            var status = new SqlParameter("status", request.status);
+
+            var activatedmodel = _context.ReportSettings.FromSql("EXECUTE dbo.spActivateModel @user_id,@model_id, @s_type, @status", user_id, model_id, s_type, status).ToList();
+            
+            return Ok(201);
+        }
         // POST api/values
         [HttpPost("addOrder")]
         public async Task<IActionResult> AddOrder([FromBody]Order request)

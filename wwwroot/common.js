@@ -342,7 +342,7 @@ var RequirementService = /** @class */ (function () {
     };
     RequirementService.prototype.searchAveragePrice = function (request) {
         console.log(request);
-        return this.http.post(this.baseUrl + 'searchaverageprice', request);
+        return this.http.put(this.baseUrl + 'searchaverageprice', request);
     };
     RequirementService.prototype.sendPurchaseOrderPost = function (request) {
         return this.http.post(this.baseUrl + 'addpurchaseorderpost', request);
@@ -354,7 +354,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'addOrder', request);
     };
     RequirementService.prototype.EditOrderPost = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'editorderpost', request);
     };
     RequirementService.prototype.sendMessagePost = function (request) {
@@ -386,10 +385,10 @@ var RequirementService = /** @class */ (function () {
         return this.http.get(this.baseUrl + 'getorder');
     };
     RequirementService.prototype.getShortFalls = function () {
-        return this.http.get(this.baseUrl + 'getshortfall');
+        return this.http.get(this.baseUrl + 'getshortfall/' + Number(localStorage.getItem('UserId')) + '/' + 1);
     };
     RequirementService.prototype.getShortFalldetails = function () {
-        return this.http.get(this.baseUrl + 'getshortfalldetail');
+        return this.http.get(this.baseUrl + 'getshortfalldetail/' + Number(localStorage.getItem('UserId')) + '/' + 2);
     };
     RequirementService.prototype.getRejectdeals = function () {
         return this.http.get(this.baseUrl + 'getrejecteddeal');
@@ -434,6 +433,10 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.RejectStock = function (request) {
         console.log(request);
         return this.http.put(this.baseUrl + 'rejectstock', request);
+    };
+    RequirementService.prototype.activateModel = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'activatemodel', request);
     };
     RequirementService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }

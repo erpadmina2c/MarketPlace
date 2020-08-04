@@ -10,6 +10,7 @@ using MailKit.Net.Smtp;
 using MailKit;
 using MimeKit;
 using CheckpointInventoryStock.API.Models;
+using System.Data.SqlClient;
 
 namespace CheckpointInventoryStock.API.Controllers
 {
@@ -206,7 +207,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("getallmenus")]
-        public async Task<IActionResult> GetAllMenus(int roleid)
+        public async Task<IActionResult> GetAllMenus()
         {
             var values = await _context.RoleAccess.ToListAsync();
             var result =from access in _context.RoleAccess
@@ -234,7 +235,24 @@ namespace CheckpointInventoryStock.API.Controllers
             return Ok(result);
         }
 
-        
+        [AllowAnonymous]
+        [HttpGet("getactivatemodel/{userid}/{type}")]
+        public async Task<IActionResult> Getactivatemodel(int userid, int type)
+        {
+
+            var values = await _context.ReportSettings.ToListAsync();
+
+            var user_id = new SqlParameter("user_id", userid);
+            var type_id = new SqlParameter("type_id", type);
+
+            List<ActiveModel> availableStock = new List<ActiveModel>();
+
+            var result = _context.ActiveModels.FromSql<ActiveModel>("EXEC spGetActivatemodel @user_id, @type_id", user_id, type_id).ToList();
+
+             
+            return Ok(result);
+        }
+
         [AllowAnonymous]
         [HttpGet("getallpages")]
         public async Task<IActionResult> GetAllPages(int roleid)
