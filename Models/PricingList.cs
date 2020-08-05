@@ -18,6 +18,7 @@ namespace CheckpointInventoryStock.API.Models
         public int supplier_id { get; set; }
         public string supplier_name { get; set; }
         public decimal price { get; set; }
+        public int qty { get; set; }
         public DateTime purchase_date { get; set; }
         public DateTime created_at { get; set; }
     }

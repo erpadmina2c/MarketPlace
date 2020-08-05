@@ -11,6 +11,7 @@ namespace CheckpointInventoryStock.API.Models
         public int hdd_id { get; set; }
         public int ram_id { get; set; }
         public int supplier_id { get; set; }
+        public int qty { get; set; }
         public decimal price { get; set; }
         public int user_id { get; set; }       
         public DateTime purchase_date { get; set; } 

@@ -212,6 +212,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 ram_id =request.ram_id,
                 supplier_id =request.supplier_id,
                 price = request.price,
+                qty = request.qty,
                 user_id = request.user_id,
                 purchase_date = request.purchase_date,
                 created_at =DateTime.Now
