@@ -458,6 +458,25 @@ namespace CheckpointInventoryStock.API.Controllers
             
             return Ok(201);
         }
+
+        
+        // POST api/values
+        [HttpPost("activateproc")]
+        public async Task<IActionResult> ActivateProc([FromBody]ProcReportSetting request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var user_id = new SqlParameter("user_id", request.user_id);
+            var proc_id = new SqlParameter("proc_id", request.proc_id);
+            var s_type = new SqlParameter("s_type", request.s_type);
+            var status = new SqlParameter("status", request.status);
+
+            var activatedmodel = _context.ProcReportSettings.FromSql("EXECUTE dbo.spActivateProc @user_id,@proc_id, @s_type, @status", user_id, proc_id, s_type, status).ToList();
+            
+            return Ok(201);
+        }
+
         // POST api/values
         [HttpPost("addOrder")]
         public async Task<IActionResult> AddOrder([FromBody]Order request)

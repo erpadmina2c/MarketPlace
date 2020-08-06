@@ -596,6 +596,9 @@ var LoadspecsService = /** @class */ (function () {
     LoadspecsService.prototype.loadActiveModels = function (type) {
         return this.http.get(this.baseUrl + 'getactivatemodel/' + Number(localStorage.getItem('UserId')) + '/' + type);
     };
+    LoadspecsService.prototype.loadActiveProc = function (type) {
+        return this.http.get(this.baseUrl + 'getactivateproc/' + Number(localStorage.getItem('UserId')) + '/' + type);
+    };
     LoadspecsService.prototype.getallpages = function () {
         return this.http.get(this.baseUrl + 'getallpages');
     };

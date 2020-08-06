@@ -341,7 +341,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'postprice', request);
     };
     RequirementService.prototype.searchAveragePrice = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'searchaverageprice', request);
     };
     RequirementService.prototype.sendPurchaseOrderPost = function (request) {
@@ -363,7 +362,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'approvedirectdeals', request);
     };
     RequirementService.prototype.EditReqDataPost = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'editreqdatapost', request);
     };
     RequirementService.prototype.sendDealsPost = function (request) {
@@ -418,25 +416,23 @@ var RequirementService = /** @class */ (function () {
         return this.http.put(this.baseUrl + 'updatepopost/', request);
     };
     RequirementService.prototype.viewChats = function (request) {
-        console.log('request');
-        console.log(request);
         return this.http.post(this.baseUrl + 'viewChats', request);
     };
     RequirementService.prototype.sendChatPost = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'sendmessagepost', request);
     };
     RequirementService.prototype.ShareReqPost = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'sharereqpost', request);
     };
     RequirementService.prototype.RejectStock = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'rejectstock', request);
     };
     RequirementService.prototype.activateModel = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'activatemodel', request);
+    };
+    RequirementService.prototype.activateProc = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'activateproc', request);
     };
     RequirementService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }

@@ -254,6 +254,23 @@ namespace CheckpointInventoryStock.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getactivateproc/{userid}/{type}")]
+        public async Task<IActionResult> Getactivateproc(int userid, int type)
+        {
+
+            var values = await _context.ReportSettings.ToListAsync();
+
+            var user_id = new SqlParameter("user_id", userid);
+            var type_id = new SqlParameter("type_id", type);
+
+            List<ActiveProc> availableStock = new List<ActiveProc>();
+
+            var result = _context.ActiveProcs.FromSql<ActiveProc>("EXEC spGetActivateproc @user_id, @type_id", user_id, type_id).ToList();
+             
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
         [HttpGet("getallpages")]
         public async Task<IActionResult> GetAllPages(int roleid)
         {
