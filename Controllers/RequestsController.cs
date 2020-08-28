@@ -113,7 +113,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on user.Id equals role.UserID
                         into Role
                         from role in Role.DefaultIfEmpty()
-                        where role.RoleID == i  || role.RoleID == 1 || role.RoleID == 2
+                        where role.RoleID == i  || role.RoleID == 1 || role.RoleID == 2 || role.RoleID == 3 || role.RoleID == 11
                select new
                 {
                     username = user.username,
@@ -1081,7 +1081,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on user.Id equals role.UserID
                         into Role
                         from role in Role.DefaultIfEmpty()
-                        where user.Id == result1.UserId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2
+                        where user.Id == result1.UserId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2  || role.RoleID == 3 || role.RoleID == 11
                select new
                 {
                     username = user.username,
@@ -1176,7 +1176,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on user.Id equals role.UserID
                         into Role
                         from role in Role.DefaultIfEmpty()
-                        where user.Id == 3 || role.RoleID == 1 || role.RoleID == 2
+                        where user.Id == 3 || role.RoleID == 1 || role.RoleID == 2  || role.RoleID == 11
                select new
                 {
                     username = user.username,
@@ -1344,7 +1344,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on user.Id equals role.UserID
                         into Role
                         from role in Role.DefaultIfEmpty()
-                        where user.Id == requestToCreate.EmpId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2
+                        where user.Id == requestToCreate.EmpId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2  || role.RoleID == 3 || role.RoleID == 11
                select new
                 {
                     username = user.username,
@@ -1579,7 +1579,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on user.Id equals role.UserID
                         into Role
                         from role in Role.DefaultIfEmpty()
-                        where user.Id == entity.UserId  || role.RoleID == 1 || role.RoleID == 2
+                        where user.Id == entity.UserId  || role.RoleID == 1 || role.RoleID == 2 
                select new
                 {
                     username = user.username,
@@ -1787,7 +1787,7 @@ namespace CheckpointInventoryStock.API.Controllers
                             on user.Id equals role.UserID
                             into Role
                             from role in Role.DefaultIfEmpty()
-                            where role.RoleID == 1 || role.RoleID == 7 || role.RoleID == 2
+                            where role.RoleID == 1 || role.RoleID == 7 || role.RoleID == 2 || role.RoleID == 3 || role.RoleID == 11
                 select new
                     {
                         username = user.username,
