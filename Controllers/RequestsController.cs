@@ -442,6 +442,24 @@ namespace CheckpointInventoryStock.API.Controllers
 
              return Ok(result);
         }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpGet("getshortfallrefurb/{userid}/{type}")]
+        public async Task<IActionResult> GetShortfallRefurb(int userid, int type)
+        {
+            var values = await _context.Requests.ToListAsync();
+           
+            var user_id = new SqlParameter("user_id", userid);
+            var type_id = new SqlParameter("type_id", type);
+
+            List<ShortfallRefurbList> availableStock = new List<ShortfallRefurbList>();
+
+            var result = _context.ShortfallRefurbLists.FromSql<ShortfallRefurbList>("EXEC spgetRefurbshortfalls @user_id, @type_id", user_id, type_id).ToList();
+
+             return Ok(result);
+        }
+
         // POST api/values
         [HttpPost("activatemodel")]
         public async Task<IActionResult> ActivateModel([FromBody]ReportSetting request)

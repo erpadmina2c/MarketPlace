@@ -39,6 +39,7 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<Order> ReserveOrders { get; set; }
         public DbSet<OrderList> OrderLists { get; set; }
         public DbSet<ShortfallList> ShortfallLists { get; set; }
+        public DbSet<ShortfallRefurbList> ShortfallRefurbLists { get; set; }
         public DbSet<ShortfallDetailList> ShortfallDetailLists { get; set; }
         public DbSet<GetDealData> GetDealDatas { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
