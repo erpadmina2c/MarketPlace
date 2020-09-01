@@ -135,8 +135,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                try
-                {
+                
                     if (request.Type == 1){
                             mytext = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>"+Subject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>"+Subject+" No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> "+Text+"</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>"+Subject+" Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.Price+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'></th><td style='font-size:16px; color:#21355C;text-align: left;'></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK "+Subject+" </div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html></body></html>";
                     }else {
@@ -170,11 +169,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                
             }  
 
              return Ok(result);
@@ -696,8 +691,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {   
-                try
-                {
+                
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("MarketPlace - A2C Support", "support@a2cuae.com"));
@@ -724,11 +718,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                
 
             } 
             
@@ -858,8 +848,6 @@ namespace CheckpointInventoryStock.API.Controllers
             foreach (var item in users)
             {
                 
-                try
-                {
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -886,11 +874,6 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
             }  
 
              return Ok(result);
@@ -1198,8 +1181,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 
             foreach (var item in users)
             {
-                try
-                {
+                
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -1226,11 +1208,6 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
             }  
 
             return Ok(result1);
@@ -1301,8 +1278,7 @@ namespace CheckpointInventoryStock.API.Controllers
             foreach (var item in users)
             {
                 
-                try
-                {
+                
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -1329,11 +1305,6 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
                 
             }  
 
@@ -1496,8 +1467,6 @@ namespace CheckpointInventoryStock.API.Controllers
 
             foreach (var item in users)
             {
-                try
-                {
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -1524,11 +1493,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                
             }  
 
            
@@ -1585,8 +1550,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                 foreach (var req in request.options)
                     {   
-                        try
-                        {
+                        
                             var user =  _context.PurchaseUsers.FirstOrDefault(item => item.id == req);
                             var message = new MimeMessage();
                             // From address
@@ -1615,11 +1579,6 @@ namespace CheckpointInventoryStock.API.Controllers
 
                                 client.Disconnect(true);
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            var ReturnMessage1 = ex.ToString();
-                        }
                     }
             } else {
 
@@ -1763,8 +1722,6 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                try
-                {
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -1791,12 +1748,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         client.Send(message);
 
                         client.Disconnect(true);
-                    }                
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                    } 
             }  
 
             return Ok(201);
@@ -2007,8 +1959,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
             foreach (var item in users)
             {
-                try
-                {
+                
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -2035,11 +1986,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                
             } 
             return Ok(201);
         }
@@ -2163,8 +2110,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                try
-                {
+                
                     var message = new MimeMessage();
                     // From address
                     message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
@@ -2191,11 +2137,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
                         client.Disconnect(true);
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ReturnMessage1 = ex.ToString();
-                }
+                
             } 
             return Ok(201);
         }
