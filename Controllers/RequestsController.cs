@@ -106,6 +106,20 @@ namespace CheckpointInventoryStock.API.Controllers
 
             var result = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
             
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(result);
+            }
             var result1 = result.Where(e=> e.RequestID==createdRequest.RequestID).FirstOrDefault();
             
             var users =from user in _context.Users
@@ -121,39 +135,45 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                if (request.Type == 1){
-                        mytext = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>"+Subject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>"+Subject+" No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> "+Text+"</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>"+Subject+" Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.Price+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'></th><td style='font-size:16px; color:#21355C;text-align: left;'></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK "+Subject+" </div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html></body></html>";
-                }else {
-                        mytext = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>"+Subject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>"+Subject+" No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> "+Text+"</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>"+Subject+" Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK "+Subject+" </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>";
+                try
+                {
+                    if (request.Type == 1){
+                            mytext = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>"+Subject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>"+Subject+" No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> "+Text+"</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>"+Subject+" Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.Price+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'></th><td style='font-size:16px; color:#21355C;text-align: left;'></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK "+Subject+" </div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html></body></html>";
+                    }else {
+                            mytext = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>"+Subject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>"+Subject+" No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> "+Text+"</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>"+Subject+" Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK "+Subject+" </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>";
+                        
+                    } 
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+
+                    // To address
+                    message.To.Add(new MailboxAddress(Subject, item.Email));
+
+                    // Subject 
                     
+                    message.Subject = "New " + Subject + " " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor + " / " + result1.RAMName + " / " + result1.HddName;
+                    // Body 
+                    message.Body =  new TextPart("html") {
+                        Text = mytext,
+                    };
+
+                    using (var client = new SmtpClient()){
+
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
+
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+
+                        client.Send(message);
+
+                        client.Disconnect(true);
+                    }
                 }
-
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
-
-                // To address
-                message.To.Add(new MailboxAddress(Subject, item.Email));
-
-                // Subject 
-                
-                message.Subject = "New " + Subject + " " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor + " / " + result1.RAMName + " / " + result1.HddName;
-                // Body 
-                message.Body =  new TextPart("html") {
-                    Text = mytext,
-                };
-
-                using (var client = new SmtpClient()){
-
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
-
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
-
-                    client.Send(message);
-
-                    client.Disconnect(true);
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             }  
 
@@ -592,7 +612,6 @@ namespace CheckpointInventoryStock.API.Controllers
         [HttpPost("sendmessagepost")]
         public async Task<IActionResult> sendMessagePost([FromBody]ChatBox request)
         {
-            
             var values = await _context.PartProducts.ToListAsync();
             var requestToCreate = new ChatBox
             {
@@ -643,7 +662,21 @@ namespace CheckpointInventoryStock.API.Controllers
                     ref_Id = chat.ref_Id,
                     Status = chat.status,
                     CreatedDate = chat.createdDate
-                };  
+                }; 
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(result);
+            } 
 
             var result1 = result.Where(e=> e.Id==createdRequest.id).FirstOrDefault();
             
@@ -662,35 +695,44 @@ namespace CheckpointInventoryStock.API.Controllers
                     Email = user.Email
                 };   
             foreach (var item in users)
-            {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("MarketPlace - A2C Support", "support@a2cuae.com"));
+            {   
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("MarketPlace - A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("New Message", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("New Message", item.Email));
 
-                // Subject 
-                message.Subject = "New Message";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Message Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Message on Requirement No #"+result1.RequestID+"( "+result1.ProductName +" ).</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New Message has been sent by " + result1.UserName + " on Marketplace kindly check. <hr></div></td></tr><tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:12px;font-style: italic;font-weight: bold;font-family: monospace;'> &#65282" + request.text + "&#65282 <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:10px 28px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK REQUIREMENT </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = "New Message";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Message Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Message on Requirement No #"+result1.RequestID+"( "+result1.ProductName +" ).</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New Message has been sent by " + result1.UserName + " on Marketplace kindly check. <hr></div></td></tr><tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:12px;font-style: italic;font-weight: bold;font-family: monospace;'> &#65282" + request.text + "&#65282 <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:10px 28px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK REQUIREMENT </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
+                }
+
             } 
-             return Ok(result);
+            
+            return Ok(result);
         }
 
         // POST api/values
@@ -785,7 +827,21 @@ namespace CheckpointInventoryStock.API.Controllers
                     EmpId = deals.EmpId,
                     CreatedDate = deals.CreateDate
                 };
-            
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(result);
+            }
+
             var result1 = result.Where(e=> e.Id==createdRequest.Id).FirstOrDefault();
             
             var users =from user in _context.Users
@@ -801,31 +857,39 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("New Deal", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("New Deal", item.Email));
 
-                // Subject 
-                message.Subject = "New Deal";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal on Requirement No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New deal has been posted on Marketplace kindly check as per your requirement. check specification details below. <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK DEAL </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = "New Deal";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal on Requirement No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> New deal has been posted on Marketplace kindly check as per your requirement. check specification details below. <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK DEAL </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             }  
 
@@ -1093,7 +1157,20 @@ namespace CheckpointInventoryStock.API.Controllers
             
             
             var result1 = result.Where(e=> e.Id==request.Id).FirstOrDefault();
-            
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(result);
+            }
              var users =from user in _context.Users
                         join role in _context.UserRoles 
                         on user.Id equals role.UserID
@@ -1121,31 +1198,38 @@ namespace CheckpointInventoryStock.API.Controllers
                 
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress(reqstatus + " Deal", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress(reqstatus + " Deal", item.Email));
 
-                // Subject 
-                message.Subject = reqstatus + " Deal";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal "+reqstatus+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+" has been <span style='text-transform: lowercase;'>"+ reqtext +"</span> by "+result1.appby+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" +result1.Username +"</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Deal </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = reqstatus + " Deal";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal "+reqstatus+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+" has been <span style='text-transform: lowercase;'>"+ reqtext +"</span> by "+result1.appby+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" +result1.Username +"</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Deal </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             }  
 
@@ -1185,7 +1269,20 @@ namespace CheckpointInventoryStock.API.Controllers
            List<RequirementList> availableStock = new List<RequirementList>();
 
             var myresults = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
-            
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(myresults);
+            }
             
             var result1 = myresults.Where(e=> e.Id==entity.Id).FirstOrDefault();
 
@@ -1203,32 +1300,41 @@ namespace CheckpointInventoryStock.API.Controllers
 
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("Modify Stock Deal", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("Modify Stock Deal", item.Email));
 
-                // Subject 
-                message.Subject = "Modify Available Deal";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Stock Modify Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Stock #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Stock #"+result1.RequestID+"  has been Modified by "+result1.Username+" <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Stock Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Price + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK STOCK </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = "Modify Available Deal";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Stock Modify Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Stock #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Stock #"+result1.RequestID+"  has been Modified by "+result1.Username+" <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Stock Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Price + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK STOCK </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
+                }
+                
             }  
 
             
@@ -1356,7 +1462,26 @@ namespace CheckpointInventoryStock.API.Controllers
             
             
             var result1 = result.Where(e=> e.Id==createdRequest.Id).FirstOrDefault();
+            var user_id = new SqlParameter("user_id", request.app_by);
 
+            List<RequirementList> availableStock = new List<RequirementList>();
+
+            var myresults = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
+            
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(myresults);
+            }
              var users =from user in _context.Users
                         join role in _context.UserRoles 
                         on user.Id equals role.UserID
@@ -1371,44 +1496,44 @@ namespace CheckpointInventoryStock.API.Controllers
 
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("Approve Deal", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("Approve Deal", item.Email));
 
-                // Subject 
-                message.Subject = "Approve Deal";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Approval Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+"  has been created and approved by "+result1.appby+" from Stock "+ result1.RequestID +". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK REQUIREMENT </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = "Approve Deal";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Approval Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+"  has been created and approved by "+result1.appby+" from Stock "+ result1.RequestID +". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK REQUIREMENT </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             }  
 
            
-            var user_id = new SqlParameter("user_id", request.app_by);
-
-           List<RequirementList> availableStock = new List<RequirementList>();
-
-            var myresults = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
             
-            
-            
-             return Ok(myresults);
+            return Ok(myresults);
         }
 
 
@@ -1437,7 +1562,20 @@ namespace CheckpointInventoryStock.API.Controllers
 
                 };            
                 var sharedealToCreated = await _sharedeal.ShareDeal(sharedealToCreate);
-                
+                var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                    smtp.Connect("mail.a2cuae.com", 465, true);
+                    smtp.Disconnect(true);
+                    flag = "pass";
+                } catch (Exception ex)
+                {   
+                    ex.ToString();
+                    flag = "fail";
+                }  
+                if(flag == "fail"){
+                    return Ok(201);
+                }
 
                 List<SharedDealList> availableStock = new List<SharedDealList>();
 
@@ -1446,34 +1584,41 @@ namespace CheckpointInventoryStock.API.Controllers
                 var result1 = result.Where(e=> e.Id==sharedealToCreated.id).FirstOrDefault();
 
                 foreach (var req in request.options)
-                    {     
-                        var user =  _context.PurchaseUsers.FirstOrDefault(item => item.id == req);
+                    {   
+                        try
+                        {
+                            var user =  _context.PurchaseUsers.FirstOrDefault(item => item.id == req);
                             var message = new MimeMessage();
-                        // From address
-                        message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                            // From address
+                            message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                        // To address
-                        message.To.Add(new MailboxAddress("Stock Alert", user.email));
+                            // To address
+                            message.To.Add(new MailboxAddress("Stock Alert", user.email));
 
-                        // Subject 
-                        
-                        message.Subject = "Stock Alert" + " " + result1.MakeName + " " + result1.ModelName + "/" + result1.Processor + "/"  + result1.RAMName+ " / " + result1.HddName;
-                        // Body 
-                        message.Body =  new TextPart("html"){
-                            Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small></small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>"+ user.p_name+"</span></div><div style='font-size:12px;'>New deal available for your consideration. Please check specification details below</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.MakeName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.HddName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.RAMName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.Processor+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.gen_name+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.s_qty+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.s_currency+""+result1.s_price+"</td></tr></table><table  width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'><tr><th  style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Comment:</th><td style='font-size:16px; color:#21355C;text-align: left;width: 100%;'>"+result1.Comment+"</td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'><div style='font-size:13px; color:#fff;'> <br><span href='http://a2cshops.com' style='color:#fff; text-decoration:underline;'>Please do not reply to this email.</span><br/>	 			<span href='http://a2cshops.com' style='color:#fff; text-decoration:underline;'>Please reply to your sales account managers email address:</span><br/><a style='color: #b7abab;'>lawrence.best@a2c.co.uk</a><br/><a style='color: #b7abab;'>sebastian@a2c.co.uk</a><br/><a style='color: #b7abab;'>connor.ralls@a2c.co.uk</a></div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                        };
+                            // Subject 
+                            
+                            message.Subject = "Stock Alert" + " " + result1.MakeName + " " + result1.ModelName + "/" + result1.Processor + "/"  + result1.RAMName+ " / " + result1.HddName;
+                            // Body 
+                            message.Body =  new TextPart("html"){
+                                Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small></small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>"+ user.p_name+"</span></div><div style='font-size:12px;'>New deal available for your consideration. Please check specification details below</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.MakeName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.HddName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.RAMName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.Processor+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.gen_name+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.s_qty+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Price:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.s_currency+""+result1.s_price+"</td></tr></table><table  width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'><tr><th  style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Comment:</th><td style='font-size:16px; color:#21355C;text-align: left;width: 100%;'>"+result1.Comment+"</td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'><div style='font-size:13px; color:#fff;'> <br><span href='http://a2cshops.com' style='color:#fff; text-decoration:underline;'>Please do not reply to this email.</span><br/>	 			<span href='http://a2cshops.com' style='color:#fff; text-decoration:underline;'>Please reply to your sales account managers email address:</span><br/><a style='color: #b7abab;'>lawrence.best@a2c.co.uk</a><br/><a style='color: #b7abab;'>sebastian@a2c.co.uk</a><br/><a style='color: #b7abab;'>connor.ralls@a2c.co.uk</a></div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                            };
 
-                        using (var client = new SmtpClient()){
+                            using (var client = new SmtpClient()){
 
-                            //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-            
-                            client.Connect("mail.a2cuae.com", 465, true);
+                                //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+                
+                                client.Connect("mail.a2cuae.com", 465, true);
 
-                            client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                                client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                            client.Send(message);
+                                client.Send(message);
 
-                            client.Disconnect(true);
+                                client.Disconnect(true);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            var ReturnMessage1 = ex.ToString();
                         }
                     }
             } else {
@@ -1583,7 +1728,20 @@ namespace CheckpointInventoryStock.API.Controllers
 
             };
             var requestlogToCreated = await _repo.RequestLog(requestlogToCreate);
-
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(201);
+            }
             var user_id = new SqlParameter("user_id", request.UserId);
 
             List<RequirementList> availableStock = new List<RequirementList>();
@@ -1605,32 +1763,39 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("Reject Stock", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("Reject Stock", item.Email));
 
-                // Subject 
-                
-                message.Subject = "Reject Stock " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor + " / " + result1.RAMName + " / " + result1.HddName;
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Reject Stock Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Stock No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Stock has been rejected. kindly check.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b> Stock Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Stock </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    
+                    message.Subject = "Reject Stock " + result1.MakeName + " " + result1.ModelName + " / " + result1.Processor + " / " + result1.RAMName + " / " + result1.HddName;
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Reject Stock Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Stock No #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Stock has been rejected. kindly check.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b> Stock Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.HddName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.RAMName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Gen:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.GenName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Type:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.TypeName + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>CreatedBy:</th><td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td><td></td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Stock </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }                
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             }  
 
@@ -1737,7 +1902,20 @@ namespace CheckpointInventoryStock.API.Controllers
             }
                 
             var requestlogToCreated = await _hisrepo.DealLog(requestlogToCreate);
-
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(201);
+            }
             var result =from deals in _context.History
                         join request1 in _context.Requests
                         on deals.RequestId equals request1.RequestID
@@ -1829,31 +2007,38 @@ namespace CheckpointInventoryStock.API.Controllers
 
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress(mysubject +" Deal", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress(mysubject +" Deal", item.Email));
 
-                // Subject 
-                message.Subject = mysubject +" Deal";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal "+mysubject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+" has been "+text+" by "+result1.Username+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Deal </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = mysubject +" Deal";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>Deal "+mysubject+" Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>Deal #"+result1.deal_id+" on Requirement #"+result1.RequestID+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> Deal #"+result1.deal_id+" has been "+text+" by "+result1.Username+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>"+result1.AdapterName+"</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK Deal </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             } 
             return Ok(201);
@@ -1900,7 +2085,20 @@ namespace CheckpointInventoryStock.API.Controllers
 
             };
             var poToCreated = await _repo.PurchaseOrder(poToCreate);
-
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return Ok(201);
+            }
 
             var result =from deals in _context.History
                         join request1 in _context.Requests
@@ -1965,31 +2163,38 @@ namespace CheckpointInventoryStock.API.Controllers
                 };   
             foreach (var item in users)
             {
-                var message = new MimeMessage();
-                // From address
-                message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
+                try
+                {
+                    var message = new MimeMessage();
+                    // From address
+                    message.From.Add(new MailboxAddress("A2C Support", "support@a2cuae.com"));
 
-                // To address
-                message.To.Add(new MailboxAddress("PO Update", item.Email));
+                    // To address
+                    message.To.Add(new MailboxAddress("PO Update", item.Email));
 
-                // Subject 
-                message.Subject = "PO Update";
-                // Body 
-                message.Body =  new TextPart("html"){
-                    Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>PO Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>PO Number #"+ request.p_num +" on Deal #"+result1.deal_id+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> PO for deal #"+result1.deal_id+" has been updated by "+result1.Username+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>Yes</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Updated By:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK PO </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
-                };
+                    // Subject 
+                    message.Subject = "PO Update";
+                    // Body 
+                    message.Body =  new TextPart("html"){
+                        Text = "<!DOCTYPE html><html><head><title>A2C Services LLC</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>A2C Services LLC</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#80808057;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'> <tr><td height='70' align='left' valign='middle'></td></tr><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#21355C ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#fff;text-align: center;font-family: sans-serif;'> <b>PO Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C ; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;'><small>PO Number #"+ request.p_num +" on Deal #"+result1.deal_id+".</small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + item.username + "</span>, </div><div style='font-size:12px;'> PO for deal #"+result1.deal_id+" has been updated by "+result1.Username+". <hr></div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='font-size:20px;color:#fff;background: #21355C ;font-family:Arial, Helvetica, sans-serif;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 51px;margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;'> <tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Make:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.MakeName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>HDD:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.hddname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Model:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ModelName + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>RAM:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.ramname + "</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Processor:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Processor + "</td><th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Adapter:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>Yes</td></tr><tr> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Qty + "</td> <th style='font-size:16px; color:#21355C;text-align: left;width: 20%;'>Updated By:</th> <td style='font-size:16px; color:#21355C;text-align: left;'>" + result1.Username + "</td></tr></table> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#21355C ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#80808057;'> <br><a href='http://a2cshops.com' style='color:#80808057; text-decoration:underline;'>CLICK HERE</a> TO CHECK PO </div></td></tr></table></td></tr></table> <br><br></td></tr></table> </body> </html> </body></html>",
+                    };
 
-                using (var client = new SmtpClient()){
+                    using (var client = new SmtpClient()){
 
-                    //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
-    
-                    client.Connect("mail.a2cuae.com", 465, true);
+                        //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+        
+                        client.Connect("mail.a2cuae.com", 465, true);
 
-                    client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+                        client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
 
-                    client.Send(message);
+                        client.Send(message);
 
-                    client.Disconnect(true);
+                        client.Disconnect(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var ReturnMessage1 = ex.ToString();
                 }
             } 
             return Ok(201);
