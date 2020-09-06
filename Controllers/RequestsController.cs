@@ -321,6 +321,46 @@ namespace CheckpointInventoryStock.API.Controllers
              return Ok(201);
         }
 
+        [HttpPost("addcommitpurchaseorderpost")]
+        public async Task<IActionResult> addCommitPurchaseOrderpost([FromBody]CommitPurchaseOrder request)
+        {
+
+            var values = await _context.PartProducts.ToListAsync();
+            var poToCreate = new CommitPurchaseOrder
+            {
+                emp_id =request.emp_id,
+                make_id =request.make_id,
+                model_id =request.model_id,
+                proc_id =request.proc_id,
+                cpo_qty = request.cpo_qty,
+                cpo_price =request.cpo_price,
+                s_name = request.s_name,
+                cpo_status = 1,
+                cpo_eta = request.cpo_eta,
+                comment =request.comment,
+                created_at =DateTime.Now,
+                updated_at =DateTime.Now
+
+            };
+            var poToCreated = await _repo.CommitPurchaseOrder(poToCreate);
+            var pologToCreate = new COPLog
+            {
+                ref_id =poToCreated.id,
+                cpo_qty =request.cpo_qty,
+                cpo_price =request.cpo_price,
+                flag =1,
+                user_id = request.emp_id,
+                comment = request.comment,
+                cpo_eta = request.cpo_eta,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COPLog(pologToCreate);
+
+            
+            return Ok(201);
+        }
+
         
 
         [HttpPut("editpurchaseorderpost")]
@@ -346,6 +386,103 @@ namespace CheckpointInventoryStock.API.Controllers
              return Ok(201);
         }
 
+        [HttpPut("editcommitpurchaseorderpost")]
+        public async Task<IActionResult> EditCommitPurchaseOrderpost([FromBody]CommitPurchaseOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitPurchaseOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.cpo_qty = request.cpo_qty;
+                entity.cpo_price =request.cpo_price;
+                entity.s_name = request.s_name;
+                entity.cpo_eta = request.cpo_eta;
+                entity.comment =request.comment;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COPLog
+            {
+                ref_id =entity.id,
+                cpo_qty =request.cpo_qty,
+                cpo_price =request.cpo_price,
+                flag =2,
+                user_id = request.updated_by,
+                comment = request.comment,
+                cpo_eta = request.cpo_eta,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COPLog(pologToCreate);         
+
+             return Ok(201);
+        }
+        [HttpPut("updatepurchasecommitorderpost")]
+        public async Task<IActionResult> UpdateCommitPurchaseOrderpost([FromBody]CommitPurchaseOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitPurchaseOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.cpo_status = request.cpo_status;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COPLog
+            {
+                ref_id =entity.id,
+                cpo_qty =entity.cpo_qty,
+                cpo_price =entity.cpo_price,
+                flag = request.cpo_status,
+                user_id = request.updated_by,
+                comment = request.comment,
+                cpo_eta = entity.cpo_eta,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COPLog(pologToCreate);         
+
+             return Ok(201);
+        }
+
+        [HttpPut("updatecommitorderpost")]
+        public async Task<IActionResult> UpdateCommitOrderpost([FromBody]CommitOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.co_status = request.co_status;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COLog
+            {
+                ref_id =entity.id,
+                co_qty =entity.co_qty,
+                flag = request.co_status,
+                user_id = request.updated_by,
+                comment = request.comment,
+                co_edd = entity.co_edd,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COLog(pologToCreate);         
+
+             return Ok(201);
+        }
         // POST api/values
         [AllowAnonymous]
         [HttpGet("getpurchaseorder")]
@@ -363,6 +500,21 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // POST api/values
         [AllowAnonymous]
+        [HttpGet("getcommitpurchaseorder")]
+        public async Task<IActionResult> GetCommitPurchaseOrder(int userid)
+        {
+            
+            var values = await _context.PurchaseOrders.ToListAsync();
+
+            List<CPOList> availableStock = new List<CPOList>();
+
+            var result = _context.CPOLists.FromSql<CPOList>("EXEC spgetcommitpurchaseorders").ToList();
+            
+             return Ok(result);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
         [HttpGet("getorder")]
         public async Task<IActionResult> GetOrder()
         {
@@ -372,6 +524,21 @@ namespace CheckpointInventoryStock.API.Controllers
             List<OrderList> availableStock = new List<OrderList>();
 
             var result = _context.OrderLists.FromSql<OrderList>("EXEC spgetorders").ToList();
+
+             return Ok(result);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpGet("getcommitorder")]
+        public async Task<IActionResult> GetCommitOrder()
+        {
+            
+            var values = await _context.ReserveOrders.ToListAsync();
+           
+            List<CommitOrderList> availableStock = new List<CommitOrderList>();
+
+            var result = _context.CommitOrderLists.FromSql<CommitOrderList>("EXEC spgetcommitorders").ToList();
 
              return Ok(result);
         }
@@ -475,6 +642,25 @@ namespace CheckpointInventoryStock.API.Controllers
              return Ok(result);
         }
 
+        
+        // POST api/values
+        [AllowAnonymous]
+        [HttpGet("getcommitshortfall/{userid}/{type1}/{type2}")]
+        public async Task<IActionResult> GetCommitShortfall(int userid, int type1, int type2)
+        {
+            var values = await _context.Requests.ToListAsync();
+           
+            var user_id = new SqlParameter("user_id", userid);
+            var type1_id = new SqlParameter("type1_id", type1);
+            var type2_id = new SqlParameter("type2_id", type2);
+
+            List<CommitShortFall> availableStock = new List<CommitShortFall>();
+
+            var result = _context.CommitShortFalls.FromSql<CommitShortFall>("EXEC spgetcommitshortfall @user_id, @type1_id, @type2_id", user_id, type1_id, type2_id).ToList();
+
+             return Ok(result);
+        }
+        
         // POST api/values
         [HttpPost("activatemodel")]
         public async Task<IActionResult> ActivateModel([FromBody]ReportSetting request)
@@ -583,6 +769,43 @@ namespace CheckpointInventoryStock.API.Controllers
 
              return Ok(201);
         }
+
+        [HttpPost("addcommitorder")]
+        public async Task<IActionResult> AddCommitOrder([FromBody]CommitOrder request)
+        {
+
+            var values = await _context.PartProducts.ToListAsync();
+            var orderToCreate = new CommitOrder
+            {
+                make_id =request.make_id,
+                model_id =request.model_id,
+                proc_id =request.proc_id,
+                co_qty =request.co_qty,
+                c_name =request.c_name,
+                emp_id = request.emp_id,
+                co_status = 1,
+                co_edd = request.co_edd,
+                comment = request.comment,
+                created_at =DateTime.Now,
+                updated_at =DateTime.Now
+
+            };
+            var orderToCreated = await _repo.CommitOrder(orderToCreate); 
+            var pologToCreate = new COLog
+            {
+                ref_id =orderToCreated.id,
+                co_qty =request.co_qty,
+                flag = 1,
+                user_id = request.emp_id,
+                comment = request.comment,
+                co_edd = request.co_edd,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COLog(pologToCreate); 
+
+             return Ok(201);
+        }
         
          // POST api/values
         [HttpPut("editorderpost")]
@@ -600,6 +823,40 @@ namespace CheckpointInventoryStock.API.Controllers
                 entity.updated_by = request.updated_by;
                 _context.SaveChanges();
             }          
+
+             return Ok(201);
+        }
+
+         // POST api/values
+        [HttpPut("editcommitorderpost")]
+        public async Task<IActionResult> EditCommitOrderPost([FromBody]CommitOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.co_qty = request.co_qty;
+                entity.co_edd = request.co_edd;
+                entity.comment = request.comment;
+                entity.updated_at = DateTime.Now;
+                entity.updated_by = request.updated_by;
+                _context.SaveChanges();
+            }   
+            var pologToCreate = new COLog
+            {
+                ref_id =entity.id,
+                co_qty =entity.co_qty,
+                flag = 2,
+                user_id = request.updated_by,
+                comment = request.comment,
+                co_edd = entity.co_edd,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COLog(pologToCreate);         
 
              return Ok(201);
         }
@@ -1011,6 +1268,37 @@ namespace CheckpointInventoryStock.API.Controllers
             List<RequirementList> availableStock = new List<RequirementList>();
 
             var result = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
+            
+             return Ok(result);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpGet("getcpodetails/{cpo_id}")]
+        public async Task<IActionResult> GetCPODetails(int cpo_id)
+        {
+            
+            var values = await _context.Departments.ToListAsync();
+            var id = new SqlParameter("id", cpo_id);
+
+            List<CPLDetailsList> availableStock = new List<CPLDetailsList>();
+
+            var result = _context.CPLDetailsLists.FromSql<CPLDetailsList>("EXEC spgetcpodetails @id", @id).ToList();
+            
+             return Ok(result);
+        }
+        // POST api/values
+        [AllowAnonymous]
+        [HttpGet("getcodetails/{co_id}")]
+        public async Task<IActionResult> GetCODetails(int co_id)
+        {
+            
+            var values = await _context.Departments.ToListAsync();
+            var id = new SqlParameter("id", co_id);
+
+            List<CODetailsList> availableStock = new List<CODetailsList>();
+
+            var result = _context.CODetailsLists.FromSql<CODetailsList>("EXEC spgetcodetails @id", @id).ToList();
             
              return Ok(result);
         }
@@ -1758,9 +2046,10 @@ namespace CheckpointInventoryStock.API.Controllers
         [HttpPut("closedeals")]
         public async Task<IActionResult> CloseDeals([FromBody]History request)
         {   
-            string mysubject ="";
-            string text ="";
-            if (request.Status == 3){   
+            string mysubject = "";
+            string text = "";
+
+            if (request.Status == 3){
                 mysubject = "Close";
                 text = "closed";
             } else if (request.Status == 5) {

@@ -43,9 +43,18 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<ShortfallDetailList> ShortfallDetailLists { get; set; }
         public DbSet<GetDealData> GetDealDatas { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<CommitPurchaseOrder> CommitPurchaseOrders { get; set; }
+        public DbSet<CPLDetailsList> CPLDetailsLists { get; set; }
+        public DbSet<COPLog> COPLogs { get; set; }
+        public DbSet<CommitOrder> CommitOrders { get; set; }
+        public DbSet<CODetailsList> CODetailsLists { get; set; }
+        public DbSet<CommitShortFall> CommitShortFalls { get; set; }
+        public DbSet<COLog> COLogs { get; set; }
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<PricingList> PricingLists { get; set; }
         public DbSet<POList> POLists { get; set; }
+        public DbSet<CPOList> CPOLists { get; set; }
+        public DbSet<CommitOrderList> CommitOrderLists { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<AvgPriceList> AvgPriceLists { get; set; }
         public DbSet<DealOfferList> DealOfferLists { get; set; }

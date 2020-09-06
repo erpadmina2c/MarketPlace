@@ -46,6 +46,38 @@ namespace CheckpointInventoryStock.API.Data
             return request;
 
         }
+        public async Task<CommitPurchaseOrder> CommitPurchaseOrder(CommitPurchaseOrder request)
+        {            
+            await _context.CommitPurchaseOrders.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
+        }
+        public async Task<COPLog> COPLog(COPLog request)
+        {            
+            await _context.COPLogs.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
+        }
+        public async Task<COLog> COLog(COLog request)
+        {            
+            await _context.COLogs.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
+        }
+        public async Task<CommitOrder> CommitOrder(CommitOrder request)
+        {            
+            await _context.CommitOrders.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
+        }
         public async Task<RequestLog> RequestLog(RequestLog request)
         {            
             await _context.RequestLogs.AddAsync(request);

@@ -9,6 +9,10 @@ namespace CheckpointInventoryStock.API.Data
          Task<Request> Request(Request request);
          Task<Pricing> Pricing(Pricing request);
          Task<PurchaseOrder> PurchaseOrder(PurchaseOrder request);
+         Task<COPLog> COPLog(COPLog request);
+         Task<COLog> COLog(COLog request);
+         Task<CommitPurchaseOrder> CommitPurchaseOrder(CommitPurchaseOrder request);
+         Task<CommitOrder> CommitOrder(CommitOrder request);
          Task<Order> Order(Order request);
          Task<RequestLog> RequestLog(RequestLog request);
          Task<IEnumerable<Request>> GetRequests();
