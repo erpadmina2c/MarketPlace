@@ -400,7 +400,6 @@ namespace CheckpointInventoryStock.API.Controllers
                 entity.cpo_price =request.cpo_price;
                 entity.s_name = request.s_name;
                 entity.cpo_eta = request.cpo_eta;
-                entity.comment =request.comment;
                 entity.updated_at =DateTime.Now;
                 entity.updated_by =request.updated_by;
                 _context.SaveChanges();
@@ -840,7 +839,6 @@ namespace CheckpointInventoryStock.API.Controllers
             {
                 entity.co_qty = request.co_qty;
                 entity.co_edd = request.co_edd;
-                entity.comment = request.comment;
                 entity.updated_at = DateTime.Now;
                 entity.updated_by = request.updated_by;
                 _context.SaveChanges();
