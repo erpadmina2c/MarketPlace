@@ -329,6 +329,7 @@ namespace CheckpointInventoryStock.API.Controllers
             var poToCreate = new CommitPurchaseOrder
             {
                 emp_id =request.emp_id,
+                po_num =request.po_num,
                 make_id =request.make_id,
                 model_id =request.model_id,
                 proc_id =request.proc_id,
@@ -337,6 +338,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 s_name = request.s_name,
                 cpo_status = 1,
                 cpo_eta = request.cpo_eta,
+                cpo_ped = request.cpo_ped,
                 comment =request.comment,
                 created_at =DateTime.Now,
                 updated_at =DateTime.Now
@@ -346,12 +348,14 @@ namespace CheckpointInventoryStock.API.Controllers
             var pologToCreate = new COPLog
             {
                 ref_id =poToCreated.id,
+                po_num =request.po_num,
                 cpo_qty =request.cpo_qty,
                 cpo_price =request.cpo_price,
                 flag =1,
                 user_id = request.emp_id,
                 comment = request.comment,
                 cpo_eta = request.cpo_eta,
+                cpo_ped = request.cpo_ped,
                 created_at =DateTime.Now,
 
             };
@@ -398,8 +402,10 @@ namespace CheckpointInventoryStock.API.Controllers
             {
                 entity.cpo_qty = request.cpo_qty;
                 entity.cpo_price =request.cpo_price;
+                entity.po_num =request.po_num;
                 entity.s_name = request.s_name;
                 entity.cpo_eta = request.cpo_eta;
+                entity.cpo_ped = request.cpo_ped;
                 entity.updated_at =DateTime.Now;
                 entity.updated_by =request.updated_by;
                 _context.SaveChanges();
@@ -408,11 +414,13 @@ namespace CheckpointInventoryStock.API.Controllers
             {
                 ref_id =entity.id,
                 cpo_qty =request.cpo_qty,
+                po_num =request.po_num,
                 cpo_price =request.cpo_price,
                 flag =2,
                 user_id = request.updated_by,
                 comment = request.comment,
                 cpo_eta = request.cpo_eta,
+                cpo_ped = request.cpo_ped,
                 created_at =DateTime.Now,
 
             };
@@ -438,14 +446,52 @@ namespace CheckpointInventoryStock.API.Controllers
             var pologToCreate = new COPLog
             {
                 ref_id =entity.id,
+                po_num =entity.po_num,
                 cpo_qty =entity.cpo_qty,
                 cpo_price =entity.cpo_price,
                 flag = request.cpo_status,
                 user_id = request.updated_by,
                 comment = request.comment,
                 cpo_eta = entity.cpo_eta,
+                cpo_ped = entity.cpo_ped,
+                receive_date = entity.receive_date,
                 created_at =DateTime.Now,
 
+            };
+            var pologToCreated = await _repo.COPLog(pologToCreate);         
+
+             return Ok(201);
+        }
+
+        [HttpPut("receivepurchasecommitorderpost")]
+        public async Task<IActionResult> ReceiveCommitPurchaseOrderpost([FromBody]CommitPurchaseOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitPurchaseOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.receive_date = request.receive_date;
+                entity.cpo_status = request.cpo_status;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COPLog
+            {
+                ref_id =entity.id,
+                cpo_qty =entity.cpo_qty,
+                cpo_ped = entity.cpo_ped,
+                receive_date =request.receive_date,
+                po_num =entity.po_num,
+                cpo_price =entity.cpo_price,
+                flag = request.cpo_status,
+                user_id = request.updated_by,
+                comment = "Received",
+                cpo_eta = entity.cpo_eta,
+                created_at =DateTime.Now,
             };
             var pologToCreated = await _repo.COPLog(pologToCreate);         
 
@@ -470,10 +516,44 @@ namespace CheckpointInventoryStock.API.Controllers
             var pologToCreate = new COLog
             {
                 ref_id =entity.id,
+                o_num =entity.o_num,
+                o_type =entity.o_type,
                 co_qty =entity.co_qty,
                 flag = request.co_status,
                 user_id = request.updated_by,
                 comment = request.comment,
+                co_edd = entity.co_edd,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COLog(pologToCreate);         
+
+             return Ok(201);
+        }
+        [HttpPut("bookcommitorderpost")]
+        public async Task<IActionResult> BookCommitOrderpost([FromBody]CommitOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.booked_status = request.co_status;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COLog
+            {
+                ref_id =entity.id,
+                o_num =entity.o_num,
+                o_type =entity.o_type,
+                co_qty =entity.co_qty,
+                flag = request.co_status,
+                user_id = request.updated_by,
+                comment = "Booked",
                 co_edd = entity.co_edd,
                 created_at =DateTime.Now,
 
@@ -499,15 +579,15 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // POST api/values
         [AllowAnonymous]
-        [HttpGet("getcommitpurchaseorder")]
+        [HttpGet("getcommitpurchaseorder/{userid}")]
         public async Task<IActionResult> GetCommitPurchaseOrder(int userid)
         {
-            
-            var values = await _context.PurchaseOrders.ToListAsync();
+            var values = await _context.ReserveOrders.ToListAsync();
+            var user_id = new SqlParameter("user_id", userid);             
 
             List<CPOList> availableStock = new List<CPOList>();
 
-            var result = _context.CPOLists.FromSql<CPOList>("EXEC spgetcommitpurchaseorders").ToList();
+            var result = _context.CPOLists.FromSql<CPOList>("EXEC spgetcommitpurchaseorders @user_id", @user_id).ToList();
             
              return Ok(result);
         }
@@ -529,15 +609,15 @@ namespace CheckpointInventoryStock.API.Controllers
 
         // POST api/values
         [AllowAnonymous]
-        [HttpGet("getcommitorder")]
-        public async Task<IActionResult> GetCommitOrder()
+        [HttpGet("getcommitorder/{userid}")]
+        public async Task<IActionResult> GetCommitOrder(int userid)
         {
-            
             var values = await _context.ReserveOrders.ToListAsync();
+            var user_id = new SqlParameter("user_id", userid);
            
             List<CommitOrderList> availableStock = new List<CommitOrderList>();
 
-            var result = _context.CommitOrderLists.FromSql<CommitOrderList>("EXEC spgetcommitorders").ToList();
+            var result = _context.CommitOrderLists.FromSql<CommitOrderList>("EXEC spgetcommitorders @user_id", @user_id).ToList();
 
              return Ok(result);
         }
@@ -776,9 +856,11 @@ namespace CheckpointInventoryStock.API.Controllers
             var values = await _context.PartProducts.ToListAsync();
             var orderToCreate = new CommitOrder
             {
+                o_num =request.o_num,
                 make_id =request.make_id,
                 model_id =request.model_id,
                 proc_id =request.proc_id,
+                o_type =request.o_type,
                 co_qty =request.co_qty,
                 c_name =request.c_name,
                 emp_id = request.emp_id,
@@ -793,6 +875,8 @@ namespace CheckpointInventoryStock.API.Controllers
             var pologToCreate = new COLog
             {
                 ref_id =orderToCreated.id,
+                o_num =request.o_num,
+                o_type =request.o_type,
                 co_qty =request.co_qty,
                 flag = 1,
                 user_id = request.emp_id,
@@ -837,6 +921,8 @@ namespace CheckpointInventoryStock.API.Controllers
 
             if (entity != null)
             {
+                entity.o_num = request.o_num;
+                entity.o_type = request.o_type;
                 entity.co_qty = request.co_qty;
                 entity.co_edd = request.co_edd;
                 entity.updated_at = DateTime.Now;
@@ -846,6 +932,8 @@ namespace CheckpointInventoryStock.API.Controllers
             var pologToCreate = new COLog
             {
                 ref_id =entity.id,
+                o_num =entity.o_num,
+                o_type =entity.o_type,
                 co_qty =entity.co_qty,
                 flag = 2,
                 user_id = request.updated_by,
@@ -976,6 +1064,120 @@ namespace CheckpointInventoryStock.API.Controllers
                 
 
             } 
+            
+            return Ok(result);
+        }
+
+        [HttpPost("sendshortfallmessagepost")]
+        public async Task<IActionResult> sendShortfallMessagePost([FromBody]ShortfallChatBox request)
+        {
+            var values = await _context.PartProducts.ToListAsync();
+            var requestToCreate = new ShortfallChatBox
+            {
+                ref_Id =request.ref_Id,
+                u_Id =request.u_Id,
+                text =request.text,
+                type =request.type,
+                status=0,
+                createdDate =DateTime.Now
+
+            };
+
+            var createdRequest = await _chat.ShortfallChatBox(requestToCreate);
+
+            var viewToCreate = new ShortfallViewchat
+            {
+                chat_id =createdRequest.id,
+                ref_id =createdRequest.ref_Id,
+                type =request.type,
+                user_id =createdRequest.u_Id,
+                created_at =DateTime.Now
+
+            };
+
+            var viewToCreated = await _viewchat.ShortfallViewchat(viewToCreate);
+
+
+            var result =from chat in _context.ShortfallChatBoxs
+                        join ord in _context.CommitOrders 
+                        on chat.ref_Id equals ord.id
+                        into Order
+                        from ord in Order.DefaultIfEmpty()
+                        join user in _context.Users
+                        on chat.u_Id equals user.Id
+                        into User
+                        from user in User.DefaultIfEmpty()
+                        where chat.type == request.type
+                        orderby chat.id ascending
+               select new
+                {
+                    Id = chat.id,
+                    OrderId = chat.id,
+                    type = chat.type,
+                    UserName = user.username,
+                    Text = chat.text,
+                    u_Id = chat.u_Id,
+                    ref_Id = chat.ref_Id,
+                    Status = chat.status,
+                    CreatedDate = chat.createdDate
+                }; 
+            
+            return Ok(result);
+        }
+
+        [HttpPost("sendshortfallpomessagepost")]
+        public async Task<IActionResult> sendShortfallPOMessagePost([FromBody]ShortfallChatBox request)
+        {
+            var values = await _context.PartProducts.ToListAsync();
+            var requestToCreate = new ShortfallChatBox
+            {
+                ref_Id =request.ref_Id,
+                u_Id =request.u_Id,
+                text =request.text,
+                type =request.type,
+                status=0,
+                createdDate =DateTime.Now
+
+            };
+
+            var createdRequest = await _chat.ShortfallChatBox(requestToCreate);
+
+            var viewToCreate = new ShortfallViewchat
+            {
+                chat_id =createdRequest.id,
+                ref_id =createdRequest.ref_Id,
+                type =request.type,
+                user_id =createdRequest.u_Id,
+                created_at =DateTime.Now
+
+            };
+
+            var viewToCreated = await _viewchat.ShortfallViewchat(viewToCreate);
+
+
+            var result =from chat in _context.ShortfallChatBoxs
+                        join ord in _context.CommitPurchaseOrders 
+                        on chat.ref_Id equals ord.id
+                        into Order
+                        from ord in Order.DefaultIfEmpty()
+                        join user in _context.Users
+                        on chat.u_Id equals user.Id
+                        into User
+                        from user in User.DefaultIfEmpty()
+                        where chat.type == request.type
+                        orderby chat.id ascending
+               select new
+                {
+                    Id = chat.id,
+                    OrderId = chat.id,
+                    type = chat.type,
+                    UserName = user.username,
+                    Text = chat.text,
+                    u_Id = chat.u_Id,
+                    ref_Id = chat.ref_Id,
+                    Status = chat.status,
+                    CreatedDate = chat.createdDate
+                }; 
             
             return Ok(result);
         }
@@ -1242,6 +1444,83 @@ namespace CheckpointInventoryStock.API.Controllers
                 {
                     Id = chat.id,
                     RequestID = req.RequestID,
+                    UserName = user.username,
+                    Text = chat.text,
+                    u_Id = chat.u_Id,
+                    ref_Id = chat.ref_Id,
+                    Status = chat.status,
+                    CreatedDate = chat.createdDate
+                };           
+            
+            
+             return Ok(result);
+        }
+        [AllowAnonymous]
+        [HttpPost("shortfallorderviewChats")]
+        public async Task<IActionResult> ShortfallOrderGetChats([FromBody]ShortfallViewchat request)
+        {
+            
+            var values = await _context.Departments.ToListAsync();
+
+            var reqid = new SqlParameter("reqid", request.ref_id);
+            var uid = new SqlParameter("uid", request.user_id);
+            var type_id = new SqlParameter("type_id", request.type);
+            var blogs = _context.Viewchats.FromSql("EXECUTE dbo.spShortfallviewChats @reqid,@uid,@type_id", reqid, uid, type_id).ToList();
+                        
+            var result =from chat in _context.ShortfallChatBoxs
+                        join ord in _context.CommitOrders 
+                        on chat.ref_Id equals ord.id
+                        into Order
+                        from ord in Order.DefaultIfEmpty()
+                        join user in _context.Users
+                        on chat.u_Id equals user.Id
+                        into User
+                        from user in User.DefaultIfEmpty()
+                        where chat.type == 1
+                        orderby chat.id ascending
+               select new
+                {
+                    Id = chat.id,
+                    RequestID = ord.id,
+                    UserName = user.username,
+                    Text = chat.text,
+                    u_Id = chat.u_Id,
+                    ref_Id = chat.ref_Id,
+                    Status = chat.status,
+                    CreatedDate = chat.createdDate
+                };           
+            
+            
+             return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("ShortfallpoviewChats")]
+        public async Task<IActionResult> ShortfallPOGetChats([FromBody]ShortfallViewchat request)
+        {
+            
+            var values = await _context.Departments.ToListAsync();
+
+            var reqid = new SqlParameter("reqid", request.ref_id);
+            var uid = new SqlParameter("uid", request.user_id);
+            var type_id = new SqlParameter("type_id", request.type);
+            var blogs = _context.Viewchats.FromSql("EXECUTE dbo.spShortfallviewChats @reqid,@uid,@type_id", reqid, uid, type_id).ToList();
+                        
+            var result =from chat in _context.ShortfallChatBoxs
+                        join ord in _context.CommitPurchaseOrders 
+                        on chat.ref_Id equals ord.id
+                        into Order
+                        from ord in Order.DefaultIfEmpty()
+                        join user in _context.Users
+                        on chat.u_Id equals user.Id
+                        into User
+                        from user in User.DefaultIfEmpty()
+                        where chat.type == 0
+                        orderby chat.id ascending
+               select new
+                {
+                    Id = chat.id,
+                    RequestID = ord.id,
                     UserName = user.username,
                     Text = chat.text,
                     u_Id = chat.u_Id,

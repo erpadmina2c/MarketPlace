@@ -198,8 +198,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'addOrder', request);
     };
     RequirementService.prototype.addCommitOrder = function (request) {
-        console.log('request');
-        console.log(request);
         return this.http.post(this.baseUrl + 'addcommitorder', request);
     };
     RequirementService.prototype.EditOrderPost = function (request) {
@@ -209,11 +207,18 @@ var RequirementService = /** @class */ (function () {
         return this.http.put(this.baseUrl + 'editcommitorderpost', request);
     };
     RequirementService.prototype.UpdateCPOPost = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'updatepurchasecommitorderpost', request);
+    };
+    RequirementService.prototype.ReceiveCPOPost = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'receivepurchasecommitorderpost', request);
     };
     RequirementService.prototype.UpdateCOPost = function (request) {
         return this.http.put(this.baseUrl + 'updatecommitorderpost', request);
+    };
+    RequirementService.prototype.BookCOPost = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'bookcommitorderpost', request);
     };
     RequirementService.prototype.sendMessagePost = function (request) {
         return this.http.post(this.baseUrl + 'sendmessagepost', request);
@@ -233,14 +238,17 @@ var RequirementService = /** @class */ (function () {
     RequirementService.prototype.getRequirements = function () {
         return this.http.get(this.baseUrl + 'getrequirements/' + Number(localStorage.getItem('UserId')));
     };
+    RequirementService.prototype.getCommitOrders = function () {
+        return this.http.get(this.baseUrl + 'getcommitorder/' + Number(localStorage.getItem('UserId')));
+    };
+    RequirementService.prototype.getCommitPurchaseOrders = function () {
+        return this.http.get(this.baseUrl + 'getcommitpurchaseorder/' + Number(localStorage.getItem('UserId')));
+    };
     RequirementService.prototype.getPrice = function () {
         return this.http.get(this.baseUrl + 'getprice');
     };
     RequirementService.prototype.getPurchaseOrders = function () {
         return this.http.get(this.baseUrl + 'getpurchaseorder');
-    };
-    RequirementService.prototype.getCommitPurchaseOrders = function () {
-        return this.http.get(this.baseUrl + 'getcommitpurchaseorder');
     };
     RequirementService.prototype.getCPODetails = function (id) {
         return this.http.get(this.baseUrl + 'getcpodetails/' + id);
@@ -250,9 +258,6 @@ var RequirementService = /** @class */ (function () {
     };
     RequirementService.prototype.getOrderss = function () {
         return this.http.get(this.baseUrl + 'getorder');
-    };
-    RequirementService.prototype.getCommitOrders = function () {
-        return this.http.get(this.baseUrl + 'getcommitorder');
     };
     RequirementService.prototype.getShortFalls = function () {
         return this.http.get(this.baseUrl + 'getshortfall/' + Number(localStorage.getItem('UserId')) + '/' + 1);
@@ -296,6 +301,21 @@ var RequirementService = /** @class */ (function () {
     };
     RequirementService.prototype.viewChats = function (request) {
         return this.http.post(this.baseUrl + 'viewChats', request);
+    };
+    RequirementService.prototype.ShortfallorderviewChats = function (request) {
+        console.log(request);
+        console.log('s');
+        return this.http.post(this.baseUrl + 'shortfallorderviewChats', request);
+    };
+    RequirementService.prototype.ShortfallpoviewChats = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'ShortfallpoviewChats', request);
+    };
+    RequirementService.prototype.sendShortfalllChatPost = function (request) {
+        return this.http.post(this.baseUrl + 'sendshortfallmessagepost', request);
+    };
+    RequirementService.prototype.sendShortfalllPOChatPost = function (request) {
+        return this.http.post(this.baseUrl + 'sendshortfallpomessagepost', request);
     };
     RequirementService.prototype.sendChatPost = function (request) {
         return this.http.post(this.baseUrl + 'sendmessagepost', request);

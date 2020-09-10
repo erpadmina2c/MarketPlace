@@ -8,6 +8,7 @@ namespace CheckpointInventoryStock.API.Data
     {
          
          Task<Viewchat> Viewchat(Viewchat request);
+         Task<ShortfallViewchat> ShortfallViewchat(ShortfallViewchat request);
          Task<IEnumerable<Viewchat>> GetViewchats();
     }
 }

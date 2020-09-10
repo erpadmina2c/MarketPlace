@@ -22,5 +22,11 @@ namespace CheckpointInventoryStock.API.Data
             await _context.SaveChangesAsync();            
             return request;
         }
+        public async Task<ShortfallViewchat> ShortfallViewchat(ShortfallViewchat request)
+        {
+            await _context.ShortfallViewchats.AddAsync(request);
+            await _context.SaveChangesAsync();            
+            return request;
+        }
     }
 }

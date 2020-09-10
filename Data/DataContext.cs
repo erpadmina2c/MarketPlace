@@ -63,5 +63,7 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<ActiveModel> ActiveModels { get; set; }
         public DbSet<ActiveProc> ActiveProcs { get; set; }
         public DbSet<ProcReportSetting> ProcReportSettings { get; set; }
+        public DbSet<ShortfallViewchat> ShortfallViewchats { get; set; }
+        public DbSet<ShortfallChatBox> ShortfallChatBoxs { get; set; }
     }
 }

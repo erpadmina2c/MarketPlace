@@ -5,7 +5,7 @@ namespace CheckpointInventoryStock.API.Models
     public class CPOList
     {
         public int id { get; set; }
-        public string cpo_num { get; set; }
+        public string po_num { get; set; }
         public int emp_id { get; set; }
         public int ref_id { get; set; }
         public string user_name { get; set; }
@@ -21,6 +21,10 @@ namespace CheckpointInventoryStock.API.Models
         public int cpo_status { get; set; }
         public string comment { get; set; }
         public DateTime cpo_eta { get; set; }
-        public DateTime created_at { get; set; }        
+        public DateTime cpo_ped { get; set; }
+        public DateTime? receive_date { get; set; }
+        public DateTime created_at { get; set; }    
+        public int chatviewcount { get; set; }
+        public int ChatCount { get; set; }    
     }
 }

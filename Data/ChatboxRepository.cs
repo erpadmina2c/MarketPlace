@@ -21,6 +21,13 @@ namespace CheckpointInventoryStock.API.Data
             
             return request;
         }
+        public async Task<ShortfallChatBox> ShortfallChatBox(ShortfallChatBox request)
+        {    
+            await _context.ShortfallChatBoxs.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+        }
 
        public async Task<IEnumerable<ChatBox>> GetChatBoxs()
         {
