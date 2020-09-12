@@ -10,6 +10,7 @@ namespace CheckpointInventoryStock.API.Models
         public string cpo_num{ get; set; }
         public int emp_id{ get; set; }
         public string po_num{ get; set; }
+        public string uk_po_num{ get; set; }
         public int make_id{ get; set; }
         public int model_id{ get; set; }
         public int proc_id{ get; set; }

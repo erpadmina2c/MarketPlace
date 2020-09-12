@@ -330,6 +330,7 @@ namespace CheckpointInventoryStock.API.Controllers
             {
                 emp_id =request.emp_id,
                 po_num =request.po_num,
+                uk_po_num =request.uk_po_num,
                 make_id =request.make_id,
                 model_id =request.model_id,
                 proc_id =request.proc_id,
@@ -349,6 +350,7 @@ namespace CheckpointInventoryStock.API.Controllers
             {
                 ref_id =poToCreated.id,
                 po_num =request.po_num,
+                uk_po_num =request.uk_po_num,
                 cpo_qty =request.cpo_qty,
                 cpo_price =request.cpo_price,
                 flag =1,
@@ -403,6 +405,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 entity.cpo_qty = request.cpo_qty;
                 entity.cpo_price =request.cpo_price;
                 entity.po_num =request.po_num;
+                entity.uk_po_num =request.uk_po_num;
                 entity.s_name = request.s_name;
                 entity.cpo_eta = request.cpo_eta;
                 entity.cpo_ped = request.cpo_ped;
@@ -415,6 +418,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 ref_id =entity.id,
                 cpo_qty =request.cpo_qty,
                 po_num =request.po_num,
+                uk_po_num =request.uk_po_num,
                 cpo_price =request.cpo_price,
                 flag =2,
                 user_id = request.updated_by,
@@ -551,7 +555,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 o_num =entity.o_num,
                 o_type =entity.o_type,
                 co_qty =entity.co_qty,
-                flag = request.co_status,
+                flag = 6,
                 user_id = request.updated_by,
                 comment = "Booked",
                 co_edd = entity.co_edd,
@@ -562,6 +566,40 @@ namespace CheckpointInventoryStock.API.Controllers
 
              return Ok(201);
         }
+
+        [HttpPut("closecommitorderpost")]
+        public async Task<IActionResult> CloseCommitOrderpost([FromBody]CommitOrder request)
+        {
+
+            var values1 = await _repo.GetRequests();
+            
+            var entity = _context.CommitOrders.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {
+                entity.close_status = request.co_status;
+                entity.updated_at =DateTime.Now;
+                entity.updated_by =request.updated_by;
+                _context.SaveChanges();
+            } 
+            var pologToCreate = new COLog
+            {
+                ref_id =entity.id,
+                o_num =entity.o_num,
+                o_type =entity.o_type,
+                co_qty =entity.co_qty,
+                flag = 7,
+                user_id = request.updated_by,
+                comment = "CLOSED",
+                co_edd = entity.co_edd,
+                created_at =DateTime.Now,
+
+            };
+            var pologToCreated = await _repo.COLog(pologToCreate);         
+
+             return Ok(201);
+        }
+
         // POST api/values
         [AllowAnonymous]
         [HttpGet("getpurchaseorder")]

@@ -20,6 +20,7 @@ namespace CheckpointInventoryStock.API.Models
         public DateTime co_edd {get; set; }
         public string comment {get; set; }
         public int booked_status {get; set; }
+        public int close_status {get; set; }
         public DateTime created_at {get; set; }
         public int chatCount {get; set; }
         public int chatviewcount {get; set; }

@@ -6,6 +6,7 @@ namespace CheckpointInventoryStock.API.Models
     {
         public int id { get; set; }
         public string po_num { get; set; }
+        public string uk_po_num { get; set; }
         public int cpol_qty { get; set; }
         public decimal cpol_price { get; set; }
         public string cpol_comment { get; set; }

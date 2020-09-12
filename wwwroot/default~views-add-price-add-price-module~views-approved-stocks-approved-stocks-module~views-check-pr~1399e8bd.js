@@ -220,6 +220,10 @@ var RequirementService = /** @class */ (function () {
         console.log(request);
         return this.http.put(this.baseUrl + 'bookcommitorderpost', request);
     };
+    RequirementService.prototype.CloseCOPost = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'closecommitorderpost', request);
+    };
     RequirementService.prototype.sendMessagePost = function (request) {
         return this.http.post(this.baseUrl + 'sendmessagepost', request);
     };
