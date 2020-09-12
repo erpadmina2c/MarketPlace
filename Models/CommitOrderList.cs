@@ -23,6 +23,8 @@ namespace CheckpointInventoryStock.API.Models
         public int close_status {get; set; }
         public DateTime created_at {get; set; }
         public int chatCount {get; set; }
+        public int userchatCount {get; set; }
         public int chatviewcount {get; set; }
+        public int userchatviewcount {get; set; }
     }
 }

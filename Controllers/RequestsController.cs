@@ -1514,7 +1514,7 @@ namespace CheckpointInventoryStock.API.Controllers
                         on chat.u_Id equals user.Id
                         into User
                         from user in User.DefaultIfEmpty()
-                        where chat.type == 1
+                        where chat.type == request.type
                         orderby chat.id ascending
                select new
                 {
