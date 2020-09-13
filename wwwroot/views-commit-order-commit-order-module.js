@@ -168,6 +168,41 @@ var CommitOrderComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getCommitOrders().subscribe(function (orders) {
             _this.orders = orders.filter(function (proj) { return (proj.close_status === 0); });
+            if (_this.filter1 === 1) {
+                if (_this.filter4 === 0 && _this.filter5 === 0) {
+                    _this.orders = orders.filter(function (proj) { return (proj.close_status === _this.filter5); });
+                }
+                else if (_this.filter4 === 1 && _this.filter5 === 0) {
+                    _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4 && proj.close_status === _this.filter5); });
+                }
+                else if (_this.filter4 === 0 && _this.filter5 === 1) {
+                    _this.orders = orders;
+                }
+                else if (_this.filter4 === 1 && _this.filter5 === 1) {
+                    _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4); });
+                }
+            }
+            else if (_this.filter2 === 1 || _this.filter3 === 3) {
+                if (_this.filter4 === 0 && _this.filter5 === 0) {
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
+                        || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
+                }
+                else if (_this.filter4 === 1 && _this.filter5 === 0) {
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4 &&
+                        proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
+                        && proj.close_status === _this.filter5); });
+                }
+                else if (_this.filter4 === 0 && _this.filter5 === 1) {
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
+                }
+                else if (_this.filter4 === 1 && _this.filter5 === 1) {
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4 ||
+                        proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
+                }
+            }
+            else {
+                _this.orders = orders.filter(function (proj) { return (proj.booked_status === 100); });
+            }
             console.log(_this.orders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
