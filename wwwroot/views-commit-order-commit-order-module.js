@@ -167,7 +167,7 @@ var CommitOrderComponent = /** @class */ (function () {
     CommitOrderComponent.prototype.loadOrders = function () {
         var _this = this;
         return this.requirementservice.getCommitOrders().subscribe(function (orders) {
-            _this.orders = orders;
+            _this.orders = orders.filter(function (proj) { return (proj.close_status === 0); });
             console.log(_this.orders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
@@ -358,10 +358,11 @@ var CommitOrderComponent = /** @class */ (function () {
                 _this.filter1 = 1;
                 if (event.target.checked === true) {
                     _this.check1 = true;
-                    _this.orders = orders;
+                    _this.orders = orders.filter(function (proj) { return (proj.close_status === 0); });
                     _this.filter2 = 0;
                     _this.filter3 = 0;
                     _this.filter4 = 0;
+                    _this.filter5 = 0;
                 }
                 else {
                     _this.check1 = false;
@@ -370,6 +371,7 @@ var CommitOrderComponent = /** @class */ (function () {
                     _this.filter2 = 0;
                     _this.filter3 = 0;
                     _this.filter4 = 0;
+                    _this.filter5 = 0;
                 }
             }
             if (type === 1) {
@@ -382,21 +384,21 @@ var CommitOrderComponent = /** @class */ (function () {
                     _this.check2 = false;
                 }
                 if (_this.filter4 === 0 && _this.filter5 === 0) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5 ||
+                        proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
                 }
                 else if (_this.filter4 === 1 && _this.filter5 === 0) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                        || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4 &&
+                        proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.close_status === _this.filter5
+                        && proj.booked_status === _this.filter4); });
                 }
                 else if (_this.filter4 === 0 && _this.filter5 === 1) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
-                        || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
                 }
                 else {
                     _this.check2 = false;
                     _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                        && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
-                        && proj.close_status === _this.filter5); });
+                        || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
                 }
             }
             if (type === 3) {
@@ -409,20 +411,21 @@ var CommitOrderComponent = /** @class */ (function () {
                     _this.check3 = false;
                 }
                 if (_this.filter4 === 0 && _this.filter5 === 0) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
+                        || proj.close_status === _this.filter5 && proj.co_status === _this.filter3); });
                 }
                 else if (_this.filter4 === 1 && _this.filter5 === 0) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                        || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4 &&
+                        proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
+                        && proj.close_status === _this.filter5); });
                 }
                 else if (_this.filter4 === 0 && _this.filter5 === 1) {
-                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
-                        || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
+                    _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
                 }
                 else {
                     _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                        && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
-                        && proj.close_status === _this.filter5); });
+                        || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
+                            && proj.close_status === _this.filter5); });
                 }
             }
             if (type === 5) {
@@ -435,18 +438,18 @@ var CommitOrderComponent = /** @class */ (function () {
                         _this.check4 = false;
                         _this.orders = orders;
                         if (_this.filter5 === 1) {
-                            _this.orders = orders.filter(function (proj) { return (proj.close_status === _this.filter5); });
+                            _this.orders = orders;
                         }
                         else if (_this.filter5 === 0) {
-                            _this.orders = orders;
+                            _this.orders = orders.filter(function (proj) { return (proj.close_status === _this.filter5); });
                         }
                     }
                     if (event.target.checked === true) {
                         if (_this.filter5 === 1) {
-                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4 && proj.close_status === _this.filter5); });
+                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4); });
                         }
                         else if (_this.filter5 === 0) {
-                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4); });
+                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4 && proj.close_status === _this.filter5); });
                         }
                     }
                 }
@@ -455,22 +458,22 @@ var CommitOrderComponent = /** @class */ (function () {
                         _this.filter4 = 0;
                         _this.check4 = false;
                         if (_this.filter5 === 1) {
-                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
-                                || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
+                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter3 || proj.co_status === _this.filter2); });
                         }
                         else if (_this.filter5 === 0) {
-                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter3 || proj.co_status === _this.filter2); });
+                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
+                                || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
                         }
                     }
                     if (event.target.checked === true) {
                         if (_this.filter5 === 1) {
                             _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                                && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
-                                && proj.close_status === _this.filter5); });
+                                || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
                         }
                         else if (_this.filter5 === 0) {
                             _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                                || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
+                                && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
+                                && proj.close_status === _this.filter5); });
                         }
                     }
                 }
@@ -494,19 +497,19 @@ var CommitOrderComponent = /** @class */ (function () {
                         _this.filter5 = 0;
                         _this.check5 = false;
                         if (_this.filter4 === 1) {
-                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4); });
+                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4 && proj.close_status === _this.filter5); });
                         }
                         else if (_this.filter4 === 0) {
-                            _this.orders = orders;
+                            _this.orders = orders.filter(function (proj) { return (proj.close_status === _this.filter5); });
                         }
                     }
                     if (event.target.checked === true) {
                         _this.check5 = true;
                         if (_this.filter4 === 1) {
-                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4 && proj.close_status === _this.filter5); });
+                            _this.orders = orders.filter(function (proj) { return (proj.booked_status === _this.filter4); });
                         }
                         else if (_this.filter4 === 0) {
-                            _this.orders = orders.filter(function (proj) { return (proj.close_status === _this.filter5); });
+                            _this.orders = orders;
                         }
                     }
                 }
@@ -516,21 +519,21 @@ var CommitOrderComponent = /** @class */ (function () {
                         _this.check5 = false;
                         if (_this.filter4 === 1) {
                             _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                                || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
+                                && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
+                                && proj.close_status === _this.filter5); });
                         }
                         else if (_this.filter5 === 0) {
-                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter3 || proj.co_status === _this.filter2); });
+                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter3 && proj.close_status === _this.filter5
+                                || proj.co_status === _this.filter2 && proj.close_status === _this.filter5); });
                         }
                     }
                     if (event.target.checked === true) {
                         if (_this.filter4 === 1) {
                             _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.booked_status === _this.filter4
-                                && proj.close_status === _this.filter5 || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4
-                                && proj.close_status === _this.filter5); });
+                                || proj.co_status === _this.filter3 && proj.booked_status === _this.filter4); });
                         }
                         else if (_this.filter4 === 0) {
-                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 && proj.close_status === _this.filter5
-                                || proj.co_status === _this.filter3 && proj.close_status === _this.filter5); });
+                            _this.orders = orders.filter(function (proj) { return (proj.co_status === _this.filter2 || proj.co_status === _this.filter3); });
                         }
                     }
                 }
