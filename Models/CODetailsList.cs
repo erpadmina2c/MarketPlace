@@ -9,6 +9,7 @@ namespace CheckpointInventoryStock.API.Models
         public int o_type { get; set; }
         public int col_qty { get; set; }
         public string col_comment { get; set; }
+        public string c_name { get; set; }
         public string col_flag { get; set; }
         public DateTime co_edd { get; set; }
         public string col_username { get; set; }

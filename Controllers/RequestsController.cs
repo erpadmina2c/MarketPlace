@@ -523,6 +523,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 ref_id =entity.id,
                 o_num =entity.o_num,
                 o_type =entity.o_type,
+                c_name =entity.c_name,
                 co_qty =entity.co_qty,
                 flag = request.co_status,
                 user_id = request.updated_by,
@@ -556,6 +557,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 o_num =entity.o_num,
                 o_type =entity.o_type,
                 co_qty =entity.co_qty,
+                c_name =entity.c_name,
                 flag = 6,
                 user_id = request.updated_by,
                 comment = "Booked",
@@ -588,6 +590,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 ref_id =entity.id,
                 o_num =entity.o_num,
                 o_type =entity.o_type,
+                c_name =entity.c_name,
                 co_qty =entity.co_qty,
                 flag = 7,
                 user_id = request.updated_by,
@@ -917,6 +920,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 o_num =request.o_num,
                 o_type =request.o_type,
                 co_qty =request.co_qty,
+                c_name =request.c_name,
                 flag = 1,
                 user_id = request.emp_id,
                 comment = request.comment,
@@ -964,6 +968,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 entity.o_type = request.o_type;
                 entity.co_qty = request.co_qty;
                 entity.co_edd = request.co_edd;
+                entity.c_name = request.c_name;
                 entity.comment = request.comment;
                 entity.updated_at = DateTime.Now;
                 entity.updated_by = request.updated_by;
@@ -974,6 +979,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 ref_id =entity.id,
                 o_num =entity.o_num,
                 o_type =entity.o_type,
+                c_name =entity.c_name,
                 co_qty =entity.co_qty,
                 flag = 2,
                 user_id = request.updated_by,
