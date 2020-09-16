@@ -5,6 +5,7 @@ namespace CheckpointInventoryStock.API.Models
     public class PricingList
     {
         public int id { get; set; }
+        public string po_num { get; set; }
         public int make_id { get; set; }
         public string make_name { get; set; }
         public int model_id { get; set; }

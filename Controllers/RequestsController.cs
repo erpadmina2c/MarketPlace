@@ -220,6 +220,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
             var priceTocreate = new Pricing
             {
+                po_num =request.po_num,
                 make_id =request.make_id,
                 model_id =request.model_id,
                 proc_id =request.proc_id,
