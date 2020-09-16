@@ -27,5 +27,6 @@ namespace CheckpointInventoryStock.API.Models
         public DateTime created_at { get; set; }    
         public int chatviewcount { get; set; }
         public int ChatCount { get; set; }    
+        public int chat1 { get; set; }    
     }
 }

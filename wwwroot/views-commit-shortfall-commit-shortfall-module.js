@@ -119,21 +119,22 @@ var CommitShortfallComponent = /** @class */ (function () {
         this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
     }
     CommitShortfallComponent.prototype.ngOnInit = function () {
+        console.log('items');
         var date = new Date(); // 2009-11-10
         var date1 = new Date(date.getFullYear(), date.getMonth() + 2, 0);
         var date2 = new Date(date.getFullYear(), date.getMonth() + 3, 0);
-        this.currentmonth = date.toLocaleString('default', { month: 'long' });
-        this.nextmonth = date1.toLocaleString('default', { month: 'long' });
-        this.postnextmonth = date2.toLocaleString('default', { month: 'long' });
+        this.currentmonth = date.toLocaleString('en-GB', { month: 'long' });
+        this.nextmonth = date1.toLocaleString('en-GB', { month: 'long' });
+        this.postnextmonth = date2.toLocaleString('en-GB', { month: 'long' });
         this.mymodel.inorder = 0;
         this.mymodel.inpo = 0;
         this.loadOrders();
     };
     CommitShortfallComponent.prototype.loadOrders = function () {
         var _this = this;
-        console.log(this.mymodel);
         return this.requirementservice.getCommitShortFalldetails(0, 0).subscribe(function (items) {
             _this.items = items;
+            console.log('items');
             console.log(items);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {

@@ -26,5 +26,7 @@ namespace CheckpointInventoryStock.API.Models
         public int userchatCount {get; set; }
         public int chatviewcount {get; set; }
         public int userchatviewcount {get; set; }
+        public int chat1 {get; set; }
+        public int chat2 {get; set; }
     }
 }

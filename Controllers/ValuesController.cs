@@ -236,6 +236,31 @@ namespace CheckpointInventoryStock.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getchatsetting")]
+        public async Task<IActionResult> GetChatSetting()
+        {
+            var values = await _context.ChatSettings.ToListAsync();
+            var result =from chat in _context.ChatSettings
+                        join user in _context.Users 
+                        on chat.user_id equals user.Id
+                        into User
+                        from user in User.DefaultIfEmpty()
+                        orderby user.Id ascending
+               select new
+                {
+                    id = chat.id,
+                    name = user.username,
+                    user_id = user.Id,
+                    chat_type = chat.chat_type,
+                    is_active = chat.status,
+                    created_at = chat.created_at,
+                };
+            
+            
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
         [HttpGet("getactivatemodel/{userid}/{type}")]
         public async Task<IActionResult> Getactivatemodel(int userid, int type)
         {
@@ -361,6 +386,25 @@ namespace CheckpointInventoryStock.API.Controllers
                  }
             }
             
+
+            return Ok(201);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpPut("activatechat")]
+        public async Task<IActionResult> ActivateChat([FromBody]ChatSetting request)
+        {   
+            var values = await _context.ChatSettings.ToListAsync();
+            var entity =  _context.ChatSettings.FirstOrDefault(
+                item => item.user_id == request.user_id && item.chat_type == request.chat_type);
+
+            if (entity != null)
+            {                
+                entity.status = request.status;
+                entity.updated_at =DateTime.Now;
+                _context.SaveChanges();
+            }    
 
             return Ok(201);
         }
