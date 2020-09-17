@@ -60368,7 +60368,7 @@ var CheckPriceComponent = /** @class */ (function () {
                 var sum = 0;
                 var qty = 0;
                 prices.forEach(function (value) {
-                    sum += parseFloat(value.avg_price);
+                    sum += parseFloat(value.avg_price) * value.qty;
                     qty += value.qty;
                 });
                 _this.TavgPrice = sum / qty;
