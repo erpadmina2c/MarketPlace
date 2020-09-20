@@ -60175,7 +60175,7 @@ var Deferred = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"card\">\n        <div class=\"card-body\">\n          <br>\n            <table class=\"table table-responsive-sm table-striped table-hover table-outline mb-0\">\n              <thead class=\"thead-light\">\n                <tr>\n                  <th>Make</th>\n                  <th>Model </th>\n                  <th>Processor </th>\n                  <th>HDD</th>\n                  <th>RAM</th>\n                  <th>Supplier Name</th>\n                  <!-- <th>Action</th> -->\n                </tr>\n                <tr>\n                  <th><ng-select2 [data]=\"makes\" [width]=\"200\" name=\"make_id\" [(ngModel)]=\"mymodel.make_id\" (ngModelChange)=\"loadModels($event)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"models\" [width]=\"200\" name=\"model_id\" [(ngModel)]=\"mymodel.model_id\" (ngModelChange)=\"SearchAveragePrice(2)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"processors\" [width]=\"200\" name=\"proc_id\" [(ngModel)]=\"mymodel.proc_id\" (ngModelChange)=\"SearchAveragePrice(3)\"></ng-select2> </th>\n                  <th><ng-select2 [data]=\"hdds\" [width]=\"200\" name=\"hdd_id\" [(ngModel)]=\"mymodel.hdd_id\" (ngModelChange)=\"SearchAveragePrice(4)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"rams\" [width]=\"200\" name=\"ram_id\" [(ngModel)]=\"mymodel.ram_id\" (ngModelChange)=\"SearchAveragePrice(5)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"suppliers\" [width]=\"200\" name=\"supplier_id\" [(ngModel)]=\"mymodel.supplier_id\" (ngModelChange)=\"SearchAveragePrice(6)\"></ng-select2></th>\n                  <!-- <th><button type=\"submit\" class=\"btn btn-sm btn-success\" id=\"postingPrice\">Search</button></th> -->\n                </tr>\n              </thead>\n            </table>\n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->  \n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"card\">\n        <div class=\"card-body\">          \n          <div *ngIf=\"araylength > 0\">\n            <span style=\"font-weight: bold;font-family: -webkit-body;\">Total Average Price </span>\n            {{TavgPrice | number : '2.2-2' }}\n            <span style=\"font-weight: bold;font-family: -webkit-body;\">  Total Qty</span>\n             {{ Tqty }}\n          </div>\n          <div style=\" float:right;\" *ngIf=\"araylength > 0\">\n            <span>Filter By Date </span>\n            <ejs-daterangepicker id='daterangepicker' format='yyyy-MM-dd' [width]=\"200\" (change)=\"SearchAveragePriceWithdaterange($event)\" placeholder='Select a range'>\n              <e-presets>\n                <e-preset label=\"This Week\" [start]='weekStart' [end]='weekEnd'></e-preset>\n                <e-preset label=\"This Month\" [start]='monthStart' [end]='monthEnd'></e-preset>\n                <e-preset label=\"Last Month\" [start]='lastStart' [end]='lastEnd'></e-preset>\n                <e-preset label=\"Last 6 Month\" [start]='midyearStart' [end]='monthEnd'></e-preset>\n                <e-preset label=\"Last Year\" [start]='yearStart' [end]='yearEnd'></e-preset>\n            </e-presets>\n            </ejs-daterangepicker>\n          </div>\n          <br>\n            <table  *ngIf=\"araylength > 0\" class=\"table table-responsive-sm table-striped table-hover table-outline mb-0\">\n              <thead class=\"thead-light\">\n                <tr>\n                  <th>Make</th>\n                  <th>Model </th>\n                  <th>Processor </th>\n                  <th>HDD</th>\n                  <th>RAM</th>\n                  <th>Supplier Name</th>\n                  <th>Qty</th>\n                  <th>Avg. Price</th>\n                </tr>\n                <tr  *ngFor=\"let price of prices\">\n                  <td>{{price.make_name}}</td>\n                  <td>{{price.model_name}}</td>\n                  <td>{{price.proc_name}}</td>\n                  <td>{{price.hdd_name}}</td>\n                  <td>{{price.ram_name}}</td>\n                  <td>{{price.supplier_name}}</td>\n                  <td>{{price.qty}}</td>\n                  <td>{{price.avg_price}}</td>\n                  </tr>\n              </thead>\n            </table>            \n            <div class=\"container\" *ngIf=\"araylength < 1\">\n              <div class=\"row justify-content-center\">\n                <div class=\"col-md-4\">\n                  <div class=\"clearfix\">\n                    <h4 class=\"pt-3\">Result Not Found</h4>\n                    <p class=\"text-muted\">The result you are looking for was not found.</p>\n                  </div>\n                  <div class=\"input-prepend input-group\">\n                    <div class=\"input-group-prepend\">\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div> \n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->  \n  <div>   \n  </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"card\">\n        <div class=\"card-body\">\n          <br>\n            <table class=\"table table-responsive-sm table-striped table-hover table-outline mb-0\">\n              <thead class=\"thead-light\">\n                <tr>\n                  <th>Make</th>\n                  <th>Model </th>\n                  <th>Processor </th>\n                  <th>HDD</th>\n                  <th>RAM</th>\n                  <th>Supplier Name</th>\n                  <!-- <th>Action</th> -->\n                </tr>\n                <tr>\n                  <th><ng-select2 [data]=\"makes\" [width]=\"200\" name=\"make_id\" [(ngModel)]=\"mymodel.make_id\" (ngModelChange)=\"loadModels($event)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"models\" [width]=\"200\" name=\"model_id\" [(ngModel)]=\"mymodel.model_id\" (ngModelChange)=\"SearchAveragePrice(2)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"processors\" [width]=\"200\" name=\"proc_id\" [(ngModel)]=\"mymodel.proc_id\" (ngModelChange)=\"SearchAveragePrice(3)\"></ng-select2> </th>\n                  <th><ng-select2 [data]=\"hdds\" [width]=\"200\" name=\"hdd_id\" [(ngModel)]=\"mymodel.hdd_id\" (ngModelChange)=\"SearchAveragePrice(4)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"rams\" [width]=\"200\" name=\"ram_id\" [(ngModel)]=\"mymodel.ram_id\" (ngModelChange)=\"SearchAveragePrice(5)\"></ng-select2></th>\n                  <th><ng-select2 [data]=\"suppliers\" [width]=\"200\" name=\"supplier_id\" [(ngModel)]=\"mymodel.supplier_id\" (ngModelChange)=\"SearchAveragePrice(6)\"></ng-select2></th>\n                  <!-- <th><button type=\"submit\" class=\"btn btn-sm btn-success\" id=\"postingPrice\">Search</button></th> -->\n                </tr>\n              </thead>\n            </table>\n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->  \n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"card\">\n        <div class=\"card-body\" class=\"show{{araylength}}\">          \n          <div *ngIf=\"araylength > 0\" style=\"float:left;margin: 21px 11px;\">\n            <span style=\"font-weight: bold;font-family: -webkit-body;\">Total Average Price </span>\n            {{TavgPrice | number : '2.2-2' }}\n            <span style=\"font-weight: bold;font-family: -webkit-body;\">  Total Qty</span>\n             {{ Tqty }}\n          </div>\n          <div style=\" float:right;margin: 21px 11px;\" *ngIf=\"araylength > 0\">\n            <span>Filter By Date </span>\n            <ejs-daterangepicker id='daterangepicker' format='yyyy-MM-dd' [width]=\"200\" (change)=\"SearchAveragePriceWithdaterange($event)\" placeholder='Select a range'>\n              <e-presets>\n                <e-preset label=\"This Week\" [start]='weekStart' [end]='weekEnd'></e-preset>\n                <e-preset label=\"This Month\" [start]='monthStart' [end]='monthEnd'></e-preset>\n                <e-preset label=\"Last Month\" [start]='lastStart' [end]='lastEnd'></e-preset>\n                <e-preset label=\"Last 6 Month\" [start]='midyearStart' [end]='monthEnd'></e-preset>\n                <e-preset label=\"Last Year\" [start]='yearStart' [end]='yearEnd'></e-preset>\n            </e-presets>\n            </ejs-daterangepicker>\n          </div>\n          <br>\n            <table  datatable [dtTrigger]=\"dtTrigger\" [dtOptions]=\"dtOptions\" class=\"table table-responsive-sm table-striped table-hover table-outline mb-0 show{{araylength}}\">\n              <thead class=\"thead-light\">\n                <tr>\n                  <th>Make</th>\n                  <th>Model </th>\n                  <th>Processor </th>\n                  <th>HDD</th>\n                  <th>RAM</th>\n                  <th>Supplier Name</th>\n                  <th>Qty</th>\n                  <th>Avg. Price</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr  *ngFor=\"let price of prices\">\n                  <td>{{price.make_name}}</td>\n                  <td>{{price.model_name}}</td>\n                  <td>{{price.proc_name}}</td>\n                  <td>{{price.hdd_name}}</td>\n                  <td>{{price.ram_name}}</td>\n                  <td>{{price.supplier_name}}</td>\n                  <td>{{price.qty}}</td>\n                  <td>{{price.avg_price}}</td>\n                  </tr>\n                </tbody>\n            </table>   \n        </div> \n        <div class=\"container\" *ngIf=\"araylength < 1\">\n          <div class=\"row justify-content-center\">\n            <div class=\"col-md-4\">\n              <div class=\"clearfix\">\n                <h4 class=\"pt-3\">Result Not Found</h4>\n                <p class=\"text-muted\">The result you are looking for was not found.</p>\n              </div>\n              <div class=\"input-prepend input-group\">\n                <div class=\"input-group-prepend\">\n                </div>\n              </div>\n            </div>\n          </div>\n        </div> \n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->  \n  <div>   \n  </div>");
 
 /***/ }),
 
@@ -60231,7 +60231,7 @@ var CheckPriceRoutingModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2NoZWNrLXByaWNlL2NoZWNrLXByaWNlLmNvbXBvbmVudC5jc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".show0 {\r\n    display: none!important;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvY2hlY2stcHJpY2UvY2hlY2stcHJpY2UuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHVCQUF1QjtBQUMzQiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2NoZWNrLXByaWNlL2NoZWNrLXByaWNlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2hvdzAge1xyXG4gICAgZGlzcGxheTogbm9uZSFpbXBvcnRhbnQ7XHJcbn0iXX0= */");
 
 /***/ }),
 
@@ -60250,6 +60250,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
 /* harmony import */ var _services_requirement_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/requirement.service */ "./src/app/_services/requirement.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! angular-datatables */ "./node_modules/angular-datatables/index.js");
+
+
 
 
 
@@ -60266,6 +60270,14 @@ var CheckPriceComponent = /** @class */ (function () {
         this.Tqty = 0;
         this.mymodel = {};
         this.roleid = Number(String(localStorage.getItem('RoleID')));
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 25,
+            retrieve: true,
+            order: [[0, 'desc']]
+        };
+        this.isDtInitialized = false;
+        this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
         this.today = new Date(new Date().toDateString());
         this.weekStart = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
         this.weekEnd = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
@@ -60384,6 +60396,17 @@ var CheckPriceComponent = /** @class */ (function () {
                 });
                 _this.TavgPrice = sum / qty;
                 _this.Tqty = qty;
+                console.log(_this.isDtInitialized);
+                if (_this.isDtInitialized) {
+                    _this.dtElement.dtInstance.then(function (dtInstance) {
+                        dtInstance.destroy();
+                        _this.dtTrigger.next();
+                    });
+                }
+                else {
+                    _this.isDtInitialized = true;
+                    _this.dtTrigger.next();
+                }
             }, function (error) {
                 _this.alertify.error(error);
             });
@@ -60408,11 +60431,21 @@ var CheckPriceComponent = /** @class */ (function () {
                 var sum = 0;
                 var qty = 0;
                 prices.forEach(function (value) {
-                    sum += parseFloat(value.avg_price);
+                    sum += parseFloat(value.avg_price) * value.qty;
                     qty += value.qty;
                 });
                 _this.TavgPrice = sum / qty;
                 _this.Tqty = qty;
+                if (_this.isDtInitialized) {
+                    _this.dtElement.dtInstance.then(function (dtInstance) {
+                        dtInstance.destroy();
+                        _this.dtTrigger.next();
+                    });
+                }
+                else {
+                    _this.isDtInitialized = true;
+                    _this.dtTrigger.next();
+                }
             }, function (error) {
                 console.log(error);
                 _this.alertify.error(error);
@@ -60424,6 +60457,10 @@ var CheckPriceComponent = /** @class */ (function () {
         { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"] },
         { type: _services_requirement_service__WEBPACK_IMPORTED_MODULE_4__["RequirementService"] }
     ]; };
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(angular_datatables__WEBPACK_IMPORTED_MODULE_6__["DataTableDirective"]),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", angular_datatables__WEBPACK_IMPORTED_MODULE_6__["DataTableDirective"])
+    ], CheckPriceComponent.prototype, "dtElement", void 0);
     CheckPriceComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-check-price',
