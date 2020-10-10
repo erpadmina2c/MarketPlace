@@ -30,5 +30,12 @@ namespace CheckpointInventoryStock.API.Data
             
             return role;
         }
+        public async Task<EmailSetting> EmailSetting(EmailSetting email)
+        {
+            await _context.EmailSettings.AddAsync(email);
+            await _context.SaveChangesAsync();
+            
+            return email;
+        }
     }
 }

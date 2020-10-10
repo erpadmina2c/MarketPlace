@@ -259,6 +259,14 @@ namespace CheckpointInventoryStock.API.Controllers
             
             return Ok(result);
         }
+        [AllowAnonymous]
+        [HttpGet("getemailsetting")]
+        public async Task<IActionResult> GetEmailSetting()
+        {
+            var values = await _context.EmailSettings.ToListAsync();           
+            
+            return Ok(values);
+        }
 
         [AllowAnonymous]
         [HttpGet("getactivatemodel/{userid}/{type}")]
@@ -386,6 +394,24 @@ namespace CheckpointInventoryStock.API.Controllers
                  }
             }
             
+
+            return Ok(201);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpPut("activateemail")]
+        public async Task<IActionResult> ActivateEmail([FromBody]ChatSetting request)
+        {   
+            var values = await _context.EmailSettings.ToListAsync();
+            var entity =  _context.EmailSettings.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {                
+                entity.status = request.status;
+                entity.updated_at =DateTime.Now;
+                _context.SaveChanges();
+            }    
 
             return Ok(201);
         }
@@ -620,6 +646,22 @@ namespace CheckpointInventoryStock.API.Controllers
 
                 };                
                 var accessToCreated = await _role.RoleAccess(accessToCreate);
+            }
+            
+            var subs = _context.EmailSettings.Where(item => item.role_id == 1).ToList();
+
+            foreach (var sub in subs)
+            {
+                var emailtocreat = new EmailSetting
+                {
+                    role_id =createdRole.RoleID,
+                    e_type =sub.e_type,
+                    status =0,
+                    created_at =DateTime.Now,
+                    updated_at =DateTime.Now
+
+                };                
+                var emailtocreated = await _role.EmailSetting(emailtocreat);
             }
 
             var values = await _context.Roles.ToListAsync(); 

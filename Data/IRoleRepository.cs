@@ -7,8 +7,9 @@ namespace CheckpointInventoryStock.API.Data
     public interface IRoleRepository
     {
          
-         Task<Role> Role(Role history);
-         Task<RoleAccess> RoleAccess(RoleAccess history);
+         Task<Role> Role(Role role);
+         Task<RoleAccess> RoleAccess(RoleAccess roleaccess);
+         Task<EmailSetting> EmailSetting(EmailSetting email);
          Task<IEnumerable<Role>> GetRole();
     }
 }

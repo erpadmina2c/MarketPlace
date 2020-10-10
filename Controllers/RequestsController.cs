@@ -54,15 +54,14 @@ namespace CheckpointInventoryStock.API.Controllers
         [HttpPost("requirementpost")]
         public async Task<IActionResult> SubmitRequest([FromBody]Request request)
         {
-            int i = 4;
             string Subject = "Requirement";
             string mytext = "";
             string Text = "New requirement posted on Marketplace kindly check and update as per your stock. check specification details below";
-        
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Laptop Requirement"), new SqlParameter("option", 1)).ToList();
             if (request.Type == 1){
-                i = 3;
                 Subject = "Stock";
                 Text = "Available stock posted on Marketplace. check specification details below";
+                users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "New Available Stock"), new SqlParameter("option", 1)).ToList();
             }
 
             var values = await _context.PartProducts.ToListAsync();
@@ -122,17 +121,7 @@ namespace CheckpointInventoryStock.API.Controllers
             }
             var result1 = result.Where(e=> e.RequestID==createdRequest.RequestID).FirstOrDefault();
             
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == i  || role.RoleID == 1 || role.RoleID == 2 || role.RoleID == 3 || role.RoleID == 11
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
+              
             foreach (var item in users)
             {
                 
@@ -1065,20 +1054,7 @@ namespace CheckpointInventoryStock.API.Controllers
 
             var result1 = result.Where(e=> e.Id==createdRequest.id).FirstOrDefault();
             
-            
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 1 && user.Id != request.u_Id
-                           || role.RoleID == 2 && user.Id != request.u_Id
-                           || role.RoleID == 11 && user.Id != request.u_Id
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Chat"), new SqlParameter("option", request.u_Id)).ToList(); 
             foreach (var item in users)
             {   
                 
@@ -1337,18 +1313,7 @@ namespace CheckpointInventoryStock.API.Controllers
             }
 
             var result1 = result.Where(e=> e.Id==createdRequest.Id).FirstOrDefault();
-            
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 3 || role.RoleID == 11 || role.RoleID == 1 || role.RoleID == 2
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "New Deal"), new SqlParameter("option", 1)).ToList();  
             foreach (var item in users)
             {
                 
@@ -1766,30 +1731,10 @@ namespace CheckpointInventoryStock.API.Controllers
             if(flag == "fail"){
                 return Ok(result);
             }
-             var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where user.Id == result1.UserId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2  || role.RoleID == 3 || role.RoleID == 11
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };  
-                if (request.Status == 1){
-                    users =from user in _context.Users
-                            join role in _context.UserRoles 
-                            on user.Id equals role.UserID
-                            into Role
-                            from role in Role.DefaultIfEmpty()
-                            where user.Id == result1.UserId || role.RoleID == 1
-                select new
-                    {
-                        username = user.username,
-                        Email = user.Email
-                    };
-                }  
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Reject Deal"), new SqlParameter("option", result1.UserId)).ToList();    
+            if (request.Status == 1){
+                users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Approve Deal"), new SqlParameter("option", result1.UserId)).ToList();    
+            }  
                 
             foreach (var item in users)
             {
@@ -1875,17 +1820,7 @@ namespace CheckpointInventoryStock.API.Controllers
             
             var result1 = myresults.Where(e=> e.Id==entity.Id).FirstOrDefault();
 
-             var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where user.Id == 3 || role.RoleID == 1 || role.RoleID == 2  || role.RoleID == 11
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Edit Available Stock"), new SqlParameter("option", 1)).ToList();    
 
             foreach (var item in users)
             {
@@ -2065,17 +2000,8 @@ namespace CheckpointInventoryStock.API.Controllers
             if(flag == "fail"){
                 return Ok(myresults);
             }
-             var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where user.Id == requestToCreate.EmpId || role.RoleID == 1 || role.RoleID == 6 || role.RoleID == 2  || role.RoleID == 3 || role.RoleID == 11
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };
+
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Approve Deal"), new SqlParameter("option", requestToCreate.EmpId)).ToList();    
 
             foreach (var item in users)
             {
@@ -2320,18 +2246,9 @@ namespace CheckpointInventoryStock.API.Controllers
             var result = _context.RequirementLists.FromSql<RequirementList>("EXEC spgetrequirements @user_id", @user_id).ToList();
             
             var result1 = result.Where(e=> e.RequestID==request.RequestID).FirstOrDefault();
+
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Reject Stock"), new SqlParameter("option", entity.UserId)).ToList();       
             
-            var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where user.Id == entity.UserId  || role.RoleID == 1 || role.RoleID == 2 
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
             foreach (var item in users)
             {
                     var message = new MimeMessage();
@@ -2531,44 +2448,16 @@ namespace CheckpointInventoryStock.API.Controllers
             
             
             var result1 = result.Where(e=> e.Id==request.Id).FirstOrDefault();
-             var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 1 || role.RoleID == 2
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                }; 
+
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Close Deal"), new SqlParameter("option", 1)).ToList();        
             if (request.Status == 5) {
-                users =from user in _context.Users
-                            join role in _context.UserRoles 
-                            on user.Id equals role.UserID
-                            into Role
-                            from role in Role.DefaultIfEmpty()
-                            where role.RoleID == 1 || role.RoleID == 7 || role.RoleID == 2 || role.RoleID == 3 || role.RoleID == 11
-                select new
-                    {
-                        username = user.username,
-                        Email = user.Email
-                    }; 
-
+                users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Purchase Deal"), new SqlParameter("option", 1)).ToList(); 
             } else if (request.Status == 8) {
-                users =from user in _context.Users
-                            join role in _context.UserRoles 
-                            on user.Id equals role.UserID
-                            into Role
-                            from role in Role.DefaultIfEmpty()
-                            where role.RoleID == 1 || role.RoleID == 8 || role.RoleID == 2 || role.RoleID == 6
-                select new
-                    {
-                        username = user.username,
-                        Email = user.Email
-                    }; 
-
-            }  
+                users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Receive Deal"), new SqlParameter("option", 1)).ToList(); 
+            } else if (request.Status == 8) {
+                users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "Dispatch Deal"), new SqlParameter("option", 1)).ToList(); 
+            } 
+            
 
             foreach (var item in users)
             {
@@ -2710,17 +2599,9 @@ namespace CheckpointInventoryStock.API.Controllers
             
             
             var result1 = result.Where(e=> e.Id==request.Id).FirstOrDefault();
-             var users =from user in _context.Users
-                        join role in _context.UserRoles 
-                        on user.Id equals role.UserID
-                        into Role
-                        from role in Role.DefaultIfEmpty()
-                        where role.RoleID == 1 || role.RoleID == 2
-               select new
-                {
-                    username = user.username,
-                    Email = user.Email
-                };   
+
+            var users = _context.SubscribeUsers.FromSql<SubscribeUser>("EXEC spgetusers @e_type,@option", new SqlParameter("e_type", "PO Update"), new SqlParameter("option", 1)).ToList();        
+              
             foreach (var item in users)
             {
                 

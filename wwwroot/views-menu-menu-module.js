@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n    <div class=\"col-md-6\">\n        <div class=\"card\">\n          <div class=\"card-header\">                     \n            <div class=\"form-group\">\n                <div class=\"input-group row\">\n                  <label for=\"exampleSelect1\" class=\"col-lg-7\">User Roles</label>\n                  <select class=\"form-control\" id=\"roleid\" name=\"roleID\" [(ngModel)]=\"model.roleID\"  (ngModelChange)=\"loadMenu($event)\">\n                    <option disabled selected=\"selected\" [value]=\"0\">Select Role</option>\n                    <option *ngFor=\"let role of roles; let i = index\"  [value]=\"role.roleID\">                    \n                      {{role.roleTitle}}\n                    </option>\n                  </select>\n                </div>\n              </div> \n          </div>\n          <div class=\"card-body\">\n              <div *ngFor=\"let item of menus\" class=\"row\" style=\"border-bottom: 1px solid #e6d9d9;margin: 8px -20px;\">\n                <label for=\"exampleSelect1\" class=\"col-md-11\">{{item.name}}</label>\n                <label class=\"switch switch-label switch-primary\">\n                    <input type=\"checkbox\" class=\"switch-input\" [checked]=\"item.is_active\"  (click)=\"activateMenu($event,item.id)\">\n                    <span class=\"switch-slider\" data-checked=\"On\" data-unchecked=\"Off\"></span>\n                </label>\n            </div>\n          </div>\n        </div>\n      </div><!--/.col-->");
+/* harmony default export */ __webpack_exports__["default"] = ("\n    <div class=\"row\">\n    <div class=\"col-md-6\">\n        <div class=\"card\">\n          <div class=\"card-header\">                     \n            <div class=\"form-group\">\n                <div class=\"input-group row\">\n                  <label for=\"exampleSelect1\" class=\"col-lg-7\">Menu Setting</label>\n                  <select class=\"form-control\" id=\"roleid\" [(ngModel)]=\"model.roleID\"  (ngModelChange)=\"loadMenu($event)\">\n                    <option disabled selected=\"selected\" [value]=\"0\">Select Role</option>\n                    <option *ngFor=\"let role of roles; let i = index\"  [value]=\"role.roleID\">                    \n                      {{role.roleTitle}}\n                    </option>\n                  </select>\n                </div>\n              </div> \n          </div>\n          <div class=\"card-body\">\n              <div *ngFor=\"let item of menus\" class=\"row\" style=\"border-bottom: 1px solid #e6d9d9;margin: 8px -20px;\">\n                <label for=\"exampleSelect1\" class=\"col-md-11\">{{item.name}}</label>\n                <label class=\"switch switch-label switch-primary\">\n                    <input type=\"checkbox\" class=\"switch-input\" [checked]=\"item.is_active\"  (click)=\"activateMenu($event,item.id)\">\n                    <span class=\"switch-slider\" data-checked=\"On\" data-unchecked=\"Off\"></span>\n                </label>\n            </div>\n          </div>\n        </div>\n      </div><!--/.col-->\n      <div class=\"col-md-6\">\n          <div class=\"card\">\n            <div class=\"card-header\">                     \n              <div class=\"form-group\">\n                  <div class=\"input-group row\">\n                    <label for=\"exampleSelect1\" class=\"col-lg-7\">Manage Email Setting</label>\n                    <select class=\"form-control\" id=\"roleid\" name=\"role_id\" [(ngModel)]=\"emaimodel.role_id\"  (ngModelChange)=\"loadEmail($event)\">\n                      <option disabled selected=\"selected\" [value]=\"0\">Select Role</option>\n                      <option *ngFor=\"let role of roles; let i = index\"  [value]=\"role.roleID\">                    \n                        {{role.roleTitle}}\n                      </option>\n                    </select>\n                  </div>\n                </div> \n            </div>\n            <div class=\"card-body\">\n                <div *ngFor=\"let emailsetting of emailsettings\" class=\"row\" style=\"border-bottom: 1px solid #e6d9d9;margin: 8px -20px;\">\n                  <label for=\"exampleSelect1\" class=\"col-md-11\">{{emailsetting.e_type}}</label>\n                  <label class=\"switch switch-label switch-primary\">\n                      <input type=\"checkbox\" class=\"switch-input\" [checked]=\"emailsetting.status\"  (click)=\"activateEmail($event,emailsetting.id)\">\n                      <span class=\"switch-slider\" data-checked=\"On\" data-unchecked=\"Off\"></span>\n                  </label>\n              </div>\n            </div>\n          </div>\n        </div><!--/.col-->      \n      </div>");
 
 /***/ }),
 
@@ -93,6 +93,7 @@ var MenuComponent = /** @class */ (function () {
         this.roleService = roleService;
         this.alertify = alertify;
         this.model = {};
+        this.emaimodel = {};
     }
     MenuComponent.prototype.ngOnInit = function () {
         this.model.roleID = '0';
@@ -100,10 +101,15 @@ var MenuComponent = /** @class */ (function () {
     };
     MenuComponent.prototype.loadMenu = function (id) {
         var _this = this;
-        console.log(id);
         return this.loadspecsService.getallmenus().subscribe(function (menus) {
             _this.menus = menus.filter(function (proj) { return (proj.role_id === Number(id)); });
-            console.log(_this.menus);
+            // console.log(this.menus);
+        });
+    };
+    MenuComponent.prototype.loadEmail = function (id) {
+        var _this = this;
+        return this.loadspecsService.getemailsetting().subscribe(function (emailsettings) {
+            _this.emailsettings = emailsettings.filter(function (proj) { return (proj.role_id === Number(id)); });
         });
     };
     MenuComponent.prototype.loadRoles = function () {
@@ -123,6 +129,22 @@ var MenuComponent = /** @class */ (function () {
         this.loadspecsService.activateMenu(this.model).subscribe(function () {
             _this.model.roleID = _this.setrole;
             _this.loadMenu(_this.setrole);
+        }, function (error) {
+            _this.alertify.error(error);
+        });
+    };
+    MenuComponent.prototype.activateEmail = function (event, id) {
+        var _this = this;
+        this.setrole = this.emaimodel.role_id;
+        if (event.target.checked === true) {
+            this.emaimodel = { id: id, status: 1 };
+        }
+        else if (event.target.checked === false) {
+            this.emaimodel = { id: id, status: 0 };
+        }
+        this.loadspecsService.activateEmail(this.emaimodel).subscribe(function () {
+            _this.loadEmail(_this.setrole);
+            _this.emaimodel.role_id = _this.setrole;
         }, function (error) {
             _this.alertify.error(error);
         });

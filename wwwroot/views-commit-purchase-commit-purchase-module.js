@@ -116,7 +116,24 @@ var CommitPurchaseComponent = /** @class */ (function () {
             pagingType: 'full_numbers',
             pageLength: 25,
             retrieve: true,
-            order: [[0, 'desc']]
+            order: [[0, 'desc']],
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    title: 'Data export',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    }
+                },
+                {
+                    extend: 'csv',
+                    title: 'Order_Data',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    }
+                }
+            ]
         };
         this.isDtInitialized = false;
         this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();

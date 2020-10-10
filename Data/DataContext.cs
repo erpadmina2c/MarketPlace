@@ -66,5 +66,7 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<ShortfallViewchat> ShortfallViewchats { get; set; }
         public DbSet<ShortfallChatBox> ShortfallChatBoxs { get; set; }
         public DbSet<ChatSetting> ChatSettings { get; set; }
+        public DbSet<EmailSetting> EmailSettings { get; set; }
+        public DbSet<SubscribeUser> SubscribeUsers { get; set; }
     }
 }

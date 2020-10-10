@@ -593,6 +593,9 @@ var LoadspecsService = /** @class */ (function () {
     LoadspecsService.prototype.getallmenus = function () {
         return this.http.get(this.baseUrl + 'getallmenus');
     };
+    LoadspecsService.prototype.getemailsetting = function () {
+        return this.http.get(this.baseUrl + 'getemailsetting');
+    };
     LoadspecsService.prototype.getChatSetting = function () {
         return this.http.get(this.baseUrl + 'getchatsetting');
     };
@@ -663,6 +666,10 @@ var LoadspecsService = /** @class */ (function () {
     };
     LoadspecsService.prototype.activateMenu = function (request) {
         return this.http.put(this.baseUrl + 'activatemenu', request);
+    };
+    LoadspecsService.prototype.activateEmail = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'activateemail', request);
     };
     LoadspecsService.prototype.activateChat = function (request) {
         return this.http.put(this.baseUrl + 'activatechat', request);
@@ -1503,7 +1510,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    apiUrl: '/api/'
+    apiUrl: 'http://localhost:5000/api/'
 };
 
 
