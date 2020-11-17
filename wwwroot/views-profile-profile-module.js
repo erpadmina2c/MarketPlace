@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("        <div>\n            <form  #requestForm=\"ngForm\" (ngSubmit)=\"EdituserPost()\"  class=\"row\">\n            <div class=\"card col-lg-6  mx-auto\">\n                <div class=\"card-header\">Edit Profile</div>\n                <div class=\"card-body\">\n                    <div class=\"form-group\">\n                    <div class=\"input-group\">\n                        <label style=\"padding: 7px\">Username</label>\n                        <input type=\"text\" id=\"Username\" name=\"Username\" [(ngModel)]=\"mymodel.Username\"  class=\"form-control\" disabled placeholder=\"Username\">               \n                    </div>\n                    </div>\n                    <div class=\"form-group\">\n                    <div class=\"input-group\">\n                        <label style=\"padding: 7px\">Email</label>  \n                        <input type=\"email\" id=\"Email\" name=\"Email\" [(ngModel)]=\"mymodel.Email\"  class=\"form-control\" disabled placeholder=\"Email\"> \n                    </div>\n                    </div>\n                    <div class=\"form-group\">\n                    <div class=\"input-group\">\n                        <label style=\"padding: 7px\">Password</label> \n                        <input type=\"password\" id=\"Password\" name=\"Password\" [(ngModel)]=\"mymodel.Password\"  class=\"form-control\" placeholder=\"Password\">\n                    </div>\n                    </div> \n                </div>\n                <div class=\"card-header\">        \n                    <button type=\"submit\" class=\"btn btn-sm btn-success\" style=\"float: right;\">Submit</button> </div>\n            </div>\n        </form>\n        </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n    <div class=\"col-lg-6\">\n        <div class=\"card\">\n            <form  #requestForm=\"ngForm\" (ngSubmit)=\"EdituserPost()\">\n                <div class=\"card-header\">Edit Profile</div>\n                <div class=\"card-body\">\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Username</label>\n                            <input type=\"text\" id=\"Username\" name=\"Username\" [(ngModel)]=\"mymodel.Username\"  class=\"form-control\" disabled placeholder=\"Username\">               \n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Email</label>  \n                            <input type=\"email\" id=\"Email\" name=\"Email\" [(ngModel)]=\"mymodel.Email\"  class=\"form-control\" disabled placeholder=\"Email\"> \n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Password</label> \n                            <input type=\"password\" id=\"Password\" name=\"Password\" [(ngModel)]=\"mymodel.Password\"  class=\"form-control\" placeholder=\"Password\">\n                        </div>\n                    </div> \n                </div>\n                <div class=\"card-header\">        \n                    <button type=\"submit\" class=\"btn btn-sm btn-success\">Update</button>\n                </div>\n            </form>\n        </div>\n    </div>\n    <div class=\"col-lg-6\">\n        <div class=\"card\">\n            <form  #requestForm=\"ngForm\" (ngSubmit)=\"EdituserInfoPost()\">\n                <div class=\"card-header\">Edit Info</div>\n                <div class=\"card-body\">\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Company</label>\n                            <input type=\"text\" id=\"Company\" name=\"Company\" [(ngModel)]=\"mymodel.Company\"  class=\"form-control\" placeholder=\"Company\">               \n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Regno</label>  \n                            <input type=\"text\" id=\"Reg_no\" name=\"Reg_no\" [(ngModel)]=\"mymodel.Reg_no\"  class=\"form-control\" placeholder=\"Reg_no\"> \n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">mobile</label> \n                            <input type=\"text\" id=\"mobile_no\" name=\"mobile_no\" [(ngModel)]=\"mymodel.mobile_no\"  class=\"form-control\" placeholder=\"Mobile\">\n                        </div>\n                    </div> \n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">City</label>  \n                            <input type=\"text\" id=\"City\" name=\"City\" [(ngModel)]=\"mymodel.City\"  class=\"form-control\" placeholder=\"City\"> \n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <div class=\"input-group\">\n                            <label style=\"padding: 7px\">Country</label>  \n                            <input type=\"text\" id=\"Country\" name=\"Country\" [(ngModel)]=\"mymodel.Country\"  class=\"form-control\" placeholder=\"Country\"> \n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-header\">        \n                    <button type=\"submit\" class=\"btn btn-sm btn-success\">Update</button>\n                </div>\n            </form>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -128,6 +128,35 @@ var ProfileComponent = /** @class */ (function () {
         }
         console.log(this.mymodel);
         this.authService.EdituserPost(this.mymodel).subscribe(function (users) {
+            _this.alertify.success('User Edited Successful');
+        }, function (error) {
+            _this.alertify.error(error);
+        });
+    };
+    ProfileComponent.prototype.EdituserInfoPost = function () {
+        var _this = this;
+        if (!this.mymodel.Company) {
+            this.alertify.error('Write Company');
+            return;
+        }
+        if (!this.mymodel.Reg_no) {
+            this.alertify.error('Write Regno');
+            return;
+        }
+        if (!this.mymodel.mobile_no) {
+            this.alertify.error('Write mobile');
+            return;
+        }
+        if (!this.mymodel.City) {
+            this.alertify.error('Write City');
+            return;
+        }
+        if (!this.mymodel.Country) {
+            this.alertify.error('Write Country');
+            return;
+        }
+        console.log(this.mymodel);
+        this.authService.EdituserInfoPost(this.mymodel).subscribe(function (users) {
             _this.alertify.success('User Edited Successful');
         }, function (error) {
             _this.alertify.error(error);

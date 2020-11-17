@@ -52,13 +52,18 @@ namespace CheckpointInventoryStock.API.Controllers
                     gender = user.Gender,
                     age = 0,
                     knownAs = user.KnownAs,
+                    company = user.Company,
+                    reg_no = user.Reg_no,
+                    mobile_no = user.mobile_no,
+                    dateOfBirth = user.DateOfBirth,
                     createdDate = user.CreatedDate,
                     lastActive = user.LastActive,
                     city = user.City,
                     country = user.Country,
                     photoUrl = photo.Url,
-                    roleID = role.RoleID,
+                    roleId = role.RoleID,
                     rolename = role.RoleTitle,
+                    active = user.active,
 
                 };   
 

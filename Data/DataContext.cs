@@ -68,5 +68,9 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<ChatSetting> ChatSettings { get; set; }
         public DbSet<EmailSetting> EmailSettings { get; set; }
         public DbSet<SubscribeUser> SubscribeUsers { get; set; }
+        public DbSet<ITAD> ITADs { get; set; }
+        public DbSet<ITADList> ITADLists { get; set; }
+        public DbSet<LoginLog> LoginLogs { get; set; }
+        public DbSet<ITADSuplier> ITADSupliers { get; set; }
     }
 }

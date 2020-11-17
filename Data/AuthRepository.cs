@@ -15,7 +15,7 @@ namespace CheckpointInventoryStock.API.Data
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.Include(p => p.UserRoles).FirstOrDefaultAsync(x => x.username==username);
+            var user = await _context.Users.Include(p => p.UserRoles).FirstOrDefaultAsync(x => x.username==username && x.active==1);
             if(user == null)
                 return null;
             if(!verifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
@@ -24,6 +24,13 @@ namespace CheckpointInventoryStock.API.Data
             return user;
         }
 
+        public async Task<LoginLog> LoginLog(LoginLog request)
+        {
+            await _context.LoginLogs.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+        }
         private bool verifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)){
@@ -73,6 +80,18 @@ namespace CheckpointInventoryStock.API.Data
         public async Task<bool> UserExists(string username)
         {
             if(await _context.Users.AnyAsync(x => x.username == username))
+                return true;
+            return false; 
+        }
+        public async Task<bool> EmailExists(string email)
+        {
+            if(await _context.Users.AnyAsync(x => x.Email == email))
+                return true;
+            return false; 
+        }
+        public async Task<bool> MobileExists(string mobile_no)
+        {
+            if(await _context.Users.AnyAsync(x => x.mobile_no == mobile_no))
                 return true;
             return false; 
         }

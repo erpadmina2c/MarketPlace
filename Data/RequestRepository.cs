@@ -21,6 +21,13 @@ namespace CheckpointInventoryStock.API.Data
             
             return request;
 
+        }public async Task<ITAD> ITAD(ITAD request)
+        {            
+            await _context.ITADs.AddAsync(request);
+            await _context.SaveChangesAsync();
+            
+            return request;
+
         }
         public async Task<Pricing> Pricing(Pricing request)
         {            

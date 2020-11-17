@@ -8,6 +8,9 @@ namespace CheckpointInventoryStock.API.Data
          Task<User> Register(User user, string password);
          Task<UserRole> UserRole(UserRole userrole);
          Task<User> Login(string username, string password);
+         Task<LoginLog> LoginLog(LoginLog request);
          Task<bool> UserExists(string username);
+         Task<bool> EmailExists(string email);
+         Task<bool> MobileExists(string mobile_no);
     }
 }

@@ -16,5 +16,6 @@ namespace CheckpointInventoryStock.API.Data
          Task<Order> Order(Order request);
          Task<RequestLog> RequestLog(RequestLog request);
          Task<IEnumerable<Request>> GetRequests();
+         Task<ITAD> ITAD(ITAD request);
     }
 }

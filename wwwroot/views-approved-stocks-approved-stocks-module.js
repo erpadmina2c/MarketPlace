@@ -65,7 +65,7 @@ var ApprovedStocksRoutingModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n.avatar {\r\n    left: 24%;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYXBwcm92ZWQtc3RvY2tzL2FwcHJvdmVkLXN0b2Nrcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLFNBQVM7QUFDYiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2FwcHJvdmVkLXN0b2Nrcy9hcHByb3ZlZC1zdG9ja3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4uYXZhdGFyIHtcclxuICAgIGxlZnQ6IDI0JTtcclxufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".avatar {\r\n    left: 24%;\r\n}\r\nbutton {\r\n    background-color: #08ab9e;\r\n    color: #fff;\r\n}\r\n.close {\r\n    background: transparent!important;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYXBwcm92ZWQtc3RvY2tzL2FwcHJvdmVkLXN0b2Nrcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksU0FBUztBQUNiO0FBQ0E7SUFDSSx5QkFBeUI7SUFDekIsV0FBVztBQUNmO0FBQ0E7SUFDSSxpQ0FBaUM7QUFDckMiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9hcHByb3ZlZC1zdG9ja3MvYXBwcm92ZWQtc3RvY2tzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXZhdGFyIHtcclxuICAgIGxlZnQ6IDI0JTtcclxufVxyXG5idXR0b24ge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzA4YWI5ZTtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG59XHJcbi5jbG9zZSB7XHJcbiAgICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCFpbXBvcnRhbnQ7XHJcbn0iXX0= */");
 
 /***/ }),
 

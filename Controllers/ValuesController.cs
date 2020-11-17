@@ -120,6 +120,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     id = part.id,
                     p_name = part.p_name,
                     text = part.email,
+                    email = part.email,
                     status = part.status,
                     type = part.type,
                     created_at = part.created_at,
@@ -127,6 +128,31 @@ namespace CheckpointInventoryStock.API.Controllers
                 };
 
             return Ok(result);
+        }
+        [AllowAnonymous]
+        [HttpGet("getsupusers")]
+        public async Task<IActionResult> Getsupusers()
+        {
+            var values = await _context.Users.ToListAsync();
+            var users =from user in _context.Users
+                        join userrole in _context.UserRoles 
+                        on user.Id equals userrole.UserID
+                        into UserRole
+                        from userrole in UserRole.DefaultIfEmpty()
+               select new
+                {
+                    id = user.Id,
+                    p_name = user.username,
+                    text = user.Email,
+                    email = user.Email,
+                    status = user.active,
+                    type = userrole.RoleID,
+                    created_at = user.CreatedDate,
+                    updated_at = user.LastActive
+
+                };  
+
+            return Ok(users);
         }
         
          // POST api/values
@@ -281,6 +307,20 @@ namespace CheckpointInventoryStock.API.Controllers
             List<ActiveModel> availableStock = new List<ActiveModel>();
 
             var result = _context.ActiveModels.FromSql<ActiveModel>("EXEC spGetActivatemodel @user_id, @type_id", user_id, type_id).ToList();
+
+             
+            return Ok(result);
+        }
+        [AllowAnonymous]
+        [HttpGet("getitadsupliers")]
+        public async Task<IActionResult> GetITADSupliers()
+        {
+
+            var values = await _context.ReportSettings.ToListAsync();
+
+            List<ITADSuplier> availableStock = new List<ITADSuplier>();
+
+            var result = _context.ITADSupliers.FromSql<ITADSuplier>("EXEC spgetitadsupliers").ToList();
 
              
             return Ok(result);
