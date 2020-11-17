@@ -32718,7 +32718,6 @@ var ItdaAvailableComponent = /** @class */ (function () {
             /* Get worksheet */
             var worksheet = workbook.Sheets[first_sheet_name];
             var x = xlsx__WEBPACK_IMPORTED_MODULE_8__["utils"].sheet_to_json(worksheet, { header: 1, raw: false, range: 0 });
-            console.log(x);
         };
         oReq.send();
     };
