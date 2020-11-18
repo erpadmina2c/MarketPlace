@@ -199,7 +199,11 @@ namespace CheckpointInventoryStock.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login (UserForLoginDto userForLoginDto)
         {   
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+            if(!await _repo.UserExists(userForLoginDto.Username))
+                return BadRequest("Invalid Username");
+            if(!await _repo.CheckPass(userForLoginDto.Username, userForLoginDto.Password))
+                return BadRequest("Wrong Password");
+            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password,1);
             if(userFromRepo==null)
                 return BadRequest("This account has not been activated yet.");
             

@@ -13,9 +13,9 @@ namespace CheckpointInventoryStock.API.Data
             _context = context;
 
         }
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password, int active)
         {
-            var user = await _context.Users.Include(p => p.UserRoles).FirstOrDefaultAsync(x => x.username==username && x.active==1);
+            var user = await _context.Users.Include(p => p.UserRoles).FirstOrDefaultAsync(x => x.username==username && x.active==active);
             if(user == null)
                 return null;
             if(!verifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
@@ -94,6 +94,15 @@ namespace CheckpointInventoryStock.API.Data
             if(await _context.Users.AnyAsync(x => x.mobile_no == mobile_no))
                 return true;
             return false; 
+        }
+        public async Task<bool> CheckPass(string username, string password)
+        {
+            var user = await _context.Users.Include(p => p.UserRoles).FirstOrDefaultAsync(x => x.username==username);
+            if(user == null)
+                return false;
+            if(!verifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return false;
+            return true; 
         }
     }
 }
