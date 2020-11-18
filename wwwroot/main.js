@@ -541,6 +541,7 @@ var AuthService = /** @class */ (function () {
         }));
     };
     AuthService.prototype.register = function (request) {
+        console.log(request);
         return this.http.post(this.baseUrl + 'register', request);
     };
     AuthService.prototype.EdituserPost = function (request) {
@@ -1492,7 +1493,12 @@ var LoginComponent = /** @class */ (function () {
         this.authService.login(this.model).subscribe(function (next) {
             _this.alertify.success('Logged in successfully');
         }, function (error) {
-            _this.alertify.error(error.error);
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
         }, function () {
             _this.router.navigate(['/dashboard']);
         });
@@ -1638,6 +1644,7 @@ var RegisterComponent = /** @class */ (function () {
             return;
         }
         this.mymodel.roleID = 12;
+        this.mymodel.active = 0;
         document.getElementById('ReqAcc').innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> Processing...';
         document.getElementById('ReqAcc').disabled = true;
         this.authService.register(this.mymodel).subscribe(function (users) {

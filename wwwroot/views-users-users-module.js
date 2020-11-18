@@ -149,7 +149,8 @@ var UsersComponent = /** @class */ (function () {
             this.alertify.error('Select role');
             return;
         }
-        console.log(this.model);
+        this.model.active = 1;
+        this.model.mobile_no = 1111111111;
         this.authService.register(this.model).subscribe(function (users) {
             _this.users = users;
             _this.model.username = '';
@@ -158,7 +159,12 @@ var UsersComponent = /** @class */ (function () {
             _this.alertify.success('Registration Successful');
             _this.infoModal.hide();
         }, function (error) {
-            _this.alertify.error(error);
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
         });
     };
     UsersComponent.prototype.EditUser = function (id) {

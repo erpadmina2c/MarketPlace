@@ -20,5 +20,6 @@ namespace CheckpointInventoryStock.API.Dtos
         public string Country { get; set; }
         public string City { get; set; }
         public string mobile_no { get; set; }
+        public int active { get; set; }
     }
 }

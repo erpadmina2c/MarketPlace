@@ -2988,14 +2988,14 @@ namespace CheckpointInventoryStock.API.Controllers
                         _context.SaveChanges();
                     } else {
                     var crtphoto = new Photo
-                        {
-                            Url = fileName,
-                            Description = "ReferenceError: lerem is not defined",
-                            DateAdded = DateTime.Now,
-                            IsMain = true,
-                            UserId = userid,
-                        };
-                        var Createdrole =  _auth.Photo(crtphoto);
+                    {
+                        Url = fileName,
+                        Description = "ReferenceError: lerem is not defined",
+                        DateAdded = DateTime.Now,
+                        IsMain = true,
+                        UserId = userid,
+                    };
+                    var Createdroled =  _auth.Photo(crtphoto);
                     }
                     
                     return Ok(new { fileName});
