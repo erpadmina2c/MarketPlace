@@ -27,6 +27,7 @@ namespace CheckpointInventoryStock.API.Controllers
     {
         
         private readonly DataContext _context;
+        private readonly IAuthRepository _auth;
         private readonly IRequestRepository _repo;
         private readonly IChatboxRepository _chat;
         private readonly IViewchatRepository _viewchat;
@@ -35,7 +36,8 @@ namespace CheckpointInventoryStock.API.Controllers
         private readonly IWorkshopRepository _repo1;
         private readonly IShareDealRepository _sharedeal;
         public RequestsController(IRequestRepository repo, IHistoryRepository hisrepo, IChatboxRepository chat,
-         IWorkshopRepository repo1, DataContext context,IMapper mapper, IViewchatRepository viewchat, IShareDealRepository sharedeal)
+         IWorkshopRepository repo1, DataContext context,IMapper mapper, IViewchatRepository viewchat,
+         IShareDealRepository sharedeal, IAuthRepository auth)
         {
             _hisrepo = hisrepo;
             _repo = repo;
@@ -45,6 +47,7 @@ namespace CheckpointInventoryStock.API.Controllers
             _chat = chat;
             _viewchat = viewchat;
             _sharedeal = sharedeal;
+            _auth = auth;
 
         }
 
@@ -2947,6 +2950,54 @@ namespace CheckpointInventoryStock.API.Controllers
                         file.CopyTo(stream);
                     }
 
+                    return Ok(new { fileName});
+                }
+                else{
+                    return BadRequest();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                
+                return StatusCode(500,$"Internal server error: {ex}");
+            }
+        }
+        [HttpPost("upload_profile/{userid}"), DisableRequestSizeLimit]
+        public IActionResult UploadProfile(int userid)
+        {
+            var entity =  _context.Users.FirstOrDefault(item => item.Id == userid);
+            var photo =  _context.Photos.FirstOrDefault(item => item.UserId == userid);
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources","Profiles");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if(file.Length > 0)
+                {
+                    var fileName = GetUniqueFileName(entity.username+ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'));
+                    var fullpath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(fullpath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    if (photo != null)            {
+                        photo.Url = fileName;
+                        _context.SaveChanges();
+                    } else {
+                    var crtphoto = new Photo
+                        {
+                            Url = fileName,
+                            Description = "ReferenceError: lerem is not defined",
+                            DateAdded = DateTime.Now,
+                            IsMain = true,
+                            UserId = userid,
+                        };
+                        var Createdrole =  _auth.Photo(crtphoto);
+                    }
+                    
                     return Ok(new { fileName});
                 }
                 else{

@@ -104,5 +104,12 @@ namespace CheckpointInventoryStock.API.Data
                 return false;
             return true; 
         }
+         public async Task<Photo> Photo(Photo photo)
+        {
+            await _context.Photos.AddAsync(photo);
+            await _context.SaveChangesAsync();
+            
+            return photo;
+        }
     }
 }

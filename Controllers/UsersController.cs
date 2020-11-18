@@ -95,14 +95,18 @@ namespace CheckpointInventoryStock.API.Controllers
                     email = user.Email,
                     gender = user.Gender,
                     age = 0,
-                    knownAs = user.KnownAs,
-                    createdDate = user.CreatedDate,
-                    lastActive = user.LastActive,
+                    company = user.Company,
+                    reg_no = user.Reg_no,
+                    mobile_no = user.mobile_no,
+                    tel_no = user.tel_no,
                     city = user.City,
                     country = user.Country,
                     photoUrl = photo.Url,
+                    knownAs = user.KnownAs,
+                    lastActive = user.LastActive,
                     roleId = role.RoleID,
                     rolename = role.RoleTitle,
+                    createdDate = user.CreatedDate,
 
                 };   
             return Ok(result.FirstOrDefault());

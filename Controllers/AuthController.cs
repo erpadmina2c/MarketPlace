@@ -336,6 +336,7 @@ namespace CheckpointInventoryStock.API.Controllers
                 entity.Company = request.Company;
                 entity.Reg_no = request.Reg_no;
                 entity.mobile_no = request.mobile_no;
+                entity.tel_no = request.tel_no;
                 entity.City = request.City;
                 entity.Country = request.Country;
                 _context.SaveChanges();

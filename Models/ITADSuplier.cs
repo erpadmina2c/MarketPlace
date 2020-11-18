@@ -6,6 +6,8 @@ namespace CheckpointInventoryStock.API.Models
     {
         public int id {get; set;}
         public string user_name {get; set;}
+        public string profile_url {get; set;}
+
         public string email {get; set;}
         public string mobile_no {get; set;}
         public string tel_no {get; set;}
