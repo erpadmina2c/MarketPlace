@@ -545,6 +545,8 @@ var AuthService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'register', request);
     };
     AuthService.prototype.EdituserPost = function (request) {
+        console.log('request');
+        console.log(request);
         return this.http.put(this.baseUrl + 'resetpassword', request);
     };
     AuthService.prototype.EdituserInfoPost = function (request) {

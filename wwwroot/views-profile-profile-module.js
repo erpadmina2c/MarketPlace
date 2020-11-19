@@ -106,6 +106,7 @@ var ProfileComponent = /** @class */ (function () {
         this.mymodel = {};
         this.mycolor = {};
         this.userid = Number(localStorage.getItem('UserId'));
+        this.roleid = Number(String(localStorage.getItem('RoleID')));
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl + 'requests/';
         this.UploadFinished = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.uploadFile = function (files) {
@@ -184,9 +185,9 @@ var ProfileComponent = /** @class */ (function () {
             this.alertify.error('Select password');
             return;
         }
-        console.log(this.mymodel);
+        this.mymodel.RoleID = this.roleid;
         this.authService.EdituserPost(this.mymodel).subscribe(function (users) {
-            _this.alertify.success('User Edited Successful');
+            _this.alertify.success('Password Updated Successful');
         }, function (error) {
             _this.alertify.error(error);
         });
