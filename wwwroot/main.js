@@ -344,7 +344,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- <video autoplay=\"\" muted=\"\" loop=\"\">\r\n\r\n      <source src=\"assets/bg/small-homepage-clip-v2-slo-mo3.mp4\" type=\"video/mp4\">\r\n\r\n      Your browser does not support HTML5 video.\r\n  </video> -->\r\n  <img  id=\"myVideo\" src=\"/assets/bg/bg_main_overlay.jpg\" style=\"width: 40px; height: 38px;\" />\r\n  <div style=\"display:none;\">\r\n      <input type=\"text\" id=\"fake_username\">\r\n      <input type=\"password\" id=\"fake_password\">\r\n  </div>\r\n  <div id=\"\">\r\n    <div class=\"\">\r\n        <div class=\"col-md-9 mx-auto mt-5\">\r\n            <div class=\"card-group\">\r\n              <div class=\"card text-white bg-primary py-5 d-md-down-none\"  style=\"border: none;background-color:#00343e!important;width:44%\">\r\n                  <div class=\"card-body text-center\" style=\"padding:3.25rem 4.25rem;\">\r\n                      <div style=\"text-align:left;\">\r\n                          <img  src=\"/assets/img/brand/cc_logo.png\" style=\"width:38%;float:left;margin: 30px 0px;\" />\r\n                          <br style=\"clear:both;\">\r\n                          <h2>Welcome</h2><p>Welcome to the Circular Computing Portal.</p>\r\n                          <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>\r\n                          <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>\r\n                          <button [routerLink]=\"['/register']\" class=\"btn btn-primary active mt-3\" type=\"button\">Join US</button>\r\n                      </div>\r\n                  </div>\r\n              </div>\r\n                <div class=\"card p-4\">\r\n                    <div class=\"card-body\" style=\"padding:10.25rem 4.25rem;\">\r\n                        <form #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\r\n                            <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                              <p style=\"color: #00343e!important;\" class=\"text-muted\">Please login using the username and password that you have been provided.</p>\r\n                              <div class=\"input-group mb-3\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-user\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input autocomplete=\"username\" class=\"form-control\" placeholder=\"Username\" required=\"\" type=\"text\" id=\"u_name\" name=\"username\" [(ngModel)]=\"model.username\">\r\n                              </div>\r\n                              <div class=\"input-group mb-4\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-lock\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input autocomplete=\"current-password\" class=\"form-control\" placeholder=\"Password\" required=\"\" type=\"password\"  id=\"u_password\" name=\"password\" [(ngModel)]=\"model.password\">\r\n                              </div>\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-12\">\r\n                                      <input [disabled]=\"!loginForm.valid\" type=\"submit\" value=\"Login\" class=\"btn btn-primary\">\r\n                                  </div>\r\n                                  <div class=\"col-12 text-right mt-2\">\r\n                                      <a style=\"float: right;\" type=\"button\">Forgot password</a>\r\n                                  </div>\r\n                              </div>\r\n                          </form>\r\n                      </div>\r\n                  </div>\r\n              </div>\r\n          </div>\r\n      </div>\r\n    </div>\r\n  <div class=\"row\">\r\n      <div class=\"col-md-4\"></div>\r\n  </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<video id=\"myVideo\" #videoElement [loop]=\"true\" [muted]=\"true\" [volume]=\"0.2\" [autoplay]=\"true\" playsinline>\r\n      <source src=\"assets/bg/bg_main_overlay.mp4\" type=\"video/mp4\">\r\n      Your browser does not support HTML5 video.\r\n  </video>\r\n  <!-- <img  id=\"myVideo\" src=\"/assets/bg/bg_main_overlay.jpg\" style=\"width: 40px; height: 38px;\" /> -->\r\n  <!-- <div style=\"display:none;\">\r\n      <input type=\"text\" id=\"fake_username\">\r\n      <input type=\"password\" id=\"fake_password\">\r\n  </div> -->\r\n  <div class=\"mt-5\"></div>\r\n  <div class=\"mt-5\"></div>\r\n  <div id=\"\" class=\"mt-5\">\r\n    <div class=\"mt-5\">\r\n        <div class=\"col-md-8 mx-auto mt-10\">\r\n            <div class=\"card-group\">\r\n              <div class=\"card text-white bg-primary\"  style=\"border: none;background-color:#00343e!important;width:44%\">\r\n                  <div class=\"card-body text-center\" style=\"padding:2.25rem 3.25rem;\">\r\n                      <div style=\"text-align:left;\">\r\n                          <img  src=\"/assets/img/brand/cc_logo.png\" class=\"bgimage\" />\r\n                          <br style=\"clear:both;\">\r\n                          <h4 class=\"banner-head\">Extending the IT lifecycle with legitimacy, professionalism & purpose</h4>\r\n                          <br style=\"clear:both;\">\r\n                          <p>Welcome to the Circular Computing Portal.</p>\r\n                          <p>If you are already a registered partner then please log in.</p>\r\n                          <p>If your company is already a partner but you are not a registered user please press <button [routerLink]=\"['/register']\" class=\"btn btn-primary active\" type=\"button\">New User</button></p>\r\n                          <p>If you want to know what the program is about then please press the  <button class=\"btn\">show me *</button></p>\r\n                          <p>If you are not a registered partner company but you want to be, please press the <button [routerLink]=\"['/itad-register-company']\" class=\"btn btn-primary active\" type=\"button\">Apply Now</button> </p>                          \r\n                      </div>\r\n                  </div>\r\n              </div>\r\n                <div class=\"card p-4\">\r\n                    <div class=\"card-body\" style=\"padding:6.25rem 3.25rem;\">\r\n                        <form #loginForm=\"ngForm\" (ngSubmit)=\"login()\" *ngIf=\"!forgotpass && !forgotuser && !msgflag && !otpflag && !resetpassflag\">\r\n                            <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                              <p style=\"color: #00343e!important;\" class=\"text-muted\">Please login using the username and password that you have been provided.</p>\r\n                              <div class=\"input-group mb-3\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-user\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input autocomplete=\"username\" class=\"form-control\" placeholder=\"Username\" required=\"\" type=\"text\" id=\"u_name\" name=\"username\" [(ngModel)]=\"model.username\">\r\n                              </div>\r\n                              <div class=\"input-group mb-4\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-lock\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input autocomplete=\"current-password\" class=\"form-control\" placeholder=\"Password\" required=\"\" type=\"password\"  id=\"u_password\" name=\"password\" [(ngModel)]=\"model.password\">\r\n                              </div>\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-12\">\r\n                                      <input [disabled]=\"!loginForm.valid\" type=\"submit\" value=\"Login\" class=\"btn btn-primary\">\r\n                                  </div>\r\n                                  <div class=\"col-12 text-right mt-2\">\r\n                                      <a style=\"float: left;\" type=\"button\" (click)=\"resetusername()\">Forgot Username</a>\r\n                                      <a style=\"float: right;\" type=\"button\" (click)=\"forgotpassword()\">Forgot Password</a>\r\n                                  </div>\r\n                              </div>\r\n                          </form>\r\n                          <form #FPForm=\"ngForm\" (ngSubmit)=\"ResetPasswordPost()\" *ngIf=\"forgotpass\">\r\n                            <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                              <p style=\"color: #00343e!important;\" class=\"text-muted\">Please use your registred email to reset the password.</p>\r\n                              <div class=\"input-group mb-3\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">@</span>\r\n                                  </div>\r\n                                  <input autocomplete=\"email\" class=\"form-control\" placeholder=\"email\" required=\"\" type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"resetmodel.email\">\r\n                              </div>\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-12\">\r\n                                      <input type=\"submit\" value=\"Reset password\" class=\"btn btn-primary\">\r\n                                  </div>\r\n                                  <div class=\"col-12 text-right mt-2\">\r\n                                    <a style=\"float: left;\" type=\"button\" (click)=\"resetusername()\">Forgot Username</a>\r\n                                    <a style=\"float: right;\" type=\"button\" (click)=\"loginback()\">Back</a>\r\n                                  </div>\r\n                              </div>\r\n                          </form>\r\n                          <form #FUForm=\"ngForm\" (ngSubmit)=\"ResetUsernamePost()\" *ngIf=\"forgotuser\">\r\n                            <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                              <p style=\"color: #00343e!important;\" class=\"text-muted\">Please use your registred email to get the username.</p>\r\n                              <div class=\"input-group mb-3\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">@</span>\r\n                                  </div>\r\n                                  <input autocomplete=\"email\" class=\"form-control\" placeholder=\"email\" required=\"\" type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"resetmodel.email\">\r\n                              </div>\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-12\">\r\n                                      <input type=\"submit\" id=\"GetUsername\" value=\"Get Username\" class=\"btn btn-primary\">\r\n                                  </div>\r\n                                  <div class=\"col-12 text-right mt-2\">\r\n                                    <a style=\"float: left;\" type=\"button\" (click)=\"forgotpassword()\">Forgot Username</a>\r\n                                    <a style=\"float: right;\" type=\"button\" (click)=\"loginback()\">Back</a>\r\n                                  </div>\r\n                              </div>\r\n                          </form>\r\n                          <div *ngIf=\"msgflag\">\r\n                              <div class=\"mt-5\"></div>\r\n                              <div class=\"mt-5\"></div>\r\n                              <div class=\"mt-5\"></div>\r\n                            <div class=\"input-group mb-3 mt-5\">\r\n                                <div class=\"input-group-prepend\">\r\n                                    <span class=\"input-group-text\" style=\"color: green;font-size: 120%;\">\r\n                                        <span>{{message}}</span>\r\n                                    </span>\r\n                                </div>\r\n                            </div>                           \r\n                            <a style=\"float: right;\" type=\"button\" (click)=\"loginback()\">Back</a>                             \r\n                          </div>\r\n                          <div *ngIf=\"otpflag\">\r\n                            <form #FUForm=\"ngForm\" (ngSubmit)=\"VerifyOTP()\">\r\n                                <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                                  <p style=\"color: #2a731c!important;\" class=\"text-muted\">{{message}}</p>\r\n                                  <div class=\"input-group mb-3\">\r\n                                      <div class=\"input-group-prepend\">\r\n                                          <span class=\"input-group-text\">\r\n                                              <i class=\"icon-lock\"></i>\r\n                                          </span>\r\n                                      </div>\r\n                                      <input class=\"form-control\" placeholder=\"OTP\" required=\"\" type=\"number\" id=\"otp\" name=\"otp\" [(ngModel)]=\"resetmodel.otp\">\r\n                                  </div>\r\n                                  <div class=\"row\">\r\n                                      <div class=\"col-12\">\r\n                                          <input type=\"submit\" id=\"VerifyOTP\" value=\"Verify OTP\" class=\"btn btn-primary\">\r\n                                      </div>\r\n                                      <div class=\"col-12 text-right mt-2\">\r\n                                        <a style=\"float: left;\" type=\"button\" (click)=\"forgotpassword()\">Forgot Username</a>\r\n                                        <a style=\"float: right;\" type=\"button\" (click)=\"loginback()\">Back</a>\r\n                                      </div>\r\n                                  </div>\r\n                              </form>                            \r\n                          </div>                          \r\n                        <form #loginForm=\"ngForm\" (ngSubmit)=\"ResetPassPost()\" *ngIf=\"resetpassflag\">\r\n                            <h1 style=\"color: #00343e;height: 3rem;\"></h1>\r\n                              <p style=\"color: #00343e!important;\" class=\"text-muted\">Reset your password now.</p>\r\n                              <div class=\"input-group mb-4\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-lock\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input class=\"form-control\" placeholder=\"Password\" required=\"\" type=\"password\"  id=\"password\" name=\"password\" [(ngModel)]=\"resetmodel.Password\">\r\n                              </div>\r\n                              <div class=\"input-group mb-4\">\r\n                                  <div class=\"input-group-prepend\">\r\n                                      <span class=\"input-group-text\">\r\n                                          <i class=\"icon-lock\"></i>\r\n                                      </span>\r\n                                  </div>\r\n                                  <input class=\"form-control\" placeholder=\"Confirm Password\" required=\"\" type=\"password\"  id=\"Repeat_password\" name=\"Repeat_password\" [(ngModel)]=\"resetmodel.Repeat_password\">\r\n                              </div>\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-12\">\r\n                                      <input type=\"submit\" value=\"Reset Password\" class=\"btn btn-primary\">\r\n                                  </div>\r\n                                  <div class=\"col-12 text-right mt-2\">\r\n                                      <a style=\"float: left;\" type=\"button\" (click)=\"resetusername()\">Forgot Username</a>\r\n                                      <a style=\"float: right;\" type=\"button\" (click)=\"forgotpassword()\">Forgot Password</a>\r\n                                  </div>\r\n                              </div>\r\n                          </form>\r\n                      </div>\r\n                  </div>\r\n              </div>\r\n          </div>\r\n      </div>\r\n    </div>\r\n  <div class=\"row\">\r\n      <div class=\"col-md-4\"></div>\r\n  </div>");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/register-company/register-company.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/register-company/register-company.component.html ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<video id=\"myVideo\"autoplay=\"\" muted=\"\" loop=\"\" id=\"myVideo\">\n    <source src=\"assets/bg/bg_main_overlay.mp4\" type=\"video/mp4\">\n    Your browser does not support HTML5 video.\n  </video>\n  <!-- <img  id=\"myVideo\" src=\"/assets/bg/bg_main_overlay.jpg\" style=\"width: 40px; height: 38px;\" /> -->\n  <div class=\"app-body mt-5\">\n    <main class=\"main d-flex align-items-center mt-5\">\n      <div class=\"container mt-5\">\n        <div class=\"row\">\n          <div class=\"col-md-12 mx-auto\">\n            <div class=\"card mx-4\" *ngIf=\"registercheck==0\">\n              <div class=\"card-body m-4\">\n                <h3>Circular Computing Registration Form</h3>\n                <p class=\"text-muted\">Fill out the form carefully for registration</p>\n                <form #requestForm=\"ngForm\" (ngSubmit)=\"ApplyNow()\" class=\"row\">\n                  <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-home\"></i></span>\n                        </div>\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.com_name\" name=\"com_name\" placeholder=\"Company Name\" autocomplete=\"com_name\" required>\n                      </div>\n                      <small>Company Name</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-phone fa-lg\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\" [(ngModel)]=\"mymodel.com_tel\" name=\"com_tel\" placeholder=\"Telephone\" autocomplete=\"com_tel\" required>\n                      </div>\n                      <small>Main Company Telephone</small>\n                      <small style=\"font-style: italic;float: right;font-size: 10px;color: #ab840e;margin-top: 4px;\">7 Digits without country code*</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-globe fa-lg\"></i></span>\n                        </div>\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.com_domain\" name=\"com_domain\" placeholder=\"Company Domain\" autocomplete=\"com_domain\" required>\n                      </div>\n                      <small>Company Domain</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\n                        </div>\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.com_street\" name=\"com_street\" placeholder=\"Street\" autocomplete=\"com_street\" required>\n                      </div>\n                      <small>Street</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\n                        </div>\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.com_city\" name=\"com_city\" placeholder=\"City\" autocomplete=\"com_city\" required>\n                      </div>\n                      <small>City</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\n                        </div>\n                        <select name=\"loc_id\"  class=\"form-control\" [(ngModel)]=\"mymodel.country_id\" style=\"width: 355px;height: 34px;\" aria-placeholder=\"Select Country\">\n                          <option value=\"0\" disabled selected>Select your Country</option>\n                          <option value=\"{{location.id}}\" *ngFor=\"let location of locations; let i = index\">{{location.text}}</option>\n                        </select>\n                      </div>\n                      <small>Country</small>\n                    </div>\n                  </div>\n                  <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-layers\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.branch_num\" name=\"branch_num\" placeholder=\"Number of Branches\" autocomplete=\"branch_num\" required>\n                      </div>\n                      <small>Number of Company Locations</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"cui-laptop\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.laptop_num\" name=\"laptop_num\" placeholder=\"Number of Laptops\" autocomplete=\"laptop_num\" required>\n                      </div>\n                      <small>Approx Number of Laptops Assets Handled PA</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"cui-screen-desktop icons\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.desk_num\" name=\"desk_num\" placeholder=\"Number of Desktops\" autocomplete=\"desk_num\" required>\n                      </div>\n                      <small>Approx Number of Desktops Assets Handled PA</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"cui-monitor\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.monitor_num\" name=\"monitor_num\" placeholder=\"Number of Monitors\" autocomplete=\"monitor_num\" required>\n                      </div>\n                      <small>Approx Number of Monitors Assets Handled PA</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-chart\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" [(ngModel)]=\"mymodel.div_revenue\" name=\"div_revenue\" placeholder=\"Division Revenue\" autocomplete=\"div_revenue\" required>\n                      </div>\n                      <small>ITAD Division Revenue PA</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-people\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.staff_num\" name=\"staff_num\" placeholder=\"Number of Staffs\" autocomplete=\"staff_num\" required>\n                      </div>\n                      <small>Approx Number of Staffs in ITAD Workforce</small>\n                    </div>\n                  </div>\n                  <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n                        </div>\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.con_name\" name=\"con_name\" placeholder=\"Enter Name\" autocomplete=\"con_name\" required>\n                      </div>\n                      <small>Main Contact Name</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\">@</span>\n                        </div>\n                        <input type=\"email\" class=\"form-control\" [(ngModel)]=\"mymodel.con_email\" name=\"con_email\" placeholder=\"Enter Email\" autocomplete=\"con_email\" required>\n                      </div>\n                      <small>Main Contact Email</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-phone fa-lg\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.con_tel\" name=\"con_tel\" placeholder=\"Enter Telephone\" autocomplete=\"con_tel\" required>\n                      </div>\n                      <small>Main Contact Landline Telephone</small>\n                      <small style=\"font-style: italic;float: right;font-size: 10px;color: #ab840e;margin-top: 4px;\">7 Digits without country code*</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                          <span class=\"input-group-text\"><i class=\"icon-screen-smartphone fa-lg\"></i></span>\n                        </div>\n                        <input type=\"number\" class=\"form-control\" min=\"0\" (keypress)=\"omit_special_char($event)\"  [(ngModel)]=\"mymodel.con_mob\" name=\"con_mob\" placeholder=\"Enter Mobile\" autocomplete=\"con_mob\" required>\n                      </div>\n                      <small>Main Contact Mobile Number</small>\n                      <small style=\"font-style: italic;float: right;font-size: 10px;color: #ab840e;margin-top: 4px;\">10 Digits without country code*</small>\n                    </div>\n                    <div class=\"form-group\">\n                      <div class=\"input-group\">\n                        <div class=\"input-group-prepend\">\n                        </div>\n                        <textarea id=\"description\" name=\"comments\" [(ngModel)]=\"mymodel.comments\" rows=\"5\" class=\"form-control\" placeholder=\"Comments..\"></textarea>\n                      </div>\n                      <small>Comments</small>\n                    </div>\n                  </div>\n                  <div class=\"col-md-12\">                    \n                    <div class=\"row\">\n                      <div class=\"col-md-12\"><p class=\"text-muted\" style=\"margin: 0px 0px 18px 0px;font-weight: 500;\">Marketing Contact Information</p></div>\n                      <div class=\"col-md-4\">\n                        <div class=\"form-group\">\n                          <div class=\"input-group\">\n                            <div class=\"input-group-prepend\">\n                              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n                            </div>\n                            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.mar_con_name\" name=\"mar_con_name\" placeholder=\"Contact Name\" autocomplete=\"mar_con_name\" required>\n                          </div>\n                          <small>Marketing Contact Name</small>\n                        </div>\n                      </div>\n                      <div class=\"col-md-4\">\n                        <div class=\"form-group\">\n                          <div class=\"input-group\">\n                            <div class=\"input-group-prepend\">\n                              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n                            </div>\n                            <input type=\"text\" class=\"form-control\" (keypress)=\"omit_special_char($event)\" [(ngModel)]=\"mymodel.mar_con_tel\" name=\"mar_con_tel\" placeholder=\"Contact Telephone\" autocomplete=\"mar_con_tel\" required>\n                          </div>\n                          <small>Marketing Contact Telephone</small>\n                          <small style=\"font-style: italic;float: right;font-size: 10px;color: #ab840e;margin-top: 4px;\">7 Digits without country code*</small>\n                        </div>\n                      </div>\n                      <div class=\"col-md-4\">\n                        <div class=\"form-group\">\n                          <div class=\"input-group\">\n                            <div class=\"input-group-prepend\">\n                              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n                            </div>\n                            <input type=\"email\" class=\"form-control\" [(ngModel)]=\"mymodel.mar_con_email\" name=\"mar_con_email\" placeholder=\"Contact Email\" autocomplete=\"mar_con_email\" required>\n                          </div>\n                          <small>Marketing Contact Email</small>\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                  <button type=\"submit\" id=\"ReqAcc\" style=\"background: #08ab9e;\" class=\"btn btn-block btn-success\">Submit</button>\n                </form>\n                <a style=\"color:#222;float: right;padding-top: 5px;padding: 1rem;\" [routerLink]=\"['/login']\">Back</a>\n              </div>\n              <!-- <div class=\"card-footer p-4\">\n                <div class=\"row\">\n                  <div class=\"col-6\">\n                    <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\n                  </div>\n                  <div class=\"col-6\">\n                    <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\n                  </div>\n                </div>\n              </div> -->\n            </div>\n            <div class=\"card text-white bg-success text-center\" *ngIf=\"registercheck==1\" style=\"background-color:#062736!important;color: #08ab9e!important;border: #08ab9e!important;\">\n              <div class=\"card-body\">\n                <blockquote class=\"card-bodyquote\">\n                  <p>Your details have been submitted successfully.</p>\n                  <footer><cite title=\"Your details have been submitted successfully\">We will notify you once your profile get approved.</cite></footer>\n                </blockquote>\n                <a style=\"color:#08ab9e!important;float: right;padding: 1rem\" [routerLink]=\"['/login']\">Back</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </main>\n  </div>\n  ");
 
 /***/ }),
 
@@ -357,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- <video autoplay=\"\" muted=\"\" loop=\"\" id=\"myVideo\" *ngIf=\"registercheck==0\">\r\n  <source src=\"assets/bg/small-homepage-clip-v2-slo-mo3.mp4\" type=\"video/mp4\">\r\n  Your browser does not support HTML5 video.\r\n</video> -->\r\n<img  id=\"myVideo\" src=\"/assets/bg/bg_main_overlay.jpg\" style=\"width: 40px; height: 38px;\" />\r\n<div class=\"app-body\">\r\n  <main class=\"main d-flex align-items-center\">\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-10 mx-auto\">\r\n          <div class=\"card mx-4\" *ngIf=\"registercheck==0\">\r\n            <div class=\"card-body p-4\">\r\n              <h1>Register</h1>\r\n              <p class=\"text-muted\">Create your account</p>\r\n              <form #requestForm=\"ngForm\" (ngSubmit)=\"Reqister()\" class=\"row\">\r\n                <div class=\"col-md-6\">\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Username\" name=\"Username\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\">@</span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Email\" name=\"Email\" placeholder=\"Email\" autocomplete=\"email\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n                    </div>\r\n                    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"mymodel.Password\" name=\"Password\" placeholder=\"Password\" autocomplete=\"new-password\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-4\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n                    </div>\r\n                    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"mymodel.Repeat_password\" name=\"Repeat_password\" placeholder=\"Repeat password\" autocomplete=\"new-password\" required>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-globe\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Company\" name=\"Company\" placeholder=\"Company\" autocomplete=\"Company\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-screen-smartphone\"></i></span>\r\n                    </div>\r\n                    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"mymodel.mobile_no\" name=\"Mobile\" placeholder=\"Mobile\" autocomplete=\"mobile_no\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.City\" name=\"City\" placeholder=\"City\" autocomplete=\"country\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\r\n                    </div>\r\n                    <select name=\"loc_id\"  class=\"form-control\" [(ngModel)]=\"mymodel.Country\" style=\"width: 355px;height: 34px;\" aria-placeholder=\"Select Country\">\r\n                      <option value=\"0\" disabled selected>Select your Country</option>\r\n                      <option value=\"{{location.text}}\" *ngFor=\"let location of locations; let i = index\">{{location.text}}</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n                <button type=\"submit\" id=\"ReqAcc\" style=\"background: #08ab9e;\" class=\"btn btn-block btn-success\">Create Account</button>\r\n              </form>\r\n              <a style=\"color:#222;float: right;padding-top: 5px;\" [routerLink]=\"['/login']\">Back</a>\r\n            </div>\r\n            <!-- <div class=\"card-footer p-4\">\r\n              <div class=\"row\">\r\n                <div class=\"col-6\">\r\n                  <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\r\n                </div>\r\n              </div>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"card text-white bg-success text-center\" *ngIf=\"registercheck==1\" style=\"background-color:#062736!important;color: #08ab9e!important;border: #08ab9e!important;\">\r\n            <div class=\"card-body\">\r\n              <blockquote class=\"card-bodyquote\">\r\n                <p>Your account has been registered successfully.</p>\r\n                <footer><cite title=\"now verify your email to activate your account\">now verify your email to activate your account</cite></footer>\r\n              </blockquote>\r\n              <a style=\"color:#08ab9e!important;float: right;\" [routerLink]=\"['/login']\">Back</a>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<video id=\"myVideo\"autoplay=\"\" muted=\"\" loop=\"\" id=\"myVideo\">\r\n  <source src=\"assets/bg/bg_main_overlay.mp4\" type=\"video/mp4\">\r\n  Your browser does not support HTML5 video.\r\n</video>\r\n<!-- <img  id=\"myVideo\" src=\"/assets/bg/bg_main_overlay.jpg\" style=\"width: 40px; height: 38px;\" /> -->\r\n<div class=\"app-body\">\r\n  <main class=\"main d-flex align-items-center\">\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-10 mx-auto\">\r\n          <div class=\"card mx-4\" *ngIf=\"registercheck==0\">\r\n            <div class=\"card-body p-4\">\r\n              <h1>Register</h1>\r\n              <p class=\"text-muted\">Create your account</p>\r\n              <form #requestForm=\"ngForm\" (ngSubmit)=\"Reqister()\" class=\"row\">\r\n                <div class=\"col-md-6\">\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Username\" name=\"Username\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\">@</span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Email\" name=\"Email\" placeholder=\"Email\" autocomplete=\"email\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n                    </div>\r\n                    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"mymodel.Password\" name=\"Password\" placeholder=\"Password\" autocomplete=\"new-password\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-4\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n                    </div>\r\n                    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"mymodel.Repeat_password\" name=\"Repeat_password\" placeholder=\"Repeat password\" autocomplete=\"new-password\" required>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-globe\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.Company\" name=\"Company\" placeholder=\"Company\" autocomplete=\"Company\" required>\r\n                  </div>\r\n                  <div class=\"input-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-screen-smartphone\"></i></span>\r\n                    </div>\r\n                    <input type=\"number\" class=\"form-control\" (keypress)=\"omit_special_char($event)\" [(ngModel)]=\"mymodel.mobile_no\" name=\"Mobile\" placeholder=\"Mobile\" autocomplete=\"mobile_no\" required>\r\n                  </div>\r\n                  <small style=\"font-style: italic;float: right;font-size: 10px;color: #ab840e;margin-top: 4px;\">10 Digits without country code*</small>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\r\n                    </div>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"mymodel.City\" name=\"City\" placeholder=\"City\" autocomplete=\"country\" required>\r\n                  </div>\r\n                  <div class=\"input-group mb-3\">\r\n                    <div class=\"input-group-prepend\">\r\n                      <span class=\"input-group-text\"><i class=\"icon-location-pin\"></i></span>\r\n                    </div>\r\n                    <select name=\"loc_id\"  class=\"form-control\" [(ngModel)]=\"mymodel.Country\" style=\"width: 355px;height: 34px;\" aria-placeholder=\"Select Country\">\r\n                      <option value=\"0\" disabled selected>Select your Country</option>\r\n                      <option value=\"{{location.text}}\" *ngFor=\"let location of locations; let i = index\">{{location.text}}</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n                <button type=\"submit\" id=\"ReqAcc\" style=\"background: #08ab9e;\" class=\"btn btn-block btn-success\">Create Account</button>\r\n              </form>\r\n              <a style=\"color:#222;float: right;padding-top: 5px;\" [routerLink]=\"['/login']\">Back</a>\r\n            </div>\r\n            <!-- <div class=\"card-footer p-4\">\r\n              <div class=\"row\">\r\n                <div class=\"col-6\">\r\n                  <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\r\n                </div>\r\n              </div>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"card text-white bg-success text-center\" *ngIf=\"registercheck==1\" style=\"background-color:#062736!important;color: #08ab9e!important;border: #08ab9e!important;\">\r\n            <div class=\"card-body\">\r\n              <blockquote class=\"card-bodyquote\">\r\n                <p>Your account has been registered successfully.</p>\r\n                <footer><cite title=\"now verify your email to activate your account\">now verify your email to activate your account</cite></footer>\r\n              </blockquote>\r\n              <a style=\"color:#08ab9e!important;float: right;\" [routerLink]=\"['/login']\">Back</a>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -544,9 +557,35 @@ var AuthService = /** @class */ (function () {
         console.log(request);
         return this.http.post(this.baseUrl + 'register', request);
     };
-    AuthService.prototype.EdituserPost = function (request) {
-        console.log('request');
+    AuthService.prototype.addinternaluser = function (request) {
         console.log(request);
+        return this.http.post(this.baseUrl + 'addinternaluser', request);
+    };
+    AuthService.prototype.registercompany = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'registercompany', request);
+    };
+    AuthService.prototype.resetusername = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'resetusername', request);
+    };
+    AuthService.prototype.verifyotp = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'verifyotp', request);
+    };
+    AuthService.prototype.resetpasspost = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'resetpasspost', request);
+    };
+    AuthService.prototype.activateuser = function (request) {
+        console.log(request);
+        return this.http.put(this.baseUrl + 'activateuser', request);
+    };
+    AuthService.prototype.resetpassotp = function (request) {
+        console.log(request);
+        return this.http.post(this.baseUrl + 'resetpassotp', request);
+    };
+    AuthService.prototype.EdituserPost = function (request) {
         return this.http.put(this.baseUrl + 'resetpassword', request);
     };
     AuthService.prototype.EdituserInfoPost = function (request) {
@@ -635,6 +674,9 @@ var LoadspecsService = /** @class */ (function () {
     LoadspecsService.prototype.loadActiveProc = function (type) {
         return this.http.get(this.baseUrl + 'getactivateproc/' + Number(localStorage.getItem('UserId')) + '/' + type);
     };
+    LoadspecsService.prototype.getcurrency = function () {
+        return this.http.get(this.baseUrl + 'getcurrency');
+    };
     LoadspecsService.prototype.getallpages = function () {
         return this.http.get(this.baseUrl + 'getallpages');
     };
@@ -709,6 +751,12 @@ var LoadspecsService = /** @class */ (function () {
     };
     LoadspecsService.prototype.getITADSuppliers = function () {
         return this.http.get(this.baseUrl + 'getitadsupliers');
+    };
+    LoadspecsService.prototype.getITADCompanyList = function () {
+        return this.http.get(this.baseUrl + 'getitadcompanylist');
+    };
+    LoadspecsService.prototype.ApproveCompany = function (request) {
+        return this.http.put(this.baseUrl + 'approvecompany', request);
     };
     LoadspecsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -848,11 +896,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_error_500_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/error/500.component */ "./src/app/views/error/500.component.ts");
 /* harmony import */ var _views_login_login_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./views/login/login.component */ "./src/app/views/login/login.component.ts");
 /* harmony import */ var _views_register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/register/register.component */ "./src/app/views/register/register.component.ts");
-/* harmony import */ var _coreui_angular__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @coreui/angular */ "./node_modules/@coreui/angular/fesm5/coreui-angular.js");
-/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
-/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "./node_modules/ngx-bootstrap/dropdown/fesm5/ngx-bootstrap-dropdown.js");
-/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "./node_modules/ngx-bootstrap/tabs/fesm5/ngx-bootstrap-tabs.js");
-/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ng2-charts */ "./node_modules/ng2-charts/fesm5/ng2-charts.js");
+/* harmony import */ var _views_register_company_register_company_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./views/register-company/register-company.component */ "./src/app/views/register-company/register-company.component.ts");
+/* harmony import */ var _coreui_angular__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @coreui/angular */ "./node_modules/@coreui/angular/fesm5/coreui-angular.js");
+/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
+/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "./node_modules/ngx-bootstrap/dropdown/fesm5/ngx-bootstrap-dropdown.js");
+/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "./node_modules/ngx-bootstrap/tabs/fesm5/ngx-bootstrap-tabs.js");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ng2-charts */ "./node_modules/ng2-charts/fesm5/ng2-charts.js");
 
 
 
@@ -870,6 +919,7 @@ var DEFAULT_PERFECT_SCROLLBAR_CONFIG = {
 
 
 // Import containers
+
 
 
 
@@ -894,16 +944,16 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"],
-                _app_routing__WEBPACK_IMPORTED_MODULE_19__["AppRoutingModule"],
-                _coreui_angular__WEBPACK_IMPORTED_MODULE_18__["AppAsideModule"],
-                _coreui_angular__WEBPACK_IMPORTED_MODULE_18__["AppBreadcrumbModule"].forRoot(),
-                _coreui_angular__WEBPACK_IMPORTED_MODULE_18__["AppFooterModule"],
-                _coreui_angular__WEBPACK_IMPORTED_MODULE_18__["AppHeaderModule"],
-                _coreui_angular__WEBPACK_IMPORTED_MODULE_18__["AppSidebarModule"],
+                _app_routing__WEBPACK_IMPORTED_MODULE_20__["AppRoutingModule"],
+                _coreui_angular__WEBPACK_IMPORTED_MODULE_19__["AppAsideModule"],
+                _coreui_angular__WEBPACK_IMPORTED_MODULE_19__["AppBreadcrumbModule"].forRoot(),
+                _coreui_angular__WEBPACK_IMPORTED_MODULE_19__["AppFooterModule"],
+                _coreui_angular__WEBPACK_IMPORTED_MODULE_19__["AppHeaderModule"],
+                _coreui_angular__WEBPACK_IMPORTED_MODULE_19__["AppSidebarModule"],
                 ngx_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_7__["PerfectScrollbarModule"],
-                ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_20__["BsDropdownModule"].forRoot(),
-                ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_21__["TabsModule"].forRoot(),
-                ng2_charts__WEBPACK_IMPORTED_MODULE_22__["ChartsModule"],
+                ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_21__["BsDropdownModule"].forRoot(),
+                ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_22__["TabsModule"].forRoot(),
+                ng2_charts__WEBPACK_IMPORTED_MODULE_23__["ChartsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"]
             ],
             declarations: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spreadArrays"])([
@@ -912,7 +962,8 @@ var AppModule = /** @class */ (function () {
                 _views_error_404_component__WEBPACK_IMPORTED_MODULE_14__["P404Component"],
                 _views_error_500_component__WEBPACK_IMPORTED_MODULE_15__["P500Component"],
                 _views_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"],
-                _views_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"]
+                _views_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"],
+                _views_register_company_register_company_component__WEBPACK_IMPORTED_MODULE_18__["RegisterCompanyComponent"]
             ]),
             providers: [
                 _services_auth_service__WEBPACK_IMPORTED_MODULE_12__["AuthService"],
@@ -952,12 +1003,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_error_404_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/error/404.component */ "./src/app/views/error/404.component.ts");
 /* harmony import */ var _views_error_500_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/error/500.component */ "./src/app/views/error/500.component.ts");
 /* harmony import */ var _views_login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/login/login.component */ "./src/app/views/login/login.component.ts");
-/* harmony import */ var _views_register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/register/register.component */ "./src/app/views/register/register.component.ts");
-/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./_guards/auth.guard */ "./src/app/_guards/auth.guard.ts");
+/* harmony import */ var _views_register_company_register_company_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/register-company/register-company.component */ "./src/app/views/register-company/register-company.component.ts");
+/* harmony import */ var _views_register_register_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/register/register.component */ "./src/app/views/register/register.component.ts");
+/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./_guards/auth.guard */ "./src/app/_guards/auth.guard.ts");
 
 
 
 // Import Containers
+
 
 
 
@@ -993,16 +1046,23 @@ var routes = [
     },
     {
         path: 'register',
-        component: _views_register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"],
+        component: _views_register_register_component__WEBPACK_IMPORTED_MODULE_8__["RegisterComponent"],
         data: {
             title: 'Register Page'
+        }
+    },
+    {
+        path: 'itad-register-company',
+        component: _views_register_company_register_company_component__WEBPACK_IMPORTED_MODULE_7__["RegisterCompanyComponent"],
+        data: {
+            title: 'Register Company Page'
         }
     },
     {
         path: '',
         runGuardsAndResolvers: 'always',
         component: _containers__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutComponent"],
-        canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]],
+        canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]],
         data: {
             title: 'Dashboard',
         },
@@ -1013,27 +1073,27 @@ var routes = [
             },
             {
                 path: 'roles',
-                loadChildren: function () { return Promise.all(/*! import() | views-role-role-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("common"), __webpack_require__.e("views-role-role-module")]).then(__webpack_require__.bind(null, /*! ./views/role/role.module */ "./src/app/views/role/role.module.ts")).then(function (m) { return m.RoleModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-role-role-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("common"), __webpack_require__.e("views-role-role-module")]).then(__webpack_require__.bind(null, /*! ./views/role/role.module */ "./src/app/views/role/role.module.ts")).then(function (m) { return m.RoleModule; }); },
             },
             {
                 path: 'users',
-                loadChildren: function () { return Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "./src/app/views/users/users.module.ts")).then(function (m) { return m.UsersModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "./src/app/views/users/users.module.ts")).then(function (m) { return m.UsersModule; }); },
             },
             {
                 path: 'managehdd',
-                loadChildren: function () { return Promise.all(/*! import() | views-manage-hdd-manage-hdd-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-manage-hdd-manage-hdd-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-hdd/manage-hdd.module */ "./src/app/views/manage-hdd/manage-hdd.module.ts")).then(function (m) { return m.ManageHddModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-hdd-manage-hdd-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-manage-hdd-manage-hdd-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-hdd/manage-hdd.module */ "./src/app/views/manage-hdd/manage-hdd.module.ts")).then(function (m) { return m.ManageHddModule; }); },
             },
             {
                 path: 'manageram',
-                loadChildren: function () { return Promise.all(/*! import() | views-manage-ram-manage-ram-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("views-manage-ram-manage-ram-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-ram/manage-ram.module */ "./src/app/views/manage-ram/manage-ram.module.ts")).then(function (m) { return m.ManageRamModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-ram-manage-ram-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-manage-ram-manage-ram-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-ram/manage-ram.module */ "./src/app/views/manage-ram/manage-ram.module.ts")).then(function (m) { return m.ManageRamModule; }); },
             },
             {
                 path: 'managemakemodel',
-                loadChildren: function () { return Promise.all(/*! import() | views-make-model-make-model-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-make-model-make-model-module")]).then(__webpack_require__.bind(null, /*! ./views/make-model/make-model.module */ "./src/app/views/make-model/make-model.module.ts")).then(function (m) { return m.MakeModelModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-make-model-make-model-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-make-model-make-model-module")]).then(__webpack_require__.bind(null, /*! ./views/make-model/make-model.module */ "./src/app/views/make-model/make-model.module.ts")).then(function (m) { return m.MakeModelModule; }); },
             },
             {
                 path: 'manage-supplier',
-                loadChildren: function () { return Promise.all(/*! import() | views-manage-supplier-manage-supplier-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("views-manage-supplier-manage-supplier-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-supplier/manage-supplier.module */ "./src/app/views/manage-supplier/manage-supplier.module.ts")).then(function (m) { return m.ManageSupplierModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-manage-supplier-manage-supplier-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-manage-supplier-manage-supplier-module")]).then(__webpack_require__.bind(null, /*! ./views/manage-supplier/manage-supplier.module */ "./src/app/views/manage-supplier/manage-supplier.module.ts")).then(function (m) { return m.ManageSupplierModule; }); },
             },
             {
                 path: 'managemenu',
@@ -1045,27 +1105,31 @@ var routes = [
             },
             {
                 path: 'stocks',
-                loadChildren: function () { return Promise.all(/*! import() | views-stocks-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-stocks-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/stocks/stocks.module */ "./src/app/views/stocks/stocks.module.ts")).then(function (m) { return m.StocksModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-stocks-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-stocks-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/stocks/stocks.module */ "./src/app/views/stocks/stocks.module.ts")).then(function (m) { return m.StocksModule; }); }
             },
             {
                 path: 'requirements',
-                loadChildren: function () { return Promise.all(/*! import() | views-requirements-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-requirements-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/requirements/requirements.module */ "./src/app/views/requirements/requirements.module.ts")).then(function (m) { return m.RequirementsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-requirements-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-requirements-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/requirements/requirements.module */ "./src/app/views/requirements/requirements.module.ts")).then(function (m) { return m.RequirementsModule; }); }
             },
             {
                 path: 'itad_available',
-                loadChildren: function () { return Promise.all(/*! import() | views-itda-available-itda-available-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("default~views-itda-available-itda-available-module~views-itda-requirements-itda-requirements-module"), __webpack_require__.e("views-itda-available-itda-available-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-available/itda-available.module */ "./src/app/views/itda-available/itda-available.module.ts")).then(function (m) { return m.ItdaAvailableModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-itda-available-itda-available-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("default~views-itda-available-itda-available-module~views-itda-requirements-itda-requirements-module"), __webpack_require__.e("views-itda-available-itda-available-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-available/itda-available.module */ "./src/app/views/itda-available/itda-available.module.ts")).then(function (m) { return m.ItdaAvailableModule; }); }
             },
             {
                 path: 'circular_requirements',
-                loadChildren: function () { return Promise.all(/*! import() | views-itda-requirements-itda-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("default~views-itda-available-itda-available-module~views-itda-requirements-itda-requirements-module"), __webpack_require__.e("views-itda-requirements-itda-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-requirements/itda-requirements.module */ "./src/app/views/itda-requirements/itda-requirements.module.ts")).then(function (m) { return m.ItdaRequirementsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-itda-requirements-itda-requirements-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("default~views-itda-available-itda-available-module~views-itda-requirements-itda-requirements-module"), __webpack_require__.e("views-itda-requirements-itda-requirements-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-requirements/itda-requirements.module */ "./src/app/views/itda-requirements/itda-requirements.module.ts")).then(function (m) { return m.ItdaRequirementsModule; }); }
             },
             {
                 path: 'itad_Suppliers',
-                loadChildren: function () { return Promise.all(/*! import() | views-itda-suppliers-itda-suppliers-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("views-itda-suppliers-itda-suppliers-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-suppliers/itda-suppliers.module */ "./src/app/views/itda-suppliers/itda-suppliers.module.ts")).then(function (m) { return m.ItdaSuppliersModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-itda-suppliers-itda-suppliers-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-itda-suppliers-itda-suppliers-module")]).then(__webpack_require__.bind(null, /*! ./views/itda-suppliers/itda-suppliers.module */ "./src/app/views/itda-suppliers/itda-suppliers.module.ts")).then(function (m) { return m.ItdaSuppliersModule; }); }
+            },
+            {
+                path: 'itad_company_list',
+                loadChildren: function () { return Promise.all(/*! import() | views-itad-company-list-itad-company-list-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-itad-company-list-itad-company-list-module")]).then(__webpack_require__.bind(null, /*! ./views/itad-company-list/itad-company-list.module */ "./src/app/views/itad-company-list/itad-company-list.module.ts")).then(function (m) { return m.ItadCompanyListModule; }); }
             },
             {
                 path: 'approvedstock',
-                loadChildren: function () { return Promise.all(/*! import() | views-approved-stocks-approved-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-approved-stocks-approved-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/approved-stocks/approved-stocks.module */ "./src/app/views/approved-stocks/approved-stocks.module.ts")).then(function (m) { return m.ApprovedStocksModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-approved-stocks-approved-stocks-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-approved-stocks-approved-stocks-module")]).then(__webpack_require__.bind(null, /*! ./views/approved-stocks/approved-stocks.module */ "./src/app/views/approved-stocks/approved-stocks.module.ts")).then(function (m) { return m.ApprovedStocksModule; }); }
             },
             {
                 path: 'shareddeals',
@@ -1073,59 +1137,59 @@ var routes = [
             },
             {
                 path: 'salesteam',
-                loadChildren: function () { return Promise.all(/*! import() | views-purchase-users-purchase-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("views-purchase-users-purchase-users-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-users/purchase-users.module */ "./src/app/views/purchase-users/purchase-users.module.ts")).then(function (m) { return m.PurchaseUsersModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-purchase-users-purchase-users-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-purchase-users-purchase-users-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-users/purchase-users.module */ "./src/app/views/purchase-users/purchase-users.module.ts")).then(function (m) { return m.PurchaseUsersModule; }); }
             },
             {
                 path: 'orders',
-                loadChildren: function () { return Promise.all(/*! import() | views-reserve-order-reserve-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-reserve-order-reserve-order-module")]).then(__webpack_require__.bind(null, /*! ./views/reserve-order/reserve-order.module */ "./src/app/views/reserve-order/reserve-order.module.ts")).then(function (m) { return m.ReserveOrderModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-reserve-order-reserve-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-reserve-order-reserve-order-module")]).then(__webpack_require__.bind(null, /*! ./views/reserve-order/reserve-order.module */ "./src/app/views/reserve-order/reserve-order.module.ts")).then(function (m) { return m.ReserveOrderModule; }); }
             },
             {
                 path: 'purchase-orders',
-                loadChildren: function () { return Promise.all(/*! import() | views-purchase-order-purchase-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-purchase-order-purchase-order-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-order/purchase-order.module */ "./src/app/views/purchase-order/purchase-order.module.ts")).then(function (m) { return m.PurchaseOrderModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-purchase-order-purchase-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-purchase-order-purchase-order-module")]).then(__webpack_require__.bind(null, /*! ./views/purchase-order/purchase-order.module */ "./src/app/views/purchase-order/purchase-order.module.ts")).then(function (m) { return m.PurchaseOrderModule; }); }
             },
             {
                 path: 'commit-purchase',
-                loadChildren: function () { return Promise.all(/*! import() | views-commit-purchase-commit-purchase-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-commit-purchase-commit-purchase-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-purchase/commit-purchase.module */ "./src/app/views/commit-purchase/commit-purchase.module.ts")).then(function (m) { return m.CommitPurchaseModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-commit-purchase-commit-purchase-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-commit-purchase-commit-purchase-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-purchase/commit-purchase.module */ "./src/app/views/commit-purchase/commit-purchase.module.ts")).then(function (m) { return m.CommitPurchaseModule; }); }
             },
             {
                 path: 'commit-order',
-                loadChildren: function () { return Promise.all(/*! import() | views-commit-order-commit-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-commit-order-commit-order-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-order/commit-order.module */ "./src/app/views/commit-order/commit-order.module.ts")).then(function (m) { return m.CommitOrderModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-commit-order-commit-order-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-commit-order-commit-order-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-order/commit-order.module */ "./src/app/views/commit-order/commit-order.module.ts")).then(function (m) { return m.CommitOrderModule; }); }
             },
             {
                 path: 'shortfall',
-                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-short-fall-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-short-fall-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall/short-fall.module */ "./src/app/views/short-fall/short-fall.module.ts")).then(function (m) { return m.ShortFallModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-short-fall-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-short-fall-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall/short-fall.module */ "./src/app/views/short-fall/short-fall.module.ts")).then(function (m) { return m.ShortFallModule; }); }
             },
             {
                 path: 'short-fall-refurb',
-                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-refurb-short-fall-refurb-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-refurb-short-fall-refurb-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall-refurb/short-fall-refurb.module */ "./src/app/views/short-fall-refurb/short-fall-refurb.module.ts")).then(function (m) { return m.ShortFallRefurbModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-refurb-short-fall-refurb-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-refurb-short-fall-refurb-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall-refurb/short-fall-refurb.module */ "./src/app/views/short-fall-refurb/short-fall-refurb.module.ts")).then(function (m) { return m.ShortFallRefurbModule; }); }
             },
             {
                 path: 'short-fall-details',
-                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-details-short-fall-details-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-details-short-fall-details-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall-details/short-fall-details.module */ "./src/app/views/short-fall-details/short-fall-details.module.ts")).then(function (m) { return m.ShortFallDetailsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-short-fall-details-short-fall-details-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-short-fall-details-short-fall-details-module")]).then(__webpack_require__.bind(null, /*! ./views/short-fall-details/short-fall-details.module */ "./src/app/views/short-fall-details/short-fall-details.module.ts")).then(function (m) { return m.ShortFallDetailsModule; }); }
             },
             {
                 path: 'commit-shortFall',
-                loadChildren: function () { return Promise.all(/*! import() | views-commit-shortfall-commit-shortfall-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-commit-shortfall-commit-shortfall-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-shortfall/commit-shortfall.module */ "./src/app/views/commit-shortfall/commit-shortfall.module.ts")).then(function (m) { return m.CommitShortfallModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-commit-shortfall-commit-shortfall-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-commit-shortfall-commit-shortfall-module")]).then(__webpack_require__.bind(null, /*! ./views/commit-shortfall/commit-shortfall.module */ "./src/app/views/commit-shortfall/commit-shortfall.module.ts")).then(function (m) { return m.CommitShortfallModule; }); }
             },
             {
                 path: 'closeddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-close-deal-close-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-close-deal-close-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/close-deal/close-deal.module */ "./src/app/views/close-deal/close-deal.module.ts")).then(function (m) { return m.CloseDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-close-deal-close-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-close-deal-close-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/close-deal/close-deal.module */ "./src/app/views/close-deal/close-deal.module.ts")).then(function (m) { return m.CloseDealModule; }); }
             },
             {
                 path: 'removeddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-remove-deal-remove-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-remove-deal-remove-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/remove-deal/remove-deal.module */ "./src/app/views/remove-deal/remove-deal.module.ts")).then(function (m) { return m.RemoveDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-remove-deal-remove-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-remove-deal-remove-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/remove-deal/remove-deal.module */ "./src/app/views/remove-deal/remove-deal.module.ts")).then(function (m) { return m.RemoveDealModule; }); }
             },
             {
                 path: 'rejecteddeal',
-                loadChildren: function () { return Promise.all(/*! import() | views-reject-deal-reject-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-reject-deal-reject-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/reject-deal/reject-deal.module */ "./src/app/views/reject-deal/reject-deal.module.ts")).then(function (m) { return m.RejectDealModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-reject-deal-reject-deal-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("views-reject-deal-reject-deal-module")]).then(__webpack_require__.bind(null, /*! ./views/reject-deal/reject-deal.module */ "./src/app/views/reject-deal/reject-deal.module.ts")).then(function (m) { return m.RejectDealModule; }); }
             },
             {
                 path: 'add-price',
-                loadChildren: function () { return Promise.all(/*! import() | views-add-price-add-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-add-price-add-price-module")]).then(__webpack_require__.bind(null, /*! ./views/add-price/add-price.module */ "./src/app/views/add-price/add-price.module.ts")).then(function (m) { return m.AddPriceModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-add-price-add-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-add-price-add-price-module")]).then(__webpack_require__.bind(null, /*! ./views/add-price/add-price.module */ "./src/app/views/add-price/add-price.module.ts")).then(function (m) { return m.AddPriceModule; }); }
             },
             {
                 path: 'check-price',
-                loadChildren: function () { return Promise.all(/*! import() | views-check-price-check-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-check-price-check-price-module")]).then(__webpack_require__.bind(null, /*! ./views/check-price/check-price.module */ "./src/app/views/check-price/check-price.module.ts")).then(function (m) { return m.CheckPriceModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-check-price-check-price-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~41bd992d"), __webpack_require__.e("default~views-add-price-add-price-module~views-check-price-check-price-module~views-commit-order-com~713971e5"), __webpack_require__.e("views-check-price-check-price-module")]).then(__webpack_require__.bind(null, /*! ./views/check-price/check-price.module */ "./src/app/views/check-price/check-price.module.ts")).then(function (m) { return m.CheckPriceModule; }); }
             },
             {
                 path: 'base',
@@ -1149,7 +1213,7 @@ var routes = [
             },
             {
                 path: 'notifications',
-                loadChildren: function () { return Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~cdd0dfc7"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "./src/app/views/notifications/notifications.module.ts")).then(function (m) { return m.NotificationsModule; }); }
+                loadChildren: function () { return Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-add-price-add-price-module~views-approved-stocks-approved-stocks-module~views-check-pr~4821d5af"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "./src/app/views/notifications/notifications.module.ts")).then(function (m) { return m.NotificationsModule; }); }
             },
             {
                 path: 'theme',
@@ -1248,16 +1312,31 @@ var DefaultLayoutComponent = /** @class */ (function () {
             var myres = list_to_tree(menus);
             myres.forEach(function (value) {
                 if (value.children.length === 0) {
+                    console.log(value.name + 'r');
                     this.navItems.push({ name: value.name, url: value.url, icon: value.icon });
                 }
                 if (value.children.length > 0) {
                     var stocks = new Array();
                     var myres1 = value.children;
                     for (var i = 0; i < myres1.length; i += 1) {
-                        var obj = { name: myres1[i].name, url: myres1[i].url, icon: myres1[i].icon };
-                        stocks.push(obj);
+                        if (myres1[i].children.length === 0) {
+                            var obj = { name: myres1[i].name, url: myres1[i].url, icon: myres1[i].icon };
+                            stocks.push(obj);
+                        }
+                        if (myres1[i].children.length > 0) {
+                            var stocks1 = new Array();
+                            var myres2 = myres1[i].children;
+                            for (var j = 0; j < myres2.length; j += 1) {
+                                var obj1 = { name: myres2[j].name, url: myres2[j].url, icon: myres2[j].icon };
+                                stocks1.push(obj1);
+                            }
+                            var obj = { name: myres1[i].name, url: myres1[i].url, icon: myres1[i].icon, class: 'open1', children: stocks1 };
+                            stocks.push(obj);
+                        }
                     }
-                    this.navItems.push({ name: value.name, url: value.url, icon: value.icon, class: 'open1', children: stocks });
+                    console.log('stocks');
+                    console.log(stocks);
+                    this.navItems.push({ name: value.name, url: value.url, icon: value.icon, class: 'open2', children: stocks });
                 }
             }.bind(_this));
         }, function (error) {
@@ -1446,7 +1525,7 @@ var P500Component = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("p {\r\n    margin-bottom: 1.6em;\r\n    font-size: 19px;\r\n}\r\n.btn {\r\n    background-color: rgb(4, 170, 157) !important;\r\n    color : #ffffff;\r\n    font-weight: bold;\r\n    border-radius: 0px;\r\n    border: rgb(4, 170, 157);\r\n}\r\ninput {\r\n    height: 51px;\r\n    width: 100%;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLG9CQUFvQjtJQUNwQixlQUFlO0FBQ25CO0FBQ0E7SUFDSSw2Q0FBNkM7SUFDN0MsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsd0JBQXdCO0FBQzVCO0FBQ0E7SUFDSSxZQUFZO0lBQ1osV0FBVztBQUNmIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMS42ZW07XHJcbiAgICBmb250LXNpemU6IDE5cHg7XHJcbn1cclxuLmJ0biB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNCwgMTcwLCAxNTcpICFpbXBvcnRhbnQ7XHJcbiAgICBjb2xvciA6ICNmZmZmZmY7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDBweDtcclxuICAgIGJvcmRlcjogcmdiKDQsIDE3MCwgMTU3KTtcclxufVxyXG5pbnB1dCB7XHJcbiAgICBoZWlnaHQ6IDUxcHg7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("p {\r\n    margin-bottom: 1.6em;\r\n    font-size: 19px;\r\n}\r\n.btn {\r\n    background-color: rgb(4, 170, 157) !important;\r\n    color : #ffffff;\r\n    font-weight: bold;\r\n    border-radius: 0px;\r\n    border: rgb(4, 170, 157);\r\n}\r\ninput {\r\n    height: 51px;\r\n    width: 100%;\r\n}\r\n.card-group{\r\n    opacity: .7;\r\n}\r\n.bgimage{\r\n    width:38%;float:left;margin: 30px 0px;\r\n    margin: 10px 0px!important;\r\n}\r\na {\r\n    text-decoration: underline!important;\r\n    font-weight: bold!important;\r\n}\r\n@media (max-width: 991.98px) {\r\n    .card {\r\n        width: 100%!important;\r\n        padding: 0px!important;\r\n        flex: none!important;\r\n    }\r\n    .card-body {\r\n        padding: 10px!important;\r\n    }\r\n    .bgimage{\r\n        width:71%!important;\r\n        float:left;\r\n        margin: 5px 0px!important;\r\n\r\n    }\r\n    .banner-head {\r\n        font-size: 133%;\r\n    }\r\n     \r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLG9CQUFvQjtJQUNwQixlQUFlO0FBQ25CO0FBQ0E7SUFDSSw2Q0FBNkM7SUFDN0MsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsd0JBQXdCO0FBQzVCO0FBQ0E7SUFDSSxZQUFZO0lBQ1osV0FBVztBQUNmO0FBQ0E7SUFDSSxXQUFXO0FBQ2Y7QUFDQTtJQUNJLFNBQVMsQ0FBQyxVQUFVLENBQUMsZ0JBQWdCO0lBQ3JDLDBCQUEwQjtBQUM5QjtBQUNBO0lBQ0ksb0NBQW9DO0lBQ3BDLDJCQUEyQjtBQUMvQjtBQUNBO0lBQ0k7UUFDSSxxQkFBcUI7UUFDckIsc0JBQXNCO1FBQ3RCLG9CQUFvQjtJQUN4QjtJQUNBO1FBQ0ksdUJBQXVCO0lBQzNCO0lBQ0E7UUFDSSxtQkFBbUI7UUFDbkIsVUFBVTtRQUNWLHlCQUF5Qjs7SUFFN0I7SUFDQTtRQUNJLGVBQWU7SUFDbkI7O0FBRUoiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsicCB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxLjZlbTtcclxuICAgIGZvbnQtc2l6ZTogMTlweDtcclxufVxyXG4uYnRuIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYig0LCAxNzAsIDE1NykgIWltcG9ydGFudDtcclxuICAgIGNvbG9yIDogI2ZmZmZmZjtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgYm9yZGVyLXJhZGl1czogMHB4O1xyXG4gICAgYm9yZGVyOiByZ2IoNCwgMTcwLCAxNTcpO1xyXG59XHJcbmlucHV0IHtcclxuICAgIGhlaWdodDogNTFweDtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcbi5jYXJkLWdyb3Vwe1xyXG4gICAgb3BhY2l0eTogLjc7XHJcbn1cclxuLmJnaW1hZ2V7XHJcbiAgICB3aWR0aDozOCU7ZmxvYXQ6bGVmdDttYXJnaW46IDMwcHggMHB4O1xyXG4gICAgbWFyZ2luOiAxMHB4IDBweCFpbXBvcnRhbnQ7XHJcbn1cclxuYSB7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZSFpbXBvcnRhbnQ7XHJcbiAgICBmb250LXdlaWdodDogYm9sZCFpbXBvcnRhbnQ7XHJcbn1cclxuQG1lZGlhIChtYXgtd2lkdGg6IDk5MS45OHB4KSB7XHJcbiAgICAuY2FyZCB7XHJcbiAgICAgICAgd2lkdGg6IDEwMCUhaW1wb3J0YW50O1xyXG4gICAgICAgIHBhZGRpbmc6IDBweCFpbXBvcnRhbnQ7XHJcbiAgICAgICAgZmxleDogbm9uZSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuY2FyZC1ib2R5IHtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5iZ2ltYWdle1xyXG4gICAgICAgIHdpZHRoOjcxJSFpbXBvcnRhbnQ7XHJcbiAgICAgICAgZmxvYXQ6bGVmdDtcclxuICAgICAgICBtYXJnaW46IDVweCAwcHghaW1wb3J0YW50O1xyXG5cclxuICAgIH1cclxuICAgIC5iYW5uZXItaGVhZCB7XHJcbiAgICAgICAgZm9udC1zaXplOiAxMzMlO1xyXG4gICAgfVxyXG4gICAgIFxyXG59Il19 */");
 
 /***/ }),
 
@@ -1480,8 +1559,15 @@ var LoginComponent = /** @class */ (function () {
         this.authService = authService;
         this.alertify = alertify;
         this.router = router;
-        this.registerMode = false;
+        this.forgotpass = false;
+        this.forgotuser = false;
+        this.registercheck = 0;
+        this.msgflag = false;
+        this.otpflag = false;
+        this.resetpassflag = false;
+        this.message = {};
         this.model = {};
+        this.resetmodel = {};
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl + 'values/';
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -1508,6 +1594,132 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.loggedIn = function () {
         return this.authService.loggedIn();
     };
+    LoginComponent.prototype.forgotpassword = function () {
+        this.forgotpass = true;
+        this.forgotuser = false;
+        this.msgflag = false;
+        this.otpflag = false;
+        this.resetpassflag = false;
+    };
+    LoginComponent.prototype.resetusername = function () {
+        this.forgotpass = false;
+        this.forgotuser = true;
+        this.msgflag = false;
+        this.otpflag = false;
+        this.resetpassflag = false;
+    };
+    LoginComponent.prototype.loginback = function () {
+        this.forgotpass = false;
+        this.forgotuser = false;
+        this.msgflag = false;
+        this.otpflag = false;
+        this.resetpassflag = false;
+    };
+    LoginComponent.prototype.ResetUsernamePost = function () {
+        var _this = this;
+        if (!this.resetmodel.email) {
+            this.alertify.error('Enter Email');
+            return;
+        }
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.resetmodel.email)) {
+            this.alertify.error('enter valid email');
+            return;
+        }
+        document.getElementById('GetUsername').innerHTML = 'Sending..';
+        document.getElementById('GetUsername').disabled = true;
+        this.authService.resetusername(this.resetmodel).subscribe(function (users) {
+            document.getElementById('GetUsername').innerHTML = 'Get Username';
+            document.getElementById('GetUsername').disabled = false;
+            _this.forgotpass = false;
+            _this.forgotuser = false;
+            _this.otpflag = false;
+            _this.resetpassflag = false;
+            _this.msgflag = true;
+            _this.message = 'Username successfully has been sent on ' + _this.resetmodel.email;
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+            document.getElementById('GetUsername').innerHTML = 'Get Username';
+            document.getElementById('GetUsername').disabled = false;
+        });
+    };
+    LoginComponent.prototype.ResetPasswordPost = function () {
+        var _this = this;
+        if (!this.resetmodel.email) {
+            this.alertify.error('Enter email');
+            return;
+        }
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.resetmodel.email)) {
+            this.alertify.error('enter valid email');
+            return;
+        }
+        this.authService.resetpassotp(this.resetmodel).subscribe(function (users) {
+            _this.forgotpass = false;
+            _this.msgflag = false;
+            _this.otpflag = true;
+            _this.message = 'OTP successfully has been sent on ' + _this.resetmodel.email;
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+        });
+    };
+    LoginComponent.prototype.VerifyOTP = function () {
+        var _this = this;
+        if (Number((this.resetmodel.otp).toString().length) !== 4) {
+            this.alertify.error('Invalid OTP');
+            return;
+        }
+        console.log(this.resetmodel);
+        console.log(this.resetmodel);
+        this.authService.verifyotp(this.resetmodel).subscribe(function (users) {
+            _this.otpflag = false;
+            _this.resetpassflag = true;
+            _this.alertify.success('Verified');
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+        });
+    };
+    LoginComponent.prototype.ResetPassPost = function () {
+        var _this = this;
+        if (!this.resetmodel.Password) {
+            this.alertify.error('Enter password');
+            return;
+        }
+        if (!this.resetmodel.Repeat_password) {
+            this.alertify.error('Enter repeat password');
+            return;
+        }
+        if (this.resetmodel.Password !== this.resetmodel.Repeat_password) {
+            this.alertify.error('Password does not match');
+            return;
+        }
+        this.resetmodel.Username = 'Dummy';
+        this.authService.resetpasspost(this.resetmodel).subscribe(function (users) {
+            _this.resetpassflag = false;
+            _this.msgflag = true;
+            _this.message = 'Password successfully updated';
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+        });
+    };
     LoginComponent.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
         { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
@@ -1530,6 +1742,232 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/views/register-company/register-company.component.css":
+/*!***********************************************************************!*\
+  !*** ./src/app/views/register-company/register-company.component.css ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".text-muted{\r\n    color: #062736!important;\r\n}\r\ninput::-webkit-outer-spin-button,\r\ninput::-webkit-inner-spin-button {\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n}\r\n/* Firefox */\r\ninput[type=number] {\r\n  -moz-appearance: textfield;\r\n}\r\n.card {\r\n    opacity: .9;\r\n}\r\n.card-body {\r\n  border: 1px solid #00343e;\r\n  padding: 0px;\r\n}\r\nsmall {\r\n  font-weight: bold;\r\n  color: #00343e;\r\n}\r\nselect {\r\n  width: 8%!important; \r\n}\r\nform {\r\n  margin: 1rem;;\r\n}\r\nh3 {\r\n  text-align: center;\r\n  border-bottom: 1px solid #00343e;\r\n  padding: 9px 0px;\r\n}\r\np {\r\n  margin: 1rem;;\r\n}\r\n@media (max-width: 991.98px) {\r\n  .card {\r\n      width: 100%!important;\r\n      padding: 0px!important;\r\n      margin: 0px!important;\r\n  }\r\n  .card-body {\r\n      padding: 10px!important;\r\n  }\r\n  .bgimage{\r\n      width:71%!important;\r\n      float:left;\r\n      margin: 5px 0px!important;\r\n\r\n  }\r\n  .banner-head {\r\n      font-size: 10%;\r\n      font-size: 109%;\r\n  }\r\n  select{\r\n      width: 83%!important; \r\n  }\r\n  .btn {\r\n    width: 89%;\r\n    margin: auto;\r\n  }   \r\n}\r\n@media (min-width: 1200px){\r\n  .container {\r\n      max-width: 1350px;\r\n  }\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvcmVnaXN0ZXItY29tcGFueS9yZWdpc3Rlci1jb21wYW55LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSx3QkFBd0I7QUFDNUI7QUFDQTs7RUFFRSx3QkFBd0I7RUFDeEIsU0FBUztBQUNYO0FBRUEsWUFBWTtBQUNaO0VBQ0UsMEJBQTBCO0FBQzVCO0FBQ0E7SUFDSSxXQUFXO0FBQ2Y7QUFDQTtFQUNFLHlCQUF5QjtFQUN6QixZQUFZO0FBQ2Q7QUFDQTtFQUNFLGlCQUFpQjtFQUNqQixjQUFjO0FBQ2hCO0FBQ0E7RUFDRSxtQkFBbUI7QUFDckI7QUFDQTtFQUNFLFlBQVk7QUFDZDtBQUNBO0VBQ0Usa0JBQWtCO0VBQ2xCLGdDQUFnQztFQUNoQyxnQkFBZ0I7QUFDbEI7QUFDQTtFQUNFLFlBQVk7QUFDZDtBQUNBO0VBQ0U7TUFDSSxxQkFBcUI7TUFDckIsc0JBQXNCO01BQ3RCLHFCQUFxQjtFQUN6QjtFQUNBO01BQ0ksdUJBQXVCO0VBQzNCO0VBQ0E7TUFDSSxtQkFBbUI7TUFDbkIsVUFBVTtNQUNWLHlCQUF5Qjs7RUFFN0I7RUFDQTtNQUNJLGNBQWM7TUFDZCxlQUFlO0VBQ25CO0VBQ0E7TUFDSSxvQkFBb0I7RUFDeEI7RUFDQTtJQUNFLFVBQVU7SUFDVixZQUFZO0VBQ2Q7QUFDRjtBQUNBO0VBQ0U7TUFDSSxpQkFBaUI7RUFDckI7QUFDRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL3JlZ2lzdGVyLWNvbXBhbnkvcmVnaXN0ZXItY29tcGFueS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtbXV0ZWR7XHJcbiAgICBjb2xvcjogIzA2MjczNiFpbXBvcnRhbnQ7XHJcbn1cclxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXHJcbmlucHV0Ojotd2Via2l0LWlubmVyLXNwaW4tYnV0dG9uIHtcclxuICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XHJcbiAgbWFyZ2luOiAwO1xyXG59XHJcblxyXG4vKiBGaXJlZm94ICovXHJcbmlucHV0W3R5cGU9bnVtYmVyXSB7XHJcbiAgLW1vei1hcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XHJcbn1cclxuLmNhcmQge1xyXG4gICAgb3BhY2l0eTogLjk7XHJcbn1cclxuLmNhcmQtYm9keSB7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgIzAwMzQzZTtcclxuICBwYWRkaW5nOiAwcHg7XHJcbn1cclxuc21hbGwge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGNvbG9yOiAjMDAzNDNlO1xyXG59XHJcbnNlbGVjdCB7XHJcbiAgd2lkdGg6IDglIWltcG9ydGFudDsgXHJcbn1cclxuZm9ybSB7XHJcbiAgbWFyZ2luOiAxcmVtOztcclxufVxyXG5oMyB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMDAzNDNlO1xyXG4gIHBhZGRpbmc6IDlweCAwcHg7XHJcbn1cclxucCB7XHJcbiAgbWFyZ2luOiAxcmVtOztcclxufVxyXG5AbWVkaWEgKG1heC13aWR0aDogOTkxLjk4cHgpIHtcclxuICAuY2FyZCB7XHJcbiAgICAgIHdpZHRoOiAxMDAlIWltcG9ydGFudDtcclxuICAgICAgcGFkZGluZzogMHB4IWltcG9ydGFudDtcclxuICAgICAgbWFyZ2luOiAwcHghaW1wb3J0YW50O1xyXG4gIH1cclxuICAuY2FyZC1ib2R5IHtcclxuICAgICAgcGFkZGluZzogMTBweCFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIC5iZ2ltYWdle1xyXG4gICAgICB3aWR0aDo3MSUhaW1wb3J0YW50O1xyXG4gICAgICBmbG9hdDpsZWZ0O1xyXG4gICAgICBtYXJnaW46IDVweCAwcHghaW1wb3J0YW50O1xyXG5cclxuICB9XHJcbiAgLmJhbm5lci1oZWFkIHtcclxuICAgICAgZm9udC1zaXplOiAxMCU7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTA5JTtcclxuICB9XHJcbiAgc2VsZWN0e1xyXG4gICAgICB3aWR0aDogODMlIWltcG9ydGFudDsgXHJcbiAgfVxyXG4gIC5idG4ge1xyXG4gICAgd2lkdGg6IDg5JTtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICB9ICAgXHJcbn1cclxuQG1lZGlhIChtaW4td2lkdGg6IDEyMDBweCl7XHJcbiAgLmNvbnRhaW5lciB7XHJcbiAgICAgIG1heC13aWR0aDogMTM1MHB4O1xyXG4gIH1cclxufSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/views/register-company/register-company.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/views/register-company/register-company.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: RegisterCompanyComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterCompanyComponent", function() { return RegisterCompanyComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+
+
+
+
+
+var RegisterCompanyComponent = /** @class */ (function () {
+    function RegisterCompanyComponent(loadspecsService, alertify, authService) {
+        this.loadspecsService = loadspecsService;
+        this.alertify = alertify;
+        this.authService = authService;
+        this.mymodel = {};
+        this.submitmodel = {};
+        this.registercheck = 0;
+    }
+    RegisterCompanyComponent.prototype.ngOnInit = function () {
+        this.mymodel.country_id = '0';
+        this.loadLocations();
+    };
+    RegisterCompanyComponent.prototype.loadLocations = function () {
+        var _this = this;
+        return this.loadspecsService.loadLocations().subscribe(function (locations) {
+            _this.locations = locations.filter(function (proj) { return (proj.status === 1); });
+        }, function (error) {
+            _this.alertify.error(error);
+        });
+    };
+    RegisterCompanyComponent.prototype.ApplyNow = function () {
+        var _this = this;
+        if (!this.mymodel.com_name) {
+            this.alertify.error('Enter company name');
+            return;
+        }
+        if (this.mymodel.com_name.trim() === '') {
+            this.alertify.error('Enter valid company name');
+            return;
+        }
+        if (!this.mymodel.com_tel) {
+            this.alertify.error('Enter telephone');
+            return;
+        }
+        if (Number((this.mymodel.com_tel).toString().length) < 7) {
+            this.alertify.error('Invalid number, telephone must be minimum 7 digits');
+            return;
+        }
+        if (!this.mymodel.com_domain) {
+            this.alertify.error('Enter company domain');
+            return;
+        }
+        if (this.mymodel.com_domain.trim() === '') {
+            this.alertify.error('Enter valid company domain');
+            return;
+        }
+        if (!this.mymodel.com_street) {
+            this.alertify.error('Enter street');
+            return;
+        }
+        if (this.mymodel.com_street.trim() === '') {
+            this.alertify.error('Enter valid street');
+            return;
+        }
+        if (!this.mymodel.com_city) {
+            this.alertify.error('Enter city');
+            return;
+        }
+        if (this.mymodel.com_city.trim() === '') {
+            this.alertify.error('Enter valid city');
+            return;
+        }
+        if (this.mymodel.country_id === '0') {
+            this.alertify.error('Select country');
+            return;
+        }
+        if (!this.mymodel.branch_num) {
+            this.alertify.error('Enter number of company locations');
+            return;
+        }
+        if (!this.mymodel.laptop_num) {
+            this.alertify.error('Enter  number of laptop assets handled PA');
+            return;
+        }
+        if (!this.mymodel.desk_num) {
+            this.alertify.error('Enter  number of desktop assets handled PA');
+            return;
+        }
+        if (!this.mymodel.monitor_num) {
+            this.alertify.error('Enter  number of monitor assets handled PA');
+            return;
+        }
+        if (!this.mymodel.div_revenue) {
+            this.alertify.error('Enter division revenue');
+            return;
+        }
+        if (!this.mymodel.staff_num) {
+            this.alertify.error('Enter number of staff');
+            return;
+        }
+        if (!this.mymodel.con_name) {
+            this.alertify.error('Enter contact name');
+            return;
+        }
+        if (this.mymodel.con_name.trim() === '') {
+            this.alertify.error('Enter valid contact name');
+            return;
+        }
+        if (!this.mymodel.con_email) {
+            this.alertify.error('Write email');
+            return;
+        }
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.mymodel.con_email)) {
+            this.alertify.error('Enter valid email');
+            return;
+        }
+        if (!this.mymodel.con_tel) {
+            this.alertify.error('Enter main contact landline telephone');
+            return;
+        }
+        if (Number((this.mymodel.con_tel).toString().length) < 7) {
+            this.alertify.error('Invalid number, landline telephone must be minimum 7 digits');
+            return;
+        }
+        if (!this.mymodel.con_mob) {
+            this.alertify.error('Enter contact mobile');
+            return;
+        }
+        if (Number((this.mymodel.con_mob).toString().length) < 10) {
+            this.alertify.error('Invalid number, mobile must be minimum 10 digits');
+            return;
+        }
+        if (!this.mymodel.mar_con_tel) {
+            if (Number((this.mymodel.mar_con_tel).toString().length) < 7) {
+                this.alertify.error('Invalid number, marketing telephone must be minimum 7 digits');
+                return;
+            }
+        }
+        if (this.mymodel.mar_con_email) {
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.mymodel.mar_con_email)) {
+                this.alertify.error('Enter valid marketing contact email');
+                return;
+            }
+        }
+        this.submitmodel.com_name = this.mymodel.com_name.trim();
+        this.submitmodel.com_tel = this.mymodel.com_tel;
+        this.submitmodel.com_domain = this.mymodel.com_domain.trim();
+        this.submitmodel.com_street = this.mymodel.com_street.trim();
+        this.submitmodel.com_city = this.mymodel.com_city.trim();
+        this.submitmodel.country_id = this.mymodel.country_id;
+        this.submitmodel.branch_num = this.mymodel.branch_num;
+        this.submitmodel.laptop_num = this.mymodel.laptop_num;
+        this.submitmodel.desk_num = this.mymodel.desk_num;
+        this.submitmodel.monitor_num = this.mymodel.monitor_num;
+        this.submitmodel.div_revenue = this.mymodel.div_revenue;
+        this.submitmodel.staff_num = this.mymodel.staff_num;
+        this.submitmodel.con_name = this.mymodel.con_name.trim();
+        this.submitmodel.con_email = this.mymodel.con_email;
+        this.submitmodel.con_tel = this.mymodel.con_tel;
+        this.submitmodel.con_mob = this.mymodel.con_mob;
+        this.submitmodel.mar_con_name = this.mymodel.mar_con_name;
+        this.submitmodel.mar_con_tel = this.mymodel.mar_con_tel;
+        this.submitmodel.mar_con_email = this.mymodel.mar_con_email;
+        this.submitmodel.comments = this.mymodel.comments;
+        document.getElementById('ReqAcc').innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> Processing...';
+        document.getElementById('ReqAcc').disabled = true;
+        this.authService.registercompany(this.submitmodel).subscribe(function () {
+            document.getElementById('ReqAcc').innerHTML = 'Submit';
+            document.getElementById('ReqAcc').disabled = false;
+            _this.registercheck = 1;
+        }, function (error) {
+            console.log();
+            _this.alertify.error(error.error);
+            document.getElementById('ReqAcc').innerHTML = 'Submit';
+            document.getElementById('ReqAcc').disabled = false;
+        });
+    };
+    RegisterCompanyComponent.prototype.omit_special_char = function (event) {
+        var k;
+        k = event.charCode; //         k = event.keyCode;  (Both can be used)
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));
+    };
+    RegisterCompanyComponent.ctorParameters = function () { return [
+        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_4__["LoadspecsService"] },
+        { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"] },
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
+    ]; };
+    RegisterCompanyComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-register-company',
+            template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./register-company.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/register-company/register-company.component.html")).default,
+            styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./register-company.component.css */ "./src/app/views/register-company/register-company.component.css")).default]
+        }),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_loadspecs_service__WEBPACK_IMPORTED_MODULE_4__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+    ], RegisterCompanyComponent);
+    return RegisterCompanyComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/views/register/register.component.css":
 /*!*******************************************************!*\
   !*** ./src/app/views/register/register.component.css ***!
@@ -1539,7 +1977,7 @@ var LoginComponent = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".text-muted{\r\n    color: #062736!important;\r\n}\r\ninput::-webkit-outer-spin-button,\r\ninput::-webkit-inner-spin-button {\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n}\r\n/* Firefox */\r\ninput[type=number] {\r\n  -moz-appearance: textfield;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHdCQUF3QjtBQUM1QjtBQUNBOztFQUVFLHdCQUF3QjtFQUN4QixTQUFTO0FBQ1g7QUFFQSxZQUFZO0FBQ1o7RUFDRSwwQkFBMEI7QUFDNUIiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtbXV0ZWR7XHJcbiAgICBjb2xvcjogIzA2MjczNiFpbXBvcnRhbnQ7XHJcbn1cclxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXHJcbmlucHV0Ojotd2Via2l0LWlubmVyLXNwaW4tYnV0dG9uIHtcclxuICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XHJcbiAgbWFyZ2luOiAwO1xyXG59XHJcblxyXG4vKiBGaXJlZm94ICovXHJcbmlucHV0W3R5cGU9bnVtYmVyXSB7XHJcbiAgLW1vei1hcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XHJcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".text-muted{\r\n    color: #062736!important;\r\n}\r\ninput::-webkit-outer-spin-button,\r\ninput::-webkit-inner-spin-button {\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n}\r\n/* Firefox */\r\ninput[type=number] {\r\n  -moz-appearance: textfield;\r\n}\r\n.card {\r\n    opacity: .9;\r\n}\r\nselect {\r\n  width: 8%!important; \r\n}\r\n@media (max-width: 991.98px) {\r\n  .card {\r\n      width: 100%!important;\r\n      padding: 0px!important;\r\n      margin: 0px!important;\r\n  }\r\n  .card-body {\r\n      padding: 10px!important;\r\n  }\r\n  .bgimage{\r\n      width:71%!important;\r\n      float:left;\r\n      margin: 5px 0px!important;\r\n\r\n  }\r\n  .banner-head {\r\n      font-size: 10%;\r\n      font-size: 109%;\r\n  }\r\n  select{\r\n      width: 83%!important; \r\n  }\r\n  .btn {\r\n    width: 89%;\r\n    margin: auto;\r\n  }\r\n   \r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHdCQUF3QjtBQUM1QjtBQUNBOztFQUVFLHdCQUF3QjtFQUN4QixTQUFTO0FBQ1g7QUFFQSxZQUFZO0FBQ1o7RUFDRSwwQkFBMEI7QUFDNUI7QUFDQTtJQUNJLFdBQVc7QUFDZjtBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCO0FBQ0E7RUFDRTtNQUNJLHFCQUFxQjtNQUNyQixzQkFBc0I7TUFDdEIscUJBQXFCO0VBQ3pCO0VBQ0E7TUFDSSx1QkFBdUI7RUFDM0I7RUFDQTtNQUNJLG1CQUFtQjtNQUNuQixVQUFVO01BQ1YseUJBQXlCOztFQUU3QjtFQUNBO01BQ0ksY0FBYztNQUNkLGVBQWU7RUFDbkI7RUFDQTtNQUNJLG9CQUFvQjtFQUN4QjtFQUNBO0lBQ0UsVUFBVTtJQUNWLFlBQVk7RUFDZDs7QUFFRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1tdXRlZHtcclxuICAgIGNvbG9yOiAjMDYyNzM2IWltcG9ydGFudDtcclxufVxyXG5pbnB1dDo6LXdlYmtpdC1vdXRlci1zcGluLWJ1dHRvbixcclxuaW5wdXQ6Oi13ZWJraXQtaW5uZXItc3Bpbi1idXR0b24ge1xyXG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcclxuICBtYXJnaW46IDA7XHJcbn1cclxuXHJcbi8qIEZpcmVmb3ggKi9cclxuaW5wdXRbdHlwZT1udW1iZXJdIHtcclxuICAtbW96LWFwcGVhcmFuY2U6IHRleHRmaWVsZDtcclxufVxyXG4uY2FyZCB7XHJcbiAgICBvcGFjaXR5OiAuOTtcclxufVxyXG5cclxuc2VsZWN0IHtcclxuICB3aWR0aDogOCUhaW1wb3J0YW50OyBcclxufVxyXG5AbWVkaWEgKG1heC13aWR0aDogOTkxLjk4cHgpIHtcclxuICAuY2FyZCB7XHJcbiAgICAgIHdpZHRoOiAxMDAlIWltcG9ydGFudDtcclxuICAgICAgcGFkZGluZzogMHB4IWltcG9ydGFudDtcclxuICAgICAgbWFyZ2luOiAwcHghaW1wb3J0YW50O1xyXG4gIH1cclxuICAuY2FyZC1ib2R5IHtcclxuICAgICAgcGFkZGluZzogMTBweCFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIC5iZ2ltYWdle1xyXG4gICAgICB3aWR0aDo3MSUhaW1wb3J0YW50O1xyXG4gICAgICBmbG9hdDpsZWZ0O1xyXG4gICAgICBtYXJnaW46IDVweCAwcHghaW1wb3J0YW50O1xyXG5cclxuICB9XHJcbiAgLmJhbm5lci1oZWFkIHtcclxuICAgICAgZm9udC1zaXplOiAxMCU7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTA5JTtcclxuICB9XHJcbiAgc2VsZWN0e1xyXG4gICAgICB3aWR0aDogODMlIWltcG9ydGFudDsgXHJcbiAgfVxyXG4gIC5idG4ge1xyXG4gICAgd2lkdGg6IDg5JTtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICB9XHJcbiAgIFxyXG59Il19 */");
 
 /***/ }),
 
@@ -1573,6 +2011,7 @@ var RegisterComponent = /** @class */ (function () {
         this.authService = authService;
         this.mymodel = {};
         this.registercheck = 0;
+        this.emailexist = ['gmail.com', 'googlemail.com', 'protonmail.com', 'protonmail.ch', 'outlook.com', ' hotmail.com', 'yahoo.com', 'zoho.com', 'aim.com', 'aol.com', 'gmx.us', 'gmx.com', 'icloud.com', 'yandex.com'];
     }
     RegisterComponent.prototype.ngOnInit = function () {
         this.mymodel.Country = '0';
@@ -1598,11 +2037,16 @@ var RegisterComponent = /** @class */ (function () {
             return;
         }
         if (!this.mymodel.Email) {
-            this.alertify.error('Write Email');
+            this.alertify.error('Enter email');
             return;
         }
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.mymodel.Email)) {
-            this.alertify.error('enter valid email');
+            this.alertify.error('Enter valid email');
+            return;
+        }
+        var splitted = this.mymodel.Email.split('@', 3);
+        if (this.emailexist.indexOf(splitted[1]) > -1) {
+            this.alertify.error('Enter your official email address');
             return;
         }
         if (!this.mymodel.Password) {
@@ -1610,7 +2054,7 @@ var RegisterComponent = /** @class */ (function () {
             return;
         }
         if (!this.mymodel.Repeat_password) {
-            this.alertify.error('Enter Repeat Password');
+            this.alertify.error('Enter repeat password');
             return;
         }
         if (this.mymodel.Password !== this.mymodel.Repeat_password) {
@@ -1618,35 +2062,40 @@ var RegisterComponent = /** @class */ (function () {
             return;
         }
         if (!this.mymodel.Company) {
-            this.alertify.error('Enter Company');
+            this.alertify.error('Enter company');
             return;
         }
         if (this.mymodel.Company.trim() === '') {
-            this.alertify.error('Enter Company');
+            this.alertify.error('Enter valid company');
             return;
         }
         if (!this.mymodel.mobile_no) {
-            this.alertify.error('Enter Mobile');
+            this.alertify.error('Enter mobile');
             return;
         }
         if (Number((this.mymodel.mobile_no).toString().length) < 10) {
-            this.alertify.error('Invalid Mobile');
+            this.alertify.error('Invalid number, mobile must be minimum 10 digits');
             return;
         }
         if (!this.mymodel.City) {
-            this.alertify.error('Enter City');
+            this.alertify.error('Enter city');
             return;
         }
         if (this.mymodel.City.trim() === '') {
-            this.alertify.error('Enter City');
+            this.alertify.error('Enter valid city');
             return;
         }
         if (this.mymodel.Country === '0') {
-            this.alertify.error('Select Country');
+            this.alertify.error('Select country');
             return;
         }
+        this.mymodel.active = 1;
+        // const splitted = this.mymodel.Email.split('@', 3);
+        // if (this.emailexist.indexOf(splitted[1]) > -1) {
+        //   this.mymodel.active = 0;
+        // }
         this.mymodel.roleID = 12;
-        this.mymodel.active = 0;
+        this.mymodel.email_ext = splitted[1];
         document.getElementById('ReqAcc').innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> Processing...';
         document.getElementById('ReqAcc').disabled = true;
         this.authService.register(this.mymodel).subscribe(function (users) {
@@ -1663,6 +2112,11 @@ var RegisterComponent = /** @class */ (function () {
             document.getElementById('ReqAcc').innerHTML = 'Create Account';
             document.getElementById('ReqAcc').disabled = false;
         });
+    };
+    RegisterComponent.prototype.omit_special_char = function (event) {
+        var k;
+        k = event.charCode; //         k = event.keyCode;  (Both can be used)
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));
     };
     RegisterComponent.ctorParameters = function () { return [
         { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_4__["LoadspecsService"] },

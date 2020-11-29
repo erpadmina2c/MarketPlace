@@ -65,7 +65,7 @@ var ChatSettingRoutingModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2NoYXQtc2V0dGluZy9jaGF0LXNldHRpbmcuY29tcG9uZW50LmNzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n.card-header { \r\n    background: #062736!important;\r\n    color: #08ab9e!important;\r\n}\r\n.card {\r\n    border: 2px solid #062736;\r\n    border-radius: 0px;\r\n}\r\n.switch-primary .switch-input:checked + .switch-slider {\r\n    background-color: #08AB9E;\r\n    border-color: #08AB9E;\r\n    color: #062736;\r\n}\r\n.switch-slider {\r\n    border-radius: 0rem;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvY2hhdC1zZXR0aW5nL2NoYXQtc2V0dGluZy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLDZCQUE2QjtJQUM3Qix3QkFBd0I7QUFDNUI7QUFDQTtJQUNJLHlCQUF5QjtJQUN6QixrQkFBa0I7QUFDdEI7QUFDQTtJQUNJLHlCQUF5QjtJQUN6QixxQkFBcUI7SUFDckIsY0FBYztBQUNsQjtBQUNBO0lBQ0ksbUJBQW1CO0FBQ3ZCIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvY2hhdC1zZXR0aW5nL2NoYXQtc2V0dGluZy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jYXJkLWhlYWRlciB7IFxyXG4gICAgYmFja2dyb3VuZDogIzA2MjczNiFpbXBvcnRhbnQ7XHJcbiAgICBjb2xvcjogIzA4YWI5ZSFpbXBvcnRhbnQ7XHJcbn1cclxuLmNhcmQge1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgIzA2MjczNjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDBweDtcclxufVxyXG4uc3dpdGNoLXByaW1hcnkgLnN3aXRjaC1pbnB1dDpjaGVja2VkICsgLnN3aXRjaC1zbGlkZXIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzA4QUI5RTtcclxuICAgIGJvcmRlci1jb2xvcjogIzA4QUI5RTtcclxuICAgIGNvbG9yOiAjMDYyNzM2O1xyXG59XHJcbi5zd2l0Y2gtc2xpZGVyIHtcclxuICAgIGJvcmRlci1yYWRpdXM6IDByZW07XHJcbn0iXX0= */");
 
 /***/ }),
 
@@ -101,10 +101,8 @@ var ChatSettingComponent = /** @class */ (function () {
     };
     ChatSettingComponent.prototype.loadMenu = function (id) {
         var _this = this;
-        console.log(id);
         return this.loadspecsService.getChatSetting().subscribe(function (users) {
             _this.users = users.filter(function (proj) { return (proj.chat_type === Number(id)); });
-            console.log(_this.users);
         });
     };
     ChatSettingComponent.prototype.activateChat = function (event, user_id) {

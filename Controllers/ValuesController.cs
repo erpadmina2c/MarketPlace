@@ -101,12 +101,64 @@ namespace CheckpointInventoryStock.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getcurrency")]
+        public async Task<IActionResult> GetCurrency()
+        {
+            var values = await _context.Currency.ToListAsync();
+            
+            return Ok(values);
+        }
+
+        [AllowAnonymous]
         [HttpGet("getpurchaseusers")]
         public async Task<IActionResult> GetPurchaseUser()
         {
             var values = await _context.PurchaseUsers.ToListAsync();
             
             return Ok(values);
+        }
+        [AllowAnonymous]
+        [HttpGet("getitadcompanylist")]
+        public async Task<IActionResult> GetITADCompanyList()
+        {
+            var values = await _context.PurchaseUsers.ToListAsync();
+            var itads =from com in _context.Companyprofiles
+                            join loc in _context.Locations 
+                            on com.country_id equals loc.id
+                            into Location
+                            from loc in Location.DefaultIfEmpty()
+                select new
+                    {
+                        id = com.id,
+                        com_name = com.com_name,
+                        com_tel = com.com_tel,
+                        com_domain = com.com_domain,
+                        com_street = com.com_street,
+                        com_city = com.com_city,
+                        country_id = com.country_id,
+                        country = loc.name,
+                        branch_num = com.branch_num,
+                        laptop_num = com.laptop_num,
+                        desk_num = com.desk_num,
+                        monitor_num = com.monitor_num,
+                        div_revenue = com.div_revenue,
+                        staff_num = com.staff_num,
+                        con_name = com.con_name,
+                        con_email = com.con_email,
+                        con_tel = com.con_tel,
+                        con_mob = com.con_mob,
+                        mar_con_name = com.mar_con_name,
+                        mar_con_tel = com.mar_con_tel,
+                        mar_con_email = com.mar_con_email,
+                        comments = com.comments,
+                        status = com.status,
+                        modified_at = com.modified_at,
+                        created_at = com.created_at,
+
+
+                    };
+
+            return Ok(itads);
         }
 
         [AllowAnonymous]
@@ -436,6 +488,74 @@ namespace CheckpointInventoryStock.API.Controllers
             
 
             return Ok(201);
+        }
+
+        // POST api/values
+        [AllowAnonymous]
+        [HttpPut("approvecompany")]
+        public async Task<IActionResult> ApproveCompany([FromBody]Companyprofile request)
+        {   
+            var values = await _context.RoleAccess.ToListAsync();
+            var entity =  _context.Companyprofiles.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {                
+                entity.status = 1;
+                entity.modified_at = DateTime.Now;
+                _context.SaveChanges();
+                ApproveCompanyEmail(entity.con_email,entity.con_name,entity.com_name);
+            }
+            
+            return Ok(201);
+        }
+
+        private bool ApproveCompanyEmail(string con_email, string con_name, string com_name)
+        {
+            var eusers = _context.Users.FirstOrDefault(e=> e.username=="Rod");
+                        
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return false;
+            }
+
+            var newmessage = new MimeMessage();
+            // From address
+            newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
+
+            // To address
+            newmessage.To.Add(new MailboxAddress("Company Approval", con_email));
+
+            // Subject 
+            
+            newmessage.Subject = "ITAD Company Approval";
+            // Body 
+            newmessage.Body =  new TextPart("html") {
+                Text = "<!DOCTYPE html><html><head><title>Circular Computing</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#062736' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#08ab9e ;text-align: center;font-family: sans-serif;'> <b>ITAD Company Approval</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#03443f; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + con_name + "</span>, </div><div style='font-size:12px;'> Your company ( " + com_name + " ) has been successfully approved on Circular Computing. Now you can proceed.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#062736 ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#08ab9e ;'> <br><a href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e ; text-decoration:underline;'>CLICK HERE</a></div></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
+            };
+
+            using (var client = new SmtpClient()){
+
+                //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+
+                client.Connect("mail.a2cuae.com", 465, true);
+
+                client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+
+                client.Send(newmessage);
+
+                client.Disconnect(true);
+            }
+            return true;
         }
 
         // POST api/values

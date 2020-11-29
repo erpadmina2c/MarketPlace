@@ -21,7 +21,10 @@ namespace CheckpointInventoryStock.API.Models
         public string mobile_no { get; set; }
         public string tel_no { get; set; }
         public string token { get; set; }
+        public int verify_email { get; set; }
+        public string email_ext { get; set; }
         public int active { get; set; }
+        public int otp { get; set; }
         public DateTime LastActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public ICollection<Photo> Photos { get; set; }

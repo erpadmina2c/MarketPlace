@@ -6,6 +6,7 @@ namespace CheckpointInventoryStock.API.Data
     public interface IAuthRepository
     {
          Task<User> Register(User user, string password);
+         Task<Companyprofile> Companyprofile(Companyprofile profile);
          Task<Photo> Photo(Photo photo);
          Task<UserRole> UserRole(UserRole userrole);
          Task<User> Login(string username, string password, int active);

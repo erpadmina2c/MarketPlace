@@ -104,12 +104,19 @@ namespace CheckpointInventoryStock.API.Data
                 return false;
             return true; 
         }
-         public async Task<Photo> Photo(Photo photo)
+        public async Task<Photo> Photo(Photo photo)
         {
             await _context.Photos.AddAsync(photo);
             await _context.SaveChangesAsync();
             
             return photo;
         }
+        public async Task<Companyprofile> Companyprofile(Companyprofile profile)
+        {
+            await _context.Companyprofiles.AddAsync(profile);
+            await _context.SaveChangesAsync();
+            
+            return profile;
+        }        
     }
 }

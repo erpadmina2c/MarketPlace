@@ -72,5 +72,7 @@ namespace CheckpointInventoryStock.API.Data
         public DbSet<ITADList> ITADLists { get; set; }
         public DbSet<LoginLog> LoginLogs { get; set; }
         public DbSet<ITADSuplier> ITADSupliers { get; set; }
+        public DbSet<Currency> Currency { get; set; }
+        public DbSet<Companyprofile> Companyprofiles { get; set; }
     }
 }

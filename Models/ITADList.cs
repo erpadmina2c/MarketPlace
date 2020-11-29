@@ -9,7 +9,6 @@ namespace CheckpointInventoryStock.API.Models
         public string p_title { get; set; }
         public int make_id { get; set; }
         public string make_name { get; set; }
-        public int model_id	{ get; set; }
         public string model_name { get; set; }
         public int cpu_id { get; set; }
         public string cpu_name { get; set; }
@@ -22,9 +21,9 @@ namespace CheckpointInventoryStock.API.Models
         public int adp_id { get; set; }
         public string adp_name { get; set; }
         public string form_factor { get; set; }
-        public int lang_id { get; set; }
         public string lang_name { get; set; }
         public int qty { get; set; }
+        public string itad_cur { get; set; }
         public decimal price { get; set; }
         public string loc_name { get; set; }
         public DateTime p_eta { get; set; }

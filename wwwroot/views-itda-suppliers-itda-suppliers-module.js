@@ -159,7 +159,7 @@ var DataTablesModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div>\n    <div class=\"card  col-md-12\">\n        <div class=\"card-body\">\n          <br>\n          <table datatable [dtTrigger]=\"dtTrigger\" [dtOptions]=\"dtOptions\" class=\"table table-responsive-sm table-hover table-striped table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th class=\"text-center\">###</th>\n                <th class=\"text-center\"><i class=\"icon-people\"></i></th>\n                <th class=\"text-center\">Username</th>\n                <th>Contact Detail</th>\n                <th>Supplier Detail</th>\n                <th>Address</th>\n                <th>LastActive</th>\n                <th>Register Date</th>\n                <th>Status</th>\n              </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let user of users; let i = index\"  class=\"color_{{user.id}}\">\n                  <td class=\"text-center\">{{user.id}}</td>\n                  <td class=\"text-center\">\n                    <div class=\"avatar\">                   \n                      <img *ngIf=\"!user.profile_url\" src=\"assets/images/User.png\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                      <img *ngIf=\"user.profile_url\" src=\"/Resources/Profiles/{{ user.profile_url}}\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                      <span *ngIf=\"user.active === 1\" class=\"avatar-status badge-success\"></span>\n                      <span *ngIf=\"user.active === 0\" class=\"avatar-status badge-danger\"></span>\n                    </div>\n                  </td>\n                  <td class=\"text-center\">{{ user.user_name}}</td>\n                  <td>                      \n                    <div *ngIf=\"user.mobile_no\" class=\"small text-muted\"><strong>Mobile No: </strong>{{ user.mobile_no}}</div>\n                    <div *ngIf=\"user.tel_no\" class=\"small text-muted\"><strong>Telephone No: </strong>{{ user.tel_no}}</div>\n                    <div *ngIf=\"user.email\" class=\"small text-muted\"><strong>Email: </strong>{{ user.email}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"user.company\" class=\"small text-muted\"><strong>Company Name: </strong>{{ user.company}}</div>\n                    <div *ngIf=\"user.reg_no\" class=\"small text-muted\"><strong>Reg No: </strong>{{ user.reg_no}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>City: </strong>{{ user.city}}</div>\n                    <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>Country: </strong>{{ user.country}}</div>\n                  </td>\n                  <td>{{ user.last_active | date:'MMM, d, y : h:mm a'}}</td>\n                  <td>{{ user.created_at | date:'MMM, d, y'}}</td>  \n                  <td>  \n                    <div *ngIf=\"user.active === 1\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-success\">Active</span></div>\n                    <div *ngIf=\"user.active === 0\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-pill badge-danger\">Inactive</span></div>\n                    <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>Login Attempt: </strong>{{ user.log_count}}</div>\n                    <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>ITAD: </strong>{{ user.itad_count}}</div>\n                  </td>         \n                </tr>\n              </tbody>\n          </table>\n        </div>\n      </div>\n  </div>\n\n  \n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div>\n    <div class=\"card  col-md-12\">\n        <div class=\"card-body table-responsive-sm\">\n          <br>\n          <table datatable [dtTrigger]=\"dtTrigger\" [dtOptions]=\"dtOptions\" class=\"table table-responsive-sm table-hover table-striped table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th class=\"text-center\">###</th>\n                <th class=\"text-center\"><i class=\"icon-people\"></i></th>\n                <th class=\"text-center\">Username</th>\n                <th>Contact Detail</th>\n                <th>Supplier Detail</th>\n                <th>Address</th>\n                <th>LastActive</th>\n                <th>Register Date</th>\n                <th>Status</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let user of users; let i = index\"  class=\"color_{{user.id}}\">\n                  <td class=\"text-center\">{{user.id}}</td>\n                  <td class=\"text-center\">\n                    <div class=\"avatar\">                   \n                      <img *ngIf=\"!user.profile_url\" src=\"assets/images/User.png\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                      <img *ngIf=\"user.profile_url\" src=\"/Resources/Profiles/{{ user.profile_url}}\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                      <span *ngIf=\"user.active === 1\" class=\"avatar-status badge-success\"></span>\n                      <span *ngIf=\"user.active === 0\" class=\"avatar-status badge-danger\"></span>\n                    </div>\n                  </td>\n                  <td class=\"text-center\">{{ user.user_name}}</td>\n                  <td>                      \n                    <div *ngIf=\"user.mobile_no\" class=\"small text-muted\"><strong>Mobile No: </strong>{{ user.mobile_no}}</div>\n                    <div *ngIf=\"user.tel_no\" class=\"small text-muted\"><strong>Telephone No: </strong>{{ user.tel_no}}</div>\n                    <div *ngIf=\"user.email\" class=\"small text-muted\"><strong>Email: </strong>{{ user.email}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"user.company\" class=\"small text-muted\"><strong>Company Name: </strong>{{ user.company}}</div>\n                    <div *ngIf=\"user.reg_no\" class=\"small text-muted\"><strong>Reg No: </strong>{{ user.reg_no}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>City: </strong>{{ user.city}}</div>\n                    <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>Country: </strong>{{ user.country}}</div>\n                  </td>\n                  <td>{{ user.last_active | date:'MMM, d, y : h:mm a'}}</td>\n                  <td>{{ user.created_at | date:'MMM, d, y'}}</td>  \n                  <td>  \n                    <div *ngIf=\"user.active === 1\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-success\">Active</span></div>\n                    <div *ngIf=\"user.active === 0\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-pill badge-danger\">Inactive</span></div>\n                    <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>Login Attempt: </strong>{{ user.log_count}}</div>\n                    <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>ITAD: </strong>{{ user.itad_count}}</div>\n                  </td>  \n                  <td><a *ngIf=\"user.active === 0\" class=\"btn btn-primary\" id=\"postitad_{{user.id}}\" type=\"button\" (click)=\"ActivateUser(user.id)\">Activate</a></td>       \n                </tr>\n              </tbody>\n          </table>\n        </div>\n      </div>\n  </div>\n\n  \n\n\n");
 
 /***/ }),
 
@@ -215,7 +215,7 @@ var ItdaSuppliersRoutingModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2l0ZGEtc3VwcGxpZXJzL2l0ZGEtc3VwcGxpZXJzLmNvbXBvbmVudC5jc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n.btn {\r\n    background-color: rgb(4, 170, 157) !important;\r\n    color : #ffffff!important;\r\n    font-weight: bold;\r\n    border-radius: 0px;\r\n    border: rgb(4, 170, 157);\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvaXRkYS1zdXBwbGllcnMvaXRkYS1zdXBwbGllcnMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSw2Q0FBNkM7SUFDN0MseUJBQXlCO0lBQ3pCLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsd0JBQXdCO0FBQzVCIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvaXRkYS1zdXBwbGllcnMvaXRkYS1zdXBwbGllcnMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4uYnRuIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYig0LCAxNzAsIDE1NykgIWltcG9ydGFudDtcclxuICAgIGNvbG9yIDogI2ZmZmZmZiFpbXBvcnRhbnQ7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDBweDtcclxuICAgIGJvcmRlcjogcmdiKDQsIDE3MCwgMTU3KTtcclxufSJdfQ== */");
 
 /***/ }),
 
@@ -234,7 +234,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular-datatables */ "./node_modules/angular-datatables/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
-/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+
 
 
 
@@ -242,9 +244,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ItdaSuppliersComponent = /** @class */ (function () {
-    function ItdaSuppliersComponent(loadspecsService, alertify) {
+    function ItdaSuppliersComponent(authService, loadspecsService, alertify) {
+        this.authService = authService;
         this.loadspecsService = loadspecsService;
         this.alertify = alertify;
+        this.resetmodel = {};
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 25,
@@ -276,8 +280,28 @@ var ItdaSuppliersComponent = /** @class */ (function () {
             _this.alertify.error(error);
         });
     };
+    ItdaSuppliersComponent.prototype.ActivateUser = function (id) {
+        var _this = this;
+        this.resetmodel.id = id;
+        document.getElementById('postitad_' + id).innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> approving...';
+        document.getElementById('postitad_' + id).disabled = true;
+        this.authService.activateuser(this.resetmodel).subscribe(function () {
+            document.getElementById('postitad_' + id).innerHTML = 'Submit';
+            document.getElementById('postitad_' + id).disabled = false;
+            _this.loadITADSup();
+            _this.alertify.success('Successfully Updated');
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+        });
+    };
     ItdaSuppliersComponent.ctorParameters = function () { return [
-        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"] },
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] },
+        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_6__["LoadspecsService"] },
         { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"] }
     ]; };
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -290,7 +314,7 @@ var ItdaSuppliersComponent = /** @class */ (function () {
             template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./itda-suppliers.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/itda-suppliers/itda-suppliers.component.html")).default,
             styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./itda-suppliers.component.css */ "./src/app/views/itda-suppliers/itda-suppliers.component.css")).default]
         }),
-        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"]])
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"], _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_6__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"]])
     ], ItdaSuppliersComponent);
     return ItdaSuppliersComponent;
 }());
