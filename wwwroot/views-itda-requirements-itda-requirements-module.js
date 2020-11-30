@@ -188,7 +188,6 @@ var ItdaRequirementsComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.getcurrency().subscribe(function (currency) {
             _this.currency = currency;
-            console.log(_this.currency);
         }, function (error) {
             _this.alertify.error(error);
         });
@@ -358,7 +357,6 @@ var ItdaRequirementsComponent = /** @class */ (function () {
             _this.companydetail.subject = 'RE: ' + p_title;
             _this.companydetail.username = _this.users[0].username;
             _this.companydetail.text = '';
-            console.log(_this.companydetail);
             _this.emailsendModel.show();
         }, function (error) {
             _this.alertify.error(error);

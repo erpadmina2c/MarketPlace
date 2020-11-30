@@ -174,7 +174,6 @@ var RequirementService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl + 'requests/';
     }
     RequirementService.prototype.sendRequirementPost = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'requirementpost', request);
     };
     RequirementService.prototype.postPrice = function (request) {
@@ -211,18 +210,15 @@ var RequirementService = /** @class */ (function () {
         return this.http.put(this.baseUrl + 'updatepurchasecommitorderpost', request);
     };
     RequirementService.prototype.ReceiveCPOPost = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'receivepurchasecommitorderpost', request);
     };
     RequirementService.prototype.UpdateCOPost = function (request) {
         return this.http.put(this.baseUrl + 'updatecommitorderpost', request);
     };
     RequirementService.prototype.BookCOPost = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'bookcommitorderpost', request);
     };
     RequirementService.prototype.CloseCOPost = function (request) {
-        console.log(request);
         return this.http.put(this.baseUrl + 'closecommitorderpost', request);
     };
     RequirementService.prototype.sendMessagePost = function (request) {
@@ -314,7 +310,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'itadviewChats', request);
     };
     RequirementService.prototype.ShortfallpoviewChats = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'ShortfallpoviewChats', request);
     };
     RequirementService.prototype.sendShortfalllChatPost = function (request) {
@@ -345,7 +340,6 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'activateproc', request);
     };
     RequirementService.prototype.sendITADPost = function (request) {
-        console.log(request);
         return this.http.post(this.baseUrl + 'senditadpost', request);
     };
     RequirementService.prototype.getITAD = function () {

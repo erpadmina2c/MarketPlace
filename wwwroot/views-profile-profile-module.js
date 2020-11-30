@@ -223,18 +223,18 @@ var ProfileComponent = /** @class */ (function () {
             this.alertify.error('Enter mobile');
             return;
         }
-        if (Number((this.mymodel.mobile_no).toString().length) < 7) {
-            this.alertify.error('Invalid number, mobile must be minimum 10 digits');
-            return;
-        }
+        // if (Number((this.mymodel.mobile_no).toString().length) < 7) {
+        //   this.alertify.error('Invalid number, mobile must be minimum 10 digits');
+        //   return;
+        // }
         if (!this.mymodel.tel_no || this.mymodel.tel_no === '') {
             this.alertify.error('Enter Telephone');
             return;
         }
-        if (Number((this.mymodel.tel_no).toString().length) < 7) {
-            this.alertify.error('Invalid number, telephone must be minimum 7 digits');
-            return;
-        }
+        // if (Number((this.mymodel.tel_no).toString().length) < 7) {
+        //   this.alertify.error('Invalid number, telephone must be minimum 7 digits');
+        //   return;
+        // }
         if (!this.mymodel.City) {
             this.alertify.error('Write City');
             return;
