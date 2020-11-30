@@ -1280,6 +1280,7 @@ var DefaultLayoutComponent = /** @class */ (function () {
         var _this = this;
         var x = this.loadspecsService.getmenus(this.roleid).subscribe(function (menus) {
             _this.menus = menus;
+            console.log(_this.menus);
             function list_to_tree(list) {
                 var map = {}, roots = [];
                 for (var i = 0; i < list.length; i += 1) {
@@ -1288,6 +1289,7 @@ var DefaultLayoutComponent = /** @class */ (function () {
                 }
                 for (var i = 0; i < list.length; i += 1) {
                     var node = list[i];
+                    console.log(node.parent_id);
                     if (node.parent_id !== 0) {
                         // if you have dangling branches check that map[node.parentId] exists
                         list[map[node.parent_id]].children.push(node);
