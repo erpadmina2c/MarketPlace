@@ -573,7 +573,7 @@ namespace CheckpointInventoryStock.API.Controllers
             if(!await _repo.CheckPass(userForLoginDto.Username, userForLoginDto.Password))
                 return BadRequest("Wrong Password");            
             if(!await _context.Users.AnyAsync(x => x.username== userForLoginDto.Username && x.verify_email==1))
-                return BadRequest("Your email not verified yet.");
+                return BadRequest("Your Email Not Verified Yet.");
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password,1);
             if(userFromRepo==null)
                 return BadRequest("This account has not been activated yet.");
