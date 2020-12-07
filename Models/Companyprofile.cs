@@ -15,7 +15,7 @@ namespace CheckpointInventoryStock.API.Models
         public int laptop_num { get; set; }
         public int desk_num { get; set; }
         public int monitor_num { get; set; }
-        public decimal div_revenue { get; set; }
+        public string div_revenue { get; set; }
         public int staff_num { get; set; }
         public string con_name { get; set; }
         public string con_email { get; set; }
