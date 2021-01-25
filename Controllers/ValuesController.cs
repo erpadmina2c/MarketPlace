@@ -509,6 +509,25 @@ namespace CheckpointInventoryStock.API.Controllers
             return Ok(201);
         }
 
+         // POST api/values
+        [AllowAnonymous]
+        [HttpPut("rejectcompany")]
+        public async Task<IActionResult> RejectCompany([FromBody]Companyprofile request)
+        {   
+            var values = await _context.RoleAccess.ToListAsync();
+            var entity =  _context.Companyprofiles.FirstOrDefault(item => item.id == request.id);
+
+            if (entity != null)
+            {                
+                entity.status = 2;
+                entity.modified_at = DateTime.Now;
+                _context.SaveChanges();
+                RejectCompanyEmail(entity.con_email,entity.con_name,entity.com_name);
+            }
+            
+            return Ok(201);
+        }
+
         private bool ApproveCompanyEmail(string con_email, string con_name, string com_name)
         {
             var eusers = _context.Users.FirstOrDefault(e=> e.username=="Rod");
@@ -540,7 +559,57 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.Subject = "ITAD Company Approval";
             // Body 
             newmessage.Body =  new TextPart("html") {
-                Text = "<!DOCTYPE html><html><head><title>Circular Computing</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#062736' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#08ab9e ;text-align: center;font-family: sans-serif;'> <b>ITAD Company Approval</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#03443f; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:16px;'> Dear <span style='text-transform:capitalize'>" + con_name + "</span>, </div><div style='font-size:12px;'> Your company ( " + com_name + " ) has been successfully approved on Circular Computing. Now you can proceed.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#062736 ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#08ab9e ;'> <br><a href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e ; text-decoration:underline;'>CLICK HERE</a></div></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
+                Text = "<!DOCTYPE html><html><head><title>Circular Computing</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#062736' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#08ab9e ;text-align: center;font-family: sans-serif;'> <b>ITAD Company Approval</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#03443f; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:12px;'> Dear <span style='text-transform:capitalize'>" + con_name + "</span>, </div><br><div style='font-size:12px;'> Thanks for your interest in joining the Circular Computing ITAD partnership.</div><div style='font-size:12px;'> Your application has been approved and you can now consider your organisation part of the growing group of companies bringing legitimacy, proffesionlism, purpose and scale to the business of \"pre used\" IT.</div><div style='font-size:12px;'> Somebody from our organisation will reach back to you shortly to get you fully onboarded.</div><div style='font-size:12px;'> Please remember that you also need to register your own details and add a password to access your account <a href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/#/register' style='color:#08ab9e; text-decoration:underline;'>here</a>.</div><br><div style='font-size:12px;'> The Circular Computing Team.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#062736 ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#08ab9e ;'> <br><a href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e ; text-decoration:underline;'>CLICK HERE</a></div></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
+            };
+
+            using (var client = new SmtpClient()){
+
+                //client.SslProtocols =  System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+
+                client.Connect("mail.a2cuae.com", 465, true);
+
+                client.Authenticate("support@a2cuae.com","WQN?5O,_-7fx");
+
+                client.Send(newmessage);
+
+                client.Disconnect(true);
+            }
+            return true;
+        }
+
+        
+        private bool RejectCompanyEmail(string con_email, string con_name, string com_name)
+        {
+            var eusers = _context.Users.FirstOrDefault(e=> e.username=="Rod");
+                        
+            var flag = "";
+            try{
+                var smtp = new SmtpClient();
+                smtp.Connect("mail.a2cuae.com", 465, true);
+                smtp.Disconnect(true);
+                flag = "pass";
+            } catch (Exception ex)
+            {   
+                ex.ToString();
+                flag = "fail";
+            }  
+            if(flag == "fail"){
+                return false;
+            }
+
+            var newmessage = new MimeMessage();
+            // From address
+            newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
+
+            // To address
+            newmessage.To.Add(new MailboxAddress("Company Approval", con_email));
+
+            // Subject 
+            
+            newmessage.Subject = "ITAD Company Approval";
+            // Body 
+            newmessage.Body =  new TextPart("html") {
+                Text = "<!DOCTYPE html><html><head><title>Circular Computing</title></head><body><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#062736' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ; font-family:Arial, Helvetica, sans-serif; padding:10px;'><div style='font-size:13px; color:#08ab9e ;text-align: center;font-family: sans-serif;'> <b>ITAD Company Approval</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#03443f; font-family:Arial, Helvetica, sans-serif; padding:10px;'> <div style='font-size:12px;'> Dear <span style='text-transform:capitalize'>" + con_name + "</span>, </div><br><div style='font-size:12px;'> Thanks for your interest in joining the Circular Computing ITAD partnership.</div><div style='font-size:12px;'> Your application has not been approved to date but we hope to reach back to you soon.</div><br><div style='font-size:12px;'> The Circular Computing Team.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tr> <td align='left' valign='middle' style='padding:15px; background-color:#062736 ; font-family:Arial, Helvetica, sans-serif;'> <div style='font-size:13px; color:#08ab9e ;'> <br><a href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e ; text-decoration:underline;'>CLICK HERE</a></div></td></tr></table> <br><br></td></tr></table></body></html></body></html>",
             };
 
             using (var client = new SmtpClient()){

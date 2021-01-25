@@ -338,7 +338,7 @@ var CommitPurchaseComponent = /** @class */ (function () {
             this.alertify.error('Select Processor');
             return;
         }
-        if (!this.mymodel.cpo_qty) {
+        if (this.mymodel.cpo_qty == null) {
             this.alertify.error('Enter Qty');
             return;
         }
