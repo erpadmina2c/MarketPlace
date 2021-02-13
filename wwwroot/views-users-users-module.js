@@ -122,6 +122,7 @@ var UsersComponent = /** @class */ (function () {
     UsersComponent.prototype.loadUsers = function () {
         var _this = this;
         return this.userService.getUsers().subscribe(function (users) {
+            console.log(users);
             _this.users = users.filter(function (proj) { return (Number(proj.roleId) !== 12); });
         }, function (error) {
             _this.alertify.error(error);
