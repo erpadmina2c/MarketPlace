@@ -139,7 +139,6 @@ var ShortFallRefurbComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.loadActiveModels(3).subscribe(function (activemodels) {
             _this.activemodels = activemodels;
-            console.log(_this.activemodels);
         });
     };
     ShortFallRefurbComponent.prototype.loadActiveprocs = function () {

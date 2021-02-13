@@ -6,6 +6,7 @@ namespace CheckpointInventoryStock.API.Models
     {
         public int id { get; set; }
         public int p_type{ get; set; }
+        public string p_typename { get; set; }
         public string p_title { get; set; }
         public int make_id { get; set; }
         public string make_name { get; set; }
@@ -31,11 +32,14 @@ namespace CheckpointInventoryStock.API.Models
         public int user_id { get; set; }
         public string comment { get; set; }
         public string username { get; set; }
+        public string Email { get; set; }
+
         public string company { get; set; }
         public int status { get; set; }
         public string stock_type { get; set; }
         public int chatviewcount { get; set; }
         public int chatCount { get; set; }
+        public int chat1 { get; set; }
         public DateTime created_at { get; set; }
     }
 }

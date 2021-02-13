@@ -148,7 +148,6 @@ var ReserveOrderComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getOrderss().subscribe(function (orders) {
             _this.orders = orders;
-            console.log(_this.orders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -194,7 +193,6 @@ var ReserveOrderComponent = /** @class */ (function () {
             this.alertify.error('Enter Customer Name');
             return;
         }
-        console.log(this.model);
         document.getElementById('postingrequest').innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> Sending...';
         document.getElementById('postingrequest').disabled = true;
         this.requirementservice.addOrder(this.model).subscribe(function (orders) {

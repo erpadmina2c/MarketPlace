@@ -119,7 +119,6 @@ var CommitShortfallComponent = /** @class */ (function () {
         this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
     }
     CommitShortfallComponent.prototype.ngOnInit = function () {
-        console.log('items');
         var date = new Date(); // 2009-11-10
         var date1 = new Date(date.getFullYear(), date.getMonth() + 2, 0);
         var date2 = new Date(date.getFullYear(), date.getMonth() + 3, 0);
@@ -185,7 +184,6 @@ var CommitShortfallComponent = /** @class */ (function () {
         this.currentcpoproc = proc_name;
         return this.requirementservice.getCommitPurchaseOrders().subscribe(function (poorders) {
             _this.poorders = poorders.filter(function (proj) { return (proj.model_name === modelname) && (proj.proc_name === proc_name); });
-            console.log(_this.poorders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -204,10 +202,8 @@ var CommitShortfallComponent = /** @class */ (function () {
     CommitShortfallComponent.prototype.CheckCOPLDetails = function (id, co_num) {
         var _this = this;
         this.selectedponum = co_num;
-        console.log(this.selectedponum);
         return this.requirementservice.getCPODetails(id).subscribe(function (cplorderdetails) {
             _this.cplorderdetails = cplorderdetails;
-            console.log(_this.cplorderdetails);
             _this.CPOLDetails.show();
         }, function (error) {
             _this.alertify.error(error);
@@ -219,7 +215,6 @@ var CommitShortfallComponent = /** @class */ (function () {
         this.currentcoproc = proc_name;
         return this.requirementservice.getCommitOrders().subscribe(function (orders) {
             _this.orders = orders.filter(function (proj) { return (proj.modelName === modelname) && (proj.processor === proc_name); });
-            console.log(_this.orders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -240,7 +235,6 @@ var CommitShortfallComponent = /** @class */ (function () {
         this.selectedconum = co_num;
         return this.requirementservice.getCODetails(id).subscribe(function (coldetails) {
             _this.coldetails = coldetails;
-            console.log(_this.coldetails);
             _this.COLDetails.show();
         }, function (error) {
             _this.alertify.error(error);

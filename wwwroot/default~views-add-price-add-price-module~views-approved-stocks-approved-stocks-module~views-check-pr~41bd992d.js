@@ -340,6 +340,7 @@ var RequirementService = /** @class */ (function () {
         return this.http.post(this.baseUrl + 'activateproc', request);
     };
     RequirementService.prototype.sendITADPost = function (request) {
+        console.log(request);
         return this.http.post(this.baseUrl + 'senditadpost', request);
     };
     RequirementService.prototype.getITAD = function () {

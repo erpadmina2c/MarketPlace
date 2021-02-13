@@ -123,7 +123,6 @@ var UsersComponent = /** @class */ (function () {
         var _this = this;
         return this.userService.getUsers().subscribe(function (users) {
             _this.users = users.filter(function (proj) { return (Number(proj.roleId) !== 12); });
-            console.log(_this.users);
         }, function (error) {
             _this.alertify.error(error);
         });
@@ -172,7 +171,6 @@ var UsersComponent = /** @class */ (function () {
         var _this = this;
         this.EdituserModal.show();
         return this.userService.getUser(id).subscribe(function (user) {
-            console.log(user);
             _this.mymodel.Id = user.id;
             _this.mymodel.Username = user.username;
             _this.mymodel.Email = user.email;

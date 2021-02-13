@@ -104,8 +104,6 @@ var MenuComponent = /** @class */ (function () {
         return this.loadspecsService.getallmenus().subscribe(function (menus) {
             _this.menus = menus.filter(function (proj) { return (proj.role_id === Number(id) && proj.parent_id === 0); });
             _this.submenus = menus.filter(function (proj) { return (proj.role_id === Number(id) && proj.parent_id !== 0); });
-            console.log(_this.menus);
-            console.log(_this.submenus);
         });
     };
     MenuComponent.prototype.loadEmail = function (id) {
@@ -118,7 +116,6 @@ var MenuComponent = /** @class */ (function () {
         var _this = this;
         return this.roleService.getRoles().subscribe(function (roles) {
             _this.roles = roles;
-            console.log(_this.roles);
         }, function (error) {
             _this.alertify.error(error);
         });
@@ -127,7 +124,6 @@ var MenuComponent = /** @class */ (function () {
         var _this = this;
         this.setrole = this.model.roleID;
         this.model = { id: id, is_active: event.target.checked };
-        console.log(this.model);
         this.loadspecsService.activateMenu(this.model).subscribe(function () {
             _this.model.roleID = _this.setrole;
             _this.loadMenu(_this.setrole);

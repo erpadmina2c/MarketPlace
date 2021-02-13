@@ -177,16 +177,11 @@ var CommitPurchaseComponent = /** @class */ (function () {
     CommitPurchaseComponent.prototype.loadPurchaseOrders = function () {
         var _this = this;
         return this.requirementservice.getCommitPurchaseOrders().subscribe(function (poorders) {
-            console.log('ji');
-            console.log(_this.filter1 + ' ' + _this.filter2 + ' ' + _this.filter3);
-            console.log('ki');
             if (_this.filter1 === 1 || _this.filter2 === 3 || _this.filter2 === 4) {
-                console.log('1');
                 _this.poorders = poorders.filter(function (proj) { return (proj.cpo_status === _this.filter1 || proj.cpo_status === _this.filter2
                     || proj.cpo_status === _this.filter3); });
             }
             else {
-                console.log('2');
                 _this.poorders = poorders;
             }
             if (_this.isDtInitialized) {
@@ -262,7 +257,6 @@ var CommitPurchaseComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getCPODetails(id).subscribe(function (cplorderdetails) {
             _this.cplorderdetails = cplorderdetails;
-            console.log(_this.cplorderdetails);
             _this.CPLDetails.show();
         }, function (error) {
             _this.alertify.error(error);
@@ -274,26 +268,22 @@ var CommitPurchaseComponent = /** @class */ (function () {
         this.mymodel.cpo_ped = this.datepipe.transform(this.mymodel.cpo_ped, 'yyyy-MM-dd');
         this.mymodel.cpo_ped = this.datepipe.transform(this.mymodel.cpo_ped, 'yyyy-MM-dd');
         this.mymodel.comment = '';
-        console.log(this.mymodel);
         this.loadModels(this.mymodel.make_id);
         this.EditPOModal.show();
     };
     CommitPurchaseComponent.prototype.UpdateCPOModal = function (id, cpo_status) {
         this.updatemodel.id = id;
         this.updatemodel.cpo_status = cpo_status;
-        console.log(this.updatemodel);
         this.UpdatePOModal.show();
     };
     CommitPurchaseComponent.prototype.ReceiveCPOModal = function (id, cpo_status) {
         this.updatemodel.id = id;
         this.updatemodel.cpo_status = cpo_status;
-        console.log(this.updatemodel);
         this.RecievePO.show();
     };
     CommitPurchaseComponent.prototype.UpdateCPOPost = function () {
         var _this = this;
         this.updatemodel['updated_by'] = localStorage.getItem('UserId');
-        console.log(this.updatemodel);
         if (!this.updatemodel.comment) {
             this.alertify.error('Enter Comment');
             return;
@@ -366,7 +356,6 @@ var CommitPurchaseComponent = /** @class */ (function () {
     CommitPurchaseComponent.prototype.activateModel = function (event, type) {
         var _this = this;
         return this.requirementservice.getCommitPurchaseOrders().subscribe(function (poorders) {
-            console.log(type);
             if (type === 0) {
                 if (event.target.checked === true) {
                     _this.poorders = poorders;
@@ -416,9 +405,6 @@ var CommitPurchaseComponent = /** @class */ (function () {
                 _this.poorders = poorders.filter(function (proj) { return (proj.cpo_status === _this.filter1 || proj.cpo_status === _this.filter2
                     || proj.cpo_status === _this.filter3); });
             }
-            console.log(_this.filter1);
-            console.log(_this.filter2);
-            console.log(_this.filter3);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -441,8 +427,6 @@ var CommitPurchaseComponent = /** @class */ (function () {
         this.chatmodel.type = 0;
         return this.requirementservice.ShortfallpoviewChats(this.chatmodel).subscribe(function (chats) {
             _this.chats = chats.filter(function (proj) { return (Number(proj.status) === 0 && proj.ref_Id === id); });
-            console.log('s');
-            console.log(_this.chats);
             _this.loadPurchaseOrders();
             _this.ChatModal.show();
         }, function (error) {

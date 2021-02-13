@@ -16,8 +16,10 @@ namespace CheckpointInventoryStock.API.Models
         public string Gender { get; set; }  
         public DateTime DateOfBirth { get; set; }
         public string Company { get; set; }
+        public int CompanyId { get; set; }
         public string Reg_no { get; set; }
-        public string KnownAs { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string mobile_no { get; set; }
         public string tel_no { get; set; }
         public string token { get; set; }

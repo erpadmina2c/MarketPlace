@@ -108,7 +108,6 @@ var ShareDealsComponent = /** @class */ (function () {
     ShareDealsComponent.prototype.loadSharedData = function () {
         var _this = this;
         return this.requirementservice.loadSharedData().subscribe(function (shareddatalists) {
-            console.log(shareddatalists);
             _this.shareddatalists = shareddatalists.filter(function (proj) { return (Number(proj.flag) === 0); });
             _this.dtTrigger.next();
         }, function (error) {

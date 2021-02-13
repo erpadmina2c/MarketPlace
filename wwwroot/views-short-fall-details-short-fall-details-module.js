@@ -119,8 +119,6 @@ var ShortFallDetailsComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getShortFalldetails().subscribe(function (items) {
             _this.items = items;
-            console.log('s');
-            console.log(_this.items);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();

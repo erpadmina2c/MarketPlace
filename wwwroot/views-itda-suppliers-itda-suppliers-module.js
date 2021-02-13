@@ -265,7 +265,6 @@ var ItdaSuppliersComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.getITADSuppliers().subscribe(function (users) {
             _this.users = users;
-            console.log(_this.users);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();

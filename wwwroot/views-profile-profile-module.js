@@ -121,7 +121,6 @@ var ProfileComponent = /** @class */ (function () {
                 _this.message = 'Invalid file type';
                 return;
             }
-            console.log(fileToUpload.type.indexOf('image') !== -1);
             _this.http.post(_this.baseUrl + 'upload_profile/' + _this.userid + '/', formData, { reportProgress: true, observe: 'events' })
                 .subscribe(function (event) {
                 if (event.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpEventType"].UploadProgress) {
@@ -133,7 +132,6 @@ var ProfileComponent = /** @class */ (function () {
                     _this.message = 'Upload success';
                     _this.UploadFinished.emit(event.body);
                     _this.mymodel = event.body;
-                    console.log(_this.mymodel.fileName);
                     localStorage.setItem('Attachment', _this.mymodel.fileName);
                     _this.uploadedimg = fileToUpload.name;
                 }
@@ -156,7 +154,6 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.loadUser = function (id) {
         var _this = this;
         return this.userService.getUser(id).subscribe(function (user) {
-            console.log(user);
             _this.mymodel.Id = user.id;
             _this.mymodel.Username = user.username;
             _this.mymodel.Email = user.email;
@@ -247,7 +244,6 @@ var ProfileComponent = /** @class */ (function () {
             this.alertify.error('Select country');
             return;
         }
-        console.log(this.mymodel);
         this.authService.EdituserInfoPost(this.mymodel).subscribe(function (users) {
             _this.alertify.success('User Edited Successful');
         }, function (error) {

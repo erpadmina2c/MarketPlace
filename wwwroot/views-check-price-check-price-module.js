@@ -60397,7 +60397,6 @@ var CheckPriceComponent = /** @class */ (function () {
                 });
                 _this.TavgPrice = sum / qty;
                 _this.Tqty = qty;
-                console.log(_this.isDtInitialized);
                 if (_this.isDtInitialized) {
                     _this.dtElement.dtInstance.then(function (dtInstance) {
                         dtInstance.destroy();

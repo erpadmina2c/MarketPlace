@@ -103,7 +103,6 @@ var ManageSupplierComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.loadSuppliers().subscribe(function (suppliers) {
             _this.suppliers = suppliers;
-            console.log(_this.suppliers);
         }, function (error) {
             _this.alertify.error(error);
         });

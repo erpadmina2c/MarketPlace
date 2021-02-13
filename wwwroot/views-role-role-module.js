@@ -115,7 +115,6 @@ var RoleComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.getallpages().subscribe(function (pages) {
             _this.pages = pages;
-            console.log(pages);
         });
     };
     RoleComponent.prototype.AddRole = function () {

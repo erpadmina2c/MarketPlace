@@ -117,7 +117,7 @@ var CloseDealComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getclosedeals().subscribe(function (items) {
             _this.items = items;
-            console.log(_this.items);
+            // console.log(this.items);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();

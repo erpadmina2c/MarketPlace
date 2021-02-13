@@ -121,7 +121,6 @@ var ShortFallComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getShortFalls().subscribe(function (items) {
             _this.items = items;
-            console.log(_this.items);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -140,7 +139,6 @@ var ShortFallComponent = /** @class */ (function () {
         var _this = this;
         return this.loadspecsService.loadActiveModels(1).subscribe(function (activemodels) {
             _this.activemodels = activemodels;
-            console.log(_this.activemodels);
         });
     };
     ShortFallComponent.prototype.loadActiveprocs = function () {

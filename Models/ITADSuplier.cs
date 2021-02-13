@@ -12,6 +12,7 @@ namespace CheckpointInventoryStock.API.Models
         public string mobile_no {get; set;}
         public string tel_no {get; set;}
         public string company {get; set;}
+        public int companyId {get; set;}
         public string reg_no {get; set;}
         public string city {get; set;}
         public string country {get; set;}

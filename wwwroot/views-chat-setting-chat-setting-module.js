@@ -83,16 +83,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
 /* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
-/* harmony import */ var _services_role_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/role.service */ "./src/app/_services/role.service.ts");
-
 
 
 
 
 var ChatSettingComponent = /** @class */ (function () {
-    function ChatSettingComponent(loadspecsService, roleService, alertify) {
+    function ChatSettingComponent(loadspecsService, alertify) {
         this.loadspecsService = loadspecsService;
-        this.roleService = roleService;
         this.alertify = alertify;
         this.model = {};
     }
@@ -123,7 +120,6 @@ var ChatSettingComponent = /** @class */ (function () {
     };
     ChatSettingComponent.ctorParameters = function () { return [
         { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_3__["LoadspecsService"] },
-        { type: _services_role_service__WEBPACK_IMPORTED_MODULE_4__["RoleService"] },
         { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"] }
     ]; };
     ChatSettingComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -132,8 +128,7 @@ var ChatSettingComponent = /** @class */ (function () {
             template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./chat-setting.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/chat-setting/chat-setting.component.html")).default,
             styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./chat-setting.component.css */ "./src/app/views/chat-setting/chat-setting.component.css")).default]
         }),
-        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_loadspecs_service__WEBPACK_IMPORTED_MODULE_3__["LoadspecsService"], _services_role_service__WEBPACK_IMPORTED_MODULE_4__["RoleService"],
-            _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"]])
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_loadspecs_service__WEBPACK_IMPORTED_MODULE_3__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"]])
     ], ChatSettingComponent);
     return ChatSettingComponent;
 }());

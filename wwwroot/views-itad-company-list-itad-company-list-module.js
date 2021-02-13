@@ -159,7 +159,7 @@ var DataTablesModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div>\n    <div class=\"card  col-md-12\">\n        <div class=\"card-body table-responsive-sm\">\n          <br>\n          <table datatable [dtTrigger]=\"dtTrigger\" [dtOptions]=\"dtOptions\" class=\"table table-responsive-sm table-hover table-striped table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th class=\"text-center\">###</th>\n                <th class=\"text-center\"><i class=\"icon-people\"></i>Company Name</th>\n                <th class=\"text-center\">Company Detail</th>\n                <th>Company Addess</th>\n                <th>Specification</th>\n                <th>Main Contact</th>\n                <th>Marketing Contact</th>\n                <th>Comments</th>\n                <th>Joining date</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let itadcomlist of itadcomlists; let i = index\"  class=\"color_{{itadcomlist.id}}\">\n                  <td class=\"text-center\">{{itadcomlist.id}}</td>\n                  <td class=\"text-center\">{{ itadcomlist.com_name}}</td>\n                  <td>                      \n                    <div *ngIf=\"itadcomlist.com_tel\" class=\"small\"><strong>Telephone: </strong>{{ itadcomlist.com_tel}}</div>\n                    <div *ngIf=\"itadcomlist.com_domain\" class=\"small\"><strong>Domain: </strong><a href=\"{{ itadcomlist.com_domain}}\" target=\"_blank\" >{{ itadcomlist.com_domain}}</a></div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.com_street\" class=\"small\"><strong>Street: </strong>{{ itadcomlist.com_street}}</div>\n                    <div *ngIf=\"itadcomlist.com_city\" class=\"small\"><strong>City: </strong>{{ itadcomlist.com_city}}</div>\n                    <div *ngIf=\"itadcomlist.country\" class=\"small\"><strong>Country: </strong>{{ itadcomlist.country}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.branch_num\" class=\"small\"><strong>Locations: </strong>{{ itadcomlist.branch_num}}</div>\n                    <div *ngIf=\"itadcomlist.laptop_num\" class=\"small\"><strong>Laptop assets: </strong>{{ itadcomlist.laptop_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.desk_num\" class=\"small\"><strong>Desktop assets: </strong>{{ itadcomlist.desk_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.monitor_num\" class=\"small\"><strong>Monitor assets: </strong>{{ itadcomlist.monitor_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.div_revenue\" class=\"small\"><strong>Division Revenue: </strong>{{ itadcomlist.div_revenue}} PA</div>\n                    <div *ngIf=\"itadcomlist.staff_num\" class=\"small\"><strong>Number of staff: </strong>{{ itadcomlist.staff_num}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.con_name\" class=\"small\"><strong>Name: </strong>{{ itadcomlist.con_name}}</div>\n                    <div *ngIf=\"itadcomlist.con_email\" class=\"small\"><strong>Email: </strong><a href=\"mailto:{{itadcomlist.con_email}}\">{{ itadcomlist.con_email}}</a></div>\n                    <div *ngIf=\"itadcomlist.con_tel\" class=\"small\"><strong>Telephone: </strong>{{ itadcomlist.con_tel}}</div>\n                    <div *ngIf=\"itadcomlist.con_mob\" class=\"small\"><strong>Mobile: </strong>{{ itadcomlist.con_mob}}</div>\n                    <div *ngIf=\"itadcomlist.status\" class=\"small\"><strong>status: </strong>{{ itadcomlist.status}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.mar_con_name\" class=\"small\"><strong>Marketing Name: </strong>{{ itadcomlist.mar_con_name}}</div>\n                    <div *ngIf=\"itadcomlist.mar_con_email\" class=\"small\"><strong>Marketing Email: </strong><a href=\"mailto:{{itadcomlist.mar_con_email}}\">{{ itadcomlist.mar_con_email}}</a></div>\n                    <div *ngIf=\"itadcomlist.mar_con_tel\" class=\"small\"><strong>Marketing Telephone: </strong>{{ itadcomlist.mar_con_tel}}</div>\n                  </td>\n                  <td>{{ itadcomlist.comments}}</td>         \n                  <td>{{ itadcomlist.created_at | date:'MMM, d, y'}}</td>\n                  <td>\n                    <a *ngIf=\"itadcomlist.status === 0\" class=\"btn btn-primary\" type=\"button\" id=\"postitad_{{itadcomlist.id}}\" (click)=\"ApproveCompany(itadcomlist.id)\">Approve</a>\n                    <a *ngIf=\"itadcomlist.status === 0\" class=\"btn btn-danger\" type=\"button\" id=\"postitad1_{{itadcomlist.id}}\" (click)=\"RejectCompany(itadcomlist.id)\">Reject</a>\n                    <span *ngIf=\"itadcomlist.status === 1\" style=\"color:green;font-style:italic;font-weight:bold;\">Approved</span>\n                    <span *ngIf=\"itadcomlist.status === 2\" style=\"color:red;font-style:italic;font-weight:bold;\">Rejected</span>\n                  </td>\n                </tr>\n              </tbody>\n          </table>\n        </div>\n      </div>\n  </div>\n\n  \n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div>\n    <div class=\"card  col-md-12\">\n        <div class=\"card-body table-responsive-sm\">\n          <br>\n          <table datatable [dtTrigger]=\"dtTrigger\" [dtOptions]=\"dtOptions\" class=\"table table-responsive-sm table-hover table-striped table-outline mb-0\">\n            <thead class=\"thead-light\">\n              <tr>\n                <th class=\"text-center\">###</th>\n                <th class=\"text-center\"><i class=\"icon-people\"></i>Company Name</th>\n                <th class=\"text-center\">Company Detail</th>\n                <th>Company Addess</th>\n                <th>Specification</th>\n                <th>Main Contact</th>\n                <th>Marketing Contact</th>\n                <th>Comments</th>\n                <th>Joining date</th>\n                <th>Detail</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let itadcomlist of itadcomlists; let i = index\"  class=\"color_{{itadcomlist.id}}\">\n                  <td class=\"text-center\">{{itadcomlist.id}}</td>\n                  <td class=\"text-center\">{{ itadcomlist.com_name}}</td>\n                  <td>                      \n                    <div *ngIf=\"itadcomlist.com_tel\" class=\"small\"><strong>Telephone: </strong>{{ itadcomlist.com_tel}}</div>\n                    <div *ngIf=\"itadcomlist.com_domain\" class=\"small\"><strong>Domain: </strong><a href=\"{{ itadcomlist.com_domain}}\" target=\"_blank\" >{{ itadcomlist.com_domain}}</a></div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.com_street\" class=\"small\"><strong>Street: </strong>{{ itadcomlist.com_street}}</div>\n                    <div *ngIf=\"itadcomlist.com_city\" class=\"small\"><strong>City: </strong>{{ itadcomlist.com_city}}</div>\n                    <div *ngIf=\"itadcomlist.country\" class=\"small\"><strong>Country: </strong>{{ itadcomlist.country}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.branch_num\" class=\"small\"><strong>Locations: </strong>{{ itadcomlist.branch_num}}</div>\n                    <div *ngIf=\"itadcomlist.laptop_num\" class=\"small\"><strong>Laptop assets: </strong>{{ itadcomlist.laptop_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.desk_num\" class=\"small\"><strong>Desktop assets: </strong>{{ itadcomlist.desk_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.monitor_num\" class=\"small\"><strong>Monitor assets: </strong>{{ itadcomlist.monitor_num}} PA</div>\n                    <div *ngIf=\"itadcomlist.div_revenue\" class=\"small\"><strong>Division Revenue: </strong>{{ itadcomlist.div_revenue}} PA</div>\n                    <div *ngIf=\"itadcomlist.staff_num\" class=\"small\"><strong>Number of staff: </strong>{{ itadcomlist.staff_num}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.con_name\" class=\"small\"><strong>Name: </strong>{{ itadcomlist.con_name}}</div>\n                    <div *ngIf=\"itadcomlist.con_email\" class=\"small\"><strong>Email: </strong><a href=\"mailto:{{itadcomlist.con_email}}\">{{ itadcomlist.con_email}}</a></div>\n                    <div *ngIf=\"itadcomlist.con_tel\" class=\"small\"><strong>Telephone: </strong>{{ itadcomlist.con_tel}}</div>\n                    <div *ngIf=\"itadcomlist.con_mob\" class=\"small\"><strong>Mobile: </strong>{{ itadcomlist.con_mob}}</div>\n                    <div *ngIf=\"itadcomlist.status\" class=\"small\"><strong>status: </strong>{{ itadcomlist.status}}</div>\n                  </td>\n                  <td>  \n                    <div *ngIf=\"itadcomlist.mar_con_name\" class=\"small\"><strong>Marketing Name: </strong>{{ itadcomlist.mar_con_name}}</div>\n                    <div *ngIf=\"itadcomlist.mar_con_email\" class=\"small\"><strong>Marketing Email: </strong><a href=\"mailto:{{itadcomlist.mar_con_email}}\">{{ itadcomlist.mar_con_email}}</a></div>\n                    <div *ngIf=\"itadcomlist.mar_con_tel\" class=\"small\"><strong>Marketing Telephone: </strong>{{ itadcomlist.mar_con_tel}}</div>\n                  </td>\n                  <td>{{ itadcomlist.comments}}</td>         \n                  <td>{{ itadcomlist.created_at | date:'MMM, d, y'}}</td>\n                  <td>\n                    <a class=\"btn btn-primary\" type=\"button\" id=\"postitad_{{itadcomlist.id}}\" (click)=\"ViewCompanyDetails(itadcomlist.id)\">view suppliers</a>\n                  </td>\n                  <td>\n                    <a *ngIf=\"itadcomlist.status === 0\" class=\"btn btn-primary\" type=\"button\" id=\"postitad_{{itadcomlist.id}}\" (click)=\"ApproveCompany(itadcomlist.id)\">Approve</a>\n                    <a *ngIf=\"itadcomlist.status === 0\" class=\"btn btn-danger\" type=\"button\" id=\"postitad1_{{itadcomlist.id}}\" (click)=\"RejectCompany(itadcomlist.id)\">Reject</a>\n                    <span *ngIf=\"itadcomlist.status === 1\" style=\"color:green;font-style:italic;font-weight:bold;\">Approved</span>\n                    <span *ngIf=\"itadcomlist.status === 2\" style=\"color:red;font-style:italic;font-weight:bold;\">Rejected</span>\n                  </td>\n                </tr>\n              </tbody>\n          </table>\n        </div>\n      </div>\n  </div>\n  <div bsModal #supplierlist=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" id=\"myModal\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-info\" role=\"document\" style=\"max-width: 1500px;\">\n    <form  #shareForm=\"ngForm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Supplier List</h4>\n          <button type=\"button\" class=\"close\" (click)=\"supplierlist.hide()\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">    \n          <div class=\"card\">\n            <div class=\"card-body table-responsive-sm\">\n              <br>\n              <table class=\"table table-responsive-sm table-hover table-striped table-outline mb-0\">\n                <thead class=\"thead-light\">\n                  <tr>\n                    <th class=\"text-center\">###</th>\n                    <th class=\"text-center\"><i class=\"icon-people\"></i></th>\n                    <th class=\"text-center\">Username</th>\n                    <th>Contact Detail</th>\n                    <th>Supplier Detail</th>\n                    <th>Address</th>\n                    <th>LastActive</th>\n                    <th>Register Date</th>\n                    <th>Status</th>\n                    <th>Action</th>\n                  </tr>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"let user of users; let i = index\"  class=\"color_{{user.id}}\">\n                      <td class=\"text-center\">{{user.id}}</td>\n                      <td class=\"text-center\">\n                        <div class=\"avatar\">                   \n                          <img *ngIf=\"!user.profile_url\" src=\"assets/images/User.png\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                          <img *ngIf=\"user.profile_url\" src=\"/Resources/Profiles/{{ user.profile_url}}\" class=\"img-avatar\" alt=\"{{ user.email}}\">\n                          <span *ngIf=\"user.active === 1\" class=\"avatar-status badge-success\"></span>\n                          <span *ngIf=\"user.active === 0\" class=\"avatar-status badge-danger\"></span>\n                        </div>\n                      </td>\n                      <td class=\"text-center\">{{ user.user_name}}</td>\n                      <td>                      \n                        <div *ngIf=\"user.mobile_no\" class=\"small text-muted\"><strong>Mobile No: </strong>{{ user.mobile_no}}</div>\n                        <div *ngIf=\"user.tel_no\" class=\"small text-muted\"><strong>Telephone No: </strong>{{ user.tel_no}}</div>\n                        <div *ngIf=\"user.email\" class=\"small text-muted\"><strong>Email: </strong>{{ user.email}}</div>\n                      </td>\n                      <td>  \n                        <div *ngIf=\"user.company\" class=\"small text-muted\"><strong>Company Name: </strong>{{ user.company}}</div>\n                        <div *ngIf=\"user.reg_no\" class=\"small text-muted\"><strong>Reg No: </strong>{{ user.reg_no}}</div>\n                      </td>\n                      <td>  \n                        <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>City: </strong>{{ user.city}}</div>\n                        <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>Country: </strong>{{ user.country}}</div>\n                      </td>\n                      <td>{{ user.last_active | date:'MMM, d, y : h:mm a'}}</td>\n                      <td>{{ user.created_at | date:'MMM, d, y'}}</td>  \n                      <td>  \n                        <div *ngIf=\"user.active === 1\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-success\">Active</span></div>\n                        <div *ngIf=\"user.active === 0\" class=\"small text-muted\"><strong>Status: </strong><span class=\"badge badge-pill badge-danger\">Inactive</span></div>\n                        <div *ngIf=\"user.city\" class=\"small text-muted\"><strong>Login Attempt: </strong>{{ user.log_count}}</div>\n                        <div *ngIf=\"user.country\" class=\"small text-muted\"><strong>ITAD: </strong>{{ user.itad_count}}</div>\n                      </td>  \n                      <td><a *ngIf=\"user.active === 0\" class=\"btn btn-primary\" id=\"postitad_{{user.id}}\" type=\"button\" (click)=\"ActivateUser(user.id)\">Activate</a></td>       \n                    </tr>\n                  </tbody>\n              </table>\n            </div>\n            </div>      \n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary\" (click)=\"supplierlist.hide()\">Close</button> \n        </div>\n      </div><!-- /.modal-content -->\n    </form>\n    </div><!-- /.modal-dialog -->\n  </div><!-- /.modal -->\n\n  \n\n\n");
 
 /***/ }),
 
@@ -230,9 +230,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular-datatables */ "./node_modules/angular-datatables/index.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
-/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../_services/loadspecs.service */ "./src/app/_services/loadspecs.service.ts");
+
+
 
 
 
@@ -240,10 +244,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ItadCompanyListComponent = /** @class */ (function () {
-    function ItadCompanyListComponent(loadspecsService, alertify) {
+    function ItadCompanyListComponent(authService, loadspecsService, alertify) {
+        this.authService = authService;
         this.loadspecsService = loadspecsService;
         this.alertify = alertify;
         this.model = {};
+        this.resetmodel = {};
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 25,
@@ -251,7 +257,7 @@ var ItadCompanyListComponent = /** @class */ (function () {
             order: [[0, 'desc']]
         };
         this.isDtInitialized = false;
-        this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
     }
     ItadCompanyListComponent.prototype.ngOnInit = function () {
         this.loadITADCompanyLists();
@@ -289,6 +295,20 @@ var ItadCompanyListComponent = /** @class */ (function () {
             _this.alertify.error(error);
         });
     };
+    ItadCompanyListComponent.prototype.ViewCompanyDetails = function (id) {
+        var _this = this;
+        return this.loadspecsService.getITADSuppliers().subscribe(function (users) {
+            _this.users = users.filter(function (proj) { return (Number(proj.companyId) === id); });
+            if (_this.users.length > 0) {
+                _this.supplierlist.show();
+            }
+            else {
+                _this.alertify.error('No Suppliers Registered Yet');
+            }
+        }, function (error) {
+            _this.alertify.error(error);
+        });
+    };
     ItadCompanyListComponent.prototype.RejectCompany = function (id) {
         var _this = this;
         this.model = { id: id };
@@ -304,10 +324,34 @@ var ItadCompanyListComponent = /** @class */ (function () {
             _this.alertify.error(error);
         });
     };
+    ItadCompanyListComponent.prototype.ActivateUser = function (id) {
+        var _this = this;
+        this.resetmodel.id = id;
+        document.getElementById('postitad_' + id).innerHTML = '<i class="fa fa-circle-o-notch mt-1 fa-lg fa-spin"></i> approving...';
+        document.getElementById('postitad_' + id).disabled = true;
+        this.authService.activateuser(this.resetmodel).subscribe(function () {
+            document.getElementById('postitad_' + id).innerHTML = 'Submit';
+            document.getElementById('postitad_' + id).disabled = false;
+            // this.ViewCompanyDetails();
+            _this.alertify.success('Successfully Updated');
+        }, function (error) {
+            if (error.error.Password !== undefined) {
+                _this.alertify.error(error.error.Password[0]);
+            }
+            else {
+                _this.alertify.error(error.error);
+            }
+        });
+    };
     ItadCompanyListComponent.ctorParameters = function () { return [
-        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"] },
-        { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"] }
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
+        { type: _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_7__["LoadspecsService"] },
+        { type: _services_alertify_service__WEBPACK_IMPORTED_MODULE_5__["AlertifyService"] }
     ]; };
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('supplierlist'),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_3__["ModalDirective"])
+    ], ItadCompanyListComponent.prototype, "supplierlist", void 0);
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(angular_datatables__WEBPACK_IMPORTED_MODULE_2__["DataTableDirective"]),
         Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", angular_datatables__WEBPACK_IMPORTED_MODULE_2__["DataTableDirective"])
@@ -318,7 +362,7 @@ var ItadCompanyListComponent = /** @class */ (function () {
             template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./itad-company-list.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/itad-company-list/itad-company-list.component.html")).default,
             styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./itad-company-list.component.css */ "./src/app/views/itad-company-list/itad-company-list.component.css")).default]
         }),
-        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_loadspecs_service__WEBPACK_IMPORTED_MODULE_5__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"]])
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"], _services_loadspecs_service__WEBPACK_IMPORTED_MODULE_7__["LoadspecsService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_5__["AlertifyService"]])
     ], ItadCompanyListComponent);
     return ItadCompanyListComponent;
 }());
@@ -344,6 +388,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
 /* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular-datatables */ "./node_modules/angular-datatables/index.js");
 /* harmony import */ var _itad_company_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./itad-company-list.component */ "./src/app/views/itad-company-list/itad-company-list.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
 
 
 
@@ -361,7 +407,8 @@ var ItadCompanyListModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _itad_company_list_routing_module__WEBPACK_IMPORTED_MODULE_3__["ItadCompanyListRoutingModule"],
                 ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__["ModalModule"].forRoot(),
-                angular_datatables__WEBPACK_IMPORTED_MODULE_5__["DataTablesModule"]
+                angular_datatables__WEBPACK_IMPORTED_MODULE_5__["DataTablesModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"]
             ]
         })
     ], ItadCompanyListModule);

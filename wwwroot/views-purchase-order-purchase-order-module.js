@@ -175,7 +175,6 @@ var PurchaseOrderComponent = /** @class */ (function () {
         var _this = this;
         return this.requirementservice.getPurchaseOrders().subscribe(function (poorders) {
             _this.poorders = poorders;
-            console.log(_this.poorders);
             if (_this.isDtInitialized) {
                 _this.dtElement.dtInstance.then(function (dtInstance) {
                     dtInstance.destroy();
@@ -277,7 +276,6 @@ var PurchaseOrderComponent = /** @class */ (function () {
     PurchaseOrderComponent.prototype.EditPO = function (id) {
         this.mymodel = this.poorders.filter(function (proj) { return (Number(proj.id) === Number(id)); })[0];
         this.mymodel.po_eta = this.datepipe.transform(this.mymodel.po_eta, 'yyyy-MM-dd');
-        console.log(this.mymodel);
         this.loadModels(this.mymodel.make_id);
         this.EditPOModal.show();
     };
