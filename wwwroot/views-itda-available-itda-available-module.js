@@ -32384,14 +32384,14 @@ var ItdaAvailableComponent = /** @class */ (function () {
                     extend: 'excel',
                     title: 'Data export',
                     exportOptions: {
-                        columns: [2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14]
+                        columns: [2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
                     }
                 },
                 {
                     extend: 'csv',
                     title: 'Order_Data',
                     exportOptions: {
-                        columns: [2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14]
+                        columns: [2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
                     }
                 }
             ]
