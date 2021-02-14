@@ -296,7 +296,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("User Reset", entity.Email));
+            newmessage.To.Add(new MailboxAddress(entity.Email));
 
             // Subject 
             
@@ -339,7 +339,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("OTP - Circular Computing", entity.Email));
+            newmessage.To.Add(new MailboxAddress(entity.Email));
 
             // Subject 
             
@@ -408,7 +408,7 @@ namespace CheckpointInventoryStock.API.Controllers
             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            message.To.Add(new MailboxAddress("Email Verification", email));
+            message.To.Add(new MailboxAddress(email));
 
             // Subject 
             
@@ -440,7 +440,7 @@ namespace CheckpointInventoryStock.API.Controllers
             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            message.To.Add(new MailboxAddress("Company Registration", email));
+            message.To.Add(new MailboxAddress(email));
 
             // Subject 
             
@@ -496,7 +496,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("User Registration", eusers.Email));
+            newmessage.To.Add(new MailboxAddress(eusers.Email));
 
             // Subject 
             
@@ -545,7 +545,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("Company Registration", eusers.Email));
+            newmessage.To.Add(new MailboxAddress(eusers.Email));
 
             // Subject 
             
@@ -661,7 +661,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("Account Activation", con_email));
+            newmessage.To.Add(new MailboxAddress(con_email));
 
             // Subject 
             

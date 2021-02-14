@@ -552,7 +552,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("Company Approval", con_email));
+            newmessage.To.Add(new MailboxAddress(con_email));
 
             // Subject 
             
@@ -602,7 +602,7 @@ namespace CheckpointInventoryStock.API.Controllers
             newmessage.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
             // To address
-            newmessage.To.Add(new MailboxAddress("Company Approval", con_email));
+            newmessage.To.Add(new MailboxAddress(con_email));
 
             // Subject 
             

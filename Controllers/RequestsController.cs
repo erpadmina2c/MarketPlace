@@ -139,7 +139,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress(Subject, item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     
@@ -436,7 +436,7 @@ namespace CheckpointInventoryStock.API.Controllers
                             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                             // To address
-                            message.To.Add(new MailboxAddress("ITAD Requirement Alert", item.Email));
+                            message.To.Add(new MailboxAddress(item.Email));
 
                             // Subject 
                             
@@ -494,7 +494,7 @@ namespace CheckpointInventoryStock.API.Controllers
                             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                             // To address
-                            message.To.Add(new MailboxAddress("ITAD Stock Available", item.Email));
+                            message.To.Add(new MailboxAddress(item.Email));
 
                             // Subject 
                             
@@ -1281,7 +1281,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("MarketPlace - Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("New Message", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = "New Message";
@@ -1540,7 +1540,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("New Deal", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = "New Deal";
@@ -1962,7 +1962,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress(reqstatus + " Deal", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = reqstatus + " Deal";
@@ -2049,7 +2049,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("Modify Stock Deal", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = "Modify Available Deal";
@@ -2228,7 +2228,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("Approve Deal", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = "Approve Deal";
@@ -2313,7 +2313,7 @@ namespace CheckpointInventoryStock.API.Controllers
                             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                             // To address
-                            message.To.Add(new MailboxAddress("Stock Alert", user.email));
+                            message.To.Add(new MailboxAddress(user.email));
 
                             // Subject 
                             
@@ -2401,13 +2401,18 @@ namespace CheckpointInventoryStock.API.Controllers
                             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                             // To address
-                            message.To.Add(new MailboxAddress("ITAD Stock Alert", user.Email));
+                            message.To.Add(new MailboxAddress(user.Email));
+                            // Subject                          
+                            if(result1.p_typename == "Laptop" || result1.p_typename == "Desktop") {   
+                                message.Subject = "ITAD Available Stock" + " " + result1.make_name + " " + result1.model_name + "/" + result1.cpu_name + "/"  + result1.ram_name+ " / " + result1.hdd_name;
 
-                            // Subject                             
-                            message.Subject = "ITAD Stock Alert" + " " + result1.make_name + " " + result1.model_name + "/" + result1.cpu_name + "/"  + result1.ram_name+ " / " + result1.hdd_name;
+                            } else if(result1.p_typename == "Monitor" || result1.p_typename == "Upload") {
+                                message.Subject = "ITAD Available Stock" + " " + result1.make_name + " " + result1.model_name;
+                                
+                            }
                             // Body 
                             message.Body =  new TextPart("html"){
-                                Text = "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body style='font-size:13px;font-family:Arial, Helvetica, sans-serif;'> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ;padding:10px;'><div style='color:#08ab9e;text-align: center;'> <b>ITAD Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#062736;padding:10px;'> <div> Dear <span style='text-transform:capitalize'>"+ user.username+"</span></div><div>New ITAD deal available for your consideration. Please check specification details below</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0' style='border-bottom:2px solid #847b7b91'><tr><td align='center' valign='middle' style='padding:5px;'></td></tr></table><div style='color:#08ab9e;background: #062736;text-align: center;padding: 19px 1px;'><b>Deal Specification.</b></div><table width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 20px;margin-bottom:15px;color:#062736;'> <tr> <th style='text-align: left;width: 20%;'>Make:</th> <td style='text-align: left;'>"+result1.make_name+"</td><th style='text-align: left;width: 20%;'>HDD:</th> <td style='text-align: left;'>"+result1.hdd_name+"</td></tr><tr> <th style='text-align: left;width: 20%;'>Model:</th> <td style='text-align: left;'>" + result1.model_name +"</td><th style='text-align: left;width: 20%;'>RAM:</th> <td style='text-align: left;'>"+result1.ram_name+"</td></tr><tr> <th style='text-align: left;width: 20%;'>Processor:</th> <td style='text-align: left;'>"+result1.cpu_name+"</td><th style='text-align: left;width: 20%;'>Gen:</th><td style='text-align: left;'>"+result1.gen_name+"</td></tr><tr> <th style='color:#21355C;text-align: left;width: 20%;'>Qty:</th> <td style='color:#21355C;text-align: left;'>"+result1.qty+"</td><th style='text-align: left;width: 20%;'>Price:</th> <td style='color:#21355C;text-align: left;'>" +result1.price+"</td></tr></table><table  width='80%' border='0' align='center' cellpadding='0' cellspacing='0' style='margin: 18px 20px;margin-bottom:15px;'><tr><th  style='color:#21355C;text-align: left;width: 20%;'>Comment:</th><td style='color:#21355C;text-align: left;width: 100%;'>"+request.s_comment+"</td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#062736;'><div style='color:#08ab9e;'> <br><span href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='text-decoration:underline;'>Please do not reply to this email.</span><br/></div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html>",
+                                Text = "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/> <title>Circular Computing</title></head><body style='font-size:13px;font-family:Arial, Helvetica, sans-serif;'> <table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#fff;'> <br><br><table width='600' border='0' cellspacing='0' cellpadding='0'  style='border: 1px solid #062736;'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ; padding:10px;'><div style='color:#08ab9e;text-align: center;'> <b>ITAD Available Stock</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' style='margin-top:15px;' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#03443f;'> <div> Dear <span style='text-transform:capitalize'>" + user.username + "</span> </div><div>New ITAD deal available for your consideration. Please check specification details below.</div></td></tr></table><br><div style='color:#08ab9e;background: #062736 ;text-align: center;padding: 19px 1px;'><b>Stock Specification</b></div><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0' style='color:#03443f;margin-bottom:15px;margin-top:15px;'><tr><th style='text-align: left;width: 20%;'>Type:</th> <td style='text-align: left;'>" + result1.p_typename + "</td><th style='text-align: left;width: 20%;'>Title:</th> <td style='text-align: left;'>" + result1.p_title + "</td></tr><tr><th style='text-align: left;width: 20%;'>Make:</th> <td style='text-align: left;'>" + result1.make_name + "</td><th style='text-align: left;width: 20%;'>Model:</th> <td style='text-align: left;'>" + result1.model_name + "</td></tr><tr><th style='text-align: left;width: 20%;'>HDD:</th> <td style='text-align: left;'>" + result1.hdd_name + "</td><th style='text-align: left;width: 20%;'>RAM:</th> <td style='text-align: left;'>" + result1.ram_name + "</td></tr><tr><th style='text-align: left;width: 20%;'>Processor:</th> <td style='text-align: left;'>" + result1.cpu_name + "</td><th style='text-align: left;width: 20%;'>Gen:</th> <td style='text-align: left;'>" + result1.gen_name + "</td></tr><tr><th style='text-align: left;width: 20%;'>Qty:</th> <td style='text-align: left;'>" + result1.qty + "</td><th style='text-align: left;width: 20%;'>Target Price:</th> <td style='text-align: left;'>" + result1.itad_cur + + result1.price + "</td></tr><tr><th style='text-align: left;width: 20%;'>Comment:</th> <td style='text-align: left;'>" + request.s_comment + "</td></tr></table> <br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#062736;'><div style='color:#08ab9e;'> <br><span href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='text-decoration:underline;'>Please do not reply to this email.</span><br/></div></td></tr></table></td></tr></table><br><br></td></tr></table></body></html>",
                             };
 
                             using (var client = new SmtpClient()){
@@ -2433,13 +2438,13 @@ namespace CheckpointInventoryStock.API.Controllers
                             message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                             // To address
-                            message.To.Add(new MailboxAddress("ITAD Stock Alert", user.Email));
+                            message.To.Add(new MailboxAddress(user.Email));
 
                             // Subject                             
-                            message.Subject = "Stock Alert";
+                            message.Subject = "ITAD Available Stock";
                             var builder = new BodyBuilder ();
                             // Body 
-                            builder.HtmlBody = @"<!DOCTYPE html><html><head><title>Circular Computing</title></head><body style='font-size:13px;font-family:Arial, Helvetica, sans-serif;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ;padding:10px;'><div style='color:#08ab9e;text-align: center;'> <b>ITAD Deal Alert</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center' valign='middle' style='padding:10px; color:#21355C;'><small></small> </td></tr></table><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#062736;padding:10px;'> <div> Dear <span style='text-transform:capitalize;'>"+ user.username+"</span></div><div>New ITAD deal available for your consideration. Please check attached file for further detail.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#062736 ;'><div style='color:#fff;'> <br><span href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e; text-decoration:underline;'>Please do not reply to this email.</span><br/></div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html>";
+                            builder.HtmlBody = @"<!DOCTYPE html><html><head><title>Circular Computing</title></head><body style='font-size:13px;font-family:Arial, Helvetica, sans-serif;'><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr> <td align='center' valign='top' bgcolor='#80808057' style='background-color:#fff;'> <br><br><table width='600' border='1' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' bgcolor='#564319' style='background-color:#062736 ;padding:10px;'><div style='color:#08ab9e;text-align: center;'> <b>ITAD Available Stock</b></div></td></tr><tr><td align='left' valign='top' bgcolor='#ffffff' style='background-color:#ffffff;'><table width='95%' border='0' align='center' cellpadding='0' cellspacing='0'> <tr><td align='left' valign='middle' style='color:#062736;padding:10px;'> <div> Dear <span style='text-transform:capitalize;'>"+ user.username+"</span></div><div>New ITAD stock available for your consideration. Please check attached file for further detail.</div></td></tr></table><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='left' valign='middle' style='padding:15px; background-color:#062736 ;'><div style='color:#fff;'> <br><span href="+$"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+"/ style='color:#08ab9e; text-decoration:underline;'>Please do not reply to this email.</span><br/></div></td></tr></table></td></tr></table> <br><br></td></tr></table></body></html>";
 
                             if(result1.p_url != null && result1.p_url != ""){
                                 builder.Attachments.Add (@"Resources\images\"+result1.p_url);
@@ -2473,7 +2478,7 @@ namespace CheckpointInventoryStock.API.Controllers
             message.From.Add(new MailboxAddress("Circular Computing - ITAD", "support@a2cuae.com"));
 
             // To address
-            message.To.Add(new MailboxAddress("Circular Computing ITAD", request.email));
+            message.To.Add(new MailboxAddress(request.email));
 
             // Subject                             
             message.Subject = request.subject;
@@ -2609,7 +2614,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("Reject Stock", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     
@@ -2820,7 +2825,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress(mysubject +" Deal", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = mysubject +" Deal";
@@ -2963,7 +2968,7 @@ namespace CheckpointInventoryStock.API.Controllers
                     message.From.Add(new MailboxAddress("Circular Computing", "support@a2cuae.com"));
 
                     // To address
-                    message.To.Add(new MailboxAddress("PO Update", item.Email));
+                    message.To.Add(new MailboxAddress(item.Email));
 
                     // Subject 
                     message.Subject = "PO Update";
